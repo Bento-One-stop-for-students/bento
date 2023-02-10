@@ -1,0 +1,86 @@
+{
+    "123abc": {
+        "email": "deveshm.cs.20@nitj.ac.in",
+        "img-url": "unsplash.com",
+        "name": "Devesh Meena",
+        "gender": "male",
+        "hostel": "MBH-B",
+        "room-no": 502,
+        "roll-no": 20103050,
+        "phone-no": 9876543210,
+        "club" : {
+            "head" : false,
+            "name" : null
+        },
+        "current-active-outpass": true,
+        "outpass": {
+            "id": "12345"
+        },
+        "appointments": {
+            "barber": {
+                "id": "12345"
+            },
+            "cleaner": {
+                "id": "12345"
+            }
+        }
+    },
+    "outpass": [
+        {
+            "12345": {
+                "user": "123abc",
+                "from-time": "4:00 pm",
+                "to-time": "8:00 pm",
+                "purpose": "vidhipur",
+                "in-time": null
+            }
+        }
+    ],
+    "barber": [
+        {
+            "12345": {
+                "user": "123abc",
+                "hair": true,
+                "beard": false
+            }
+        },
+        {
+            "12346": {
+                "user": "123abc",
+                "name": "Devesh Meena",
+                "hostel": "MBH-B",
+                "time": "4:00 pm",
+                "hair": true,
+                "beard": false
+            }
+        }
+    ],
+    "events": [
+        {
+            "81231": {
+                "img-url": "unsplash.com",
+                "content": "<p>hi there, this is event 1</p>",
+                "event-date": "01-02-23"
+            }
+        }
+    ],
+    "clubs": [
+        {
+            "12322" : {
+                "club-name" : "gdsc",
+                "club-info" : "good club",
+                "club-photo" : "unsplash.com",
+                "club-head" : "123422",
+                "contact-1" : "9876543210",
+                "contact-2" : "9876543210",
+                "social-links" : {
+                    "instagram" : "link",
+                    "linkedin" : "link",
+                    "facebook" : "link",
+                    "twitter" : "link",
+                    "whatsapp-group-link" : "link"
+                }
+            }
+        }
+    ]
+}
