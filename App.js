@@ -11,7 +11,7 @@ export default function App() {
     return null;
   }
   return (
-    <View className = "flex-1 justify-center">
+    <View className = "flex-1 bg-white">
       <Navigator/>
     </View>
   );

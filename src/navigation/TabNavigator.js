@@ -17,11 +17,15 @@ const TabNavigator = () => {
             fontSize: 12,
             tabBarStyle: [
                 {
+                    position:'absolute',
                     display: "flex",
                     height: 60,
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
                     paddingVertical:10,
+                    shadowOpacity: 0.58,
+                    shadowRadius: 16.0,
+                    elevation: 24,
                 },
                 null
             ],
