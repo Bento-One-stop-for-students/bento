@@ -1,12 +1,18 @@
-import { Text, View } from 'react-native';
-
-import { StatusBar } from 'expo-status-bar';
+import { View } from "react-native";
+import Navigator from "./src/navigation";
+import { useFonts, Lato_400Regular, Lato_900Black } from '@expo-google-fonts/lato';
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Lato_400Regular, Lato_900Black
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text>Open up App.js to start working on yousdf app!</Text>
-      <StatusBar style="auto" />
+    <View className = "flex-1 justify-center">
+      <Navigator/>
     </View>
   );
 }
