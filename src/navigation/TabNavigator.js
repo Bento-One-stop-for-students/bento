@@ -19,10 +19,9 @@ const TabNavigator = () => {
                 {
                     position:'absolute',
                     display: "flex",
-                    height: 60,
+                    height: 55,
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
-                    paddingVertical:10,
                     shadowOpacity: 0.58,
                     shadowRadius: 16.0,
                     elevation: 24,
@@ -31,7 +30,7 @@ const TabNavigator = () => {
             ],
             headerTitleAlign:'left',
             headerStyle: {
-                height: 80
+                height: 50
             },
             headerTitleStyle: {
                 fontSize: 17,
@@ -49,7 +48,7 @@ const TabNavigator = () => {
                     <Feather name="home" size={size} color={color} />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
                 },
             }} />
             <Tab.Screen name="Appointments" component={Appointments} options={{
@@ -59,7 +58,7 @@ const TabNavigator = () => {
                     <Feather name="calendar" size={size} color={color} />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
                 }
             }} />
             <Tab.Screen name="Cafeteria" component={Cafeteria} options={{
@@ -69,7 +68,7 @@ const TabNavigator = () => {
                     <Feather name="shopping-bag" size={size} color={color} />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
                 }
             }} />
             <Tab.Screen name="Settings" component={Settings} options={{
@@ -79,7 +78,7 @@ const TabNavigator = () => {
                     <Feather name="settings" size={size} color={color} />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
                 }
             }} />
         </Tab.Navigator>
