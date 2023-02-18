@@ -38,6 +38,9 @@ const TabNavigator = () => {
                 paddingLeft:30,
                 paddingTop:10
             },
+            tabBarIconStyle: {
+                marginTop:10,
+            }
         }
         }
             initialRouteName="Home">
@@ -47,9 +50,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size }) => (
                     <Feather name="home" size={size} color={color} />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-                },
             }} />
             <Tab.Screen name="Appointments" component={Appointments} options={{
                 title: "",
@@ -57,9 +57,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size }) => (
                     <Feather name="calendar" size={size} color={color} />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-                }
             }} />
             <Tab.Screen name="Cafeteria" component={Cafeteria} options={{
                 title: "",
@@ -67,9 +64,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size }) => (
                     <Feather name="shopping-bag" size={size} color={color} />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-                }
             }} />
             <Tab.Screen name="Settings" component={Settings} options={{
                 title: "",
@@ -77,9 +71,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size }) => (
                     <Feather name="settings" size={size} color={color} />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-                }
             }} />
         </Tab.Navigator>
     )
