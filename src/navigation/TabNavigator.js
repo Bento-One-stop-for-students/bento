@@ -19,10 +19,9 @@ const TabNavigator = () => {
                 {
                     position:'absolute',
                     display: "flex",
-                    height: 60,
+                    height: 55,
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
-                    paddingVertical:10,
                     shadowOpacity: 0.58,
                     shadowRadius: 16.0,
                     elevation: 24,
@@ -31,7 +30,7 @@ const TabNavigator = () => {
             ],
             headerTitleAlign:'left',
             headerStyle: {
-                height: 80
+                height: 50
         ***REMOVED***,
             headerTitleStyle: {
                 fontSize: 17,
@@ -49,7 +48,7 @@ const TabNavigator = () => {
                     <Feather name="home" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
             ***REMOVED***,
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Appointments" component={Appointments***REMOVED*** options={{
@@ -59,7 +58,7 @@ const TabNavigator = () => {
                     <Feather name="calendar" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
             ***REMOVED***
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Cafeteria" component={Cafeteria***REMOVED*** options={{
@@ -69,7 +68,7 @@ const TabNavigator = () => {
                     <Feather name="shopping-bag" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
             ***REMOVED***
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Settings" component={Settings***REMOVED*** options={{
@@ -79,7 +78,7 @@ const TabNavigator = () => {
                     <Feather name="settings" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
                 tabBarIconStyle:{
-                    marginTop:5,
+                    marginTop:10,
             ***REMOVED***
         ***REMOVED******REMOVED*** />
         </Tab.Navigator>

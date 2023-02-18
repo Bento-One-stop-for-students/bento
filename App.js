@@ -1,4 +1,4 @@
-import { View ***REMOVED*** from "react-native";
+import { SafeAreaView, StatusBar ***REMOVED*** from "react-native";
 import Navigator from "./src/navigation";
 import { useFonts, Lato_400Regular, Lato_900Black ***REMOVED*** from '@expo-google-fonts/lato';
 
@@ -9,10 +9,18 @@ export default function App() {
 
   if (!fontsLoaded) {
     return null;
-***REMOVED***
+***REMOVED***;
+
   return (
-    <View className = "flex-1 bg-white">
-      <Navigator/>
-    </View>
+    <SafeAreaView className="flex-1 bg-white">
+      <StatusBar
+        animated={true***REMOVED***
+        backgroundColor="#7345F6"
+        barStyle={'light-content'***REMOVED***
+        showHideTransition={'fade'***REMOVED***
+        hidden={false***REMOVED***
+      />
+      <Navigator />
+    </SafeAreaView>
   );
 ***REMOVED***

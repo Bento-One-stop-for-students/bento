@@ -28,6 +28,11 @@
 ***REMOVED***,
     "web": {
       "favicon": "./assets/favicon.png"
-***REMOVED***
+***REMOVED***,
+    "androidNavigationBar": {
+     "visible": true,
+     "barStyle": "dark-content",
+     "backgroundColor": "#ffffff"
+ ***REMOVED***
 ***REMOVED***
 ***REMOVED***
