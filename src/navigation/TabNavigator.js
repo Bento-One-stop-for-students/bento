@@ -38,6 +38,9 @@ const TabNavigator = () => {
                 paddingLeft:30,
                 paddingTop:10
         ***REMOVED***,
+            tabBarIconStyle: {
+                marginTop:10,
+        ***REMOVED***
     ***REMOVED***
     ***REMOVED***
             initialRouteName="Home">
@@ -47,9 +50,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size ***REMOVED***) => (
                     <Feather name="home" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-            ***REMOVED***,
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Appointments" component={Appointments***REMOVED*** options={{
                 title: "",
@@ -57,9 +57,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size ***REMOVED***) => (
                     <Feather name="calendar" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-            ***REMOVED***
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Cafeteria" component={Cafeteria***REMOVED*** options={{
                 title: "",
@@ -67,9 +64,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size ***REMOVED***) => (
                     <Feather name="shopping-bag" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-            ***REMOVED***
         ***REMOVED******REMOVED*** />
             <Tab.Screen name="Settings" component={Settings***REMOVED*** options={{
                 title: "",
@@ -77,9 +71,6 @@ const TabNavigator = () => {
                 tabBarIcon: ({ color, size ***REMOVED***) => (
                     <Feather name="settings" size={size***REMOVED*** color={color***REMOVED*** />
                 ),
-                tabBarIconStyle:{
-                    marginTop:10,
-            ***REMOVED***
         ***REMOVED******REMOVED*** />
         </Tab.Navigator>
     )
