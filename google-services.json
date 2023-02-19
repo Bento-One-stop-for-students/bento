@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "864652401846",
+    "project_id": "bento-5ad4e",
+    "storage_bucket": "bento-5ad4e.appspot.com"
+***REMOVED***,
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864652401846:android:a177e964140f77e65a9a17",
+        "android_client_info": {
+          "package_name": "com.devesh16.bento"
+    ***REMOVED***
+  ***REMOVED***,
+      "oauth_client": [
+        {
+          "client_id": "864652401846-48j35g0attqd0e21tqtkn0ap57c1e9qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devesh16.bento",
+            "certificate_hash": "00d1404bb95d4f0c9e5eeb5805b4e3c5b9732a06"
+      ***REMOVED***
+    ***REMOVED***,
+        {
+          "client_id": "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
+          "client_type": 3
+    ***REMOVED***
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC79CYk-iMvRUFgg4y6coZY9L4KZ4QpVS0"
+    ***REMOVED***
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864652401846-d237osu4me3al5jper8fetsajle4pjuc.apps.googleusercontent.com",
+              "client_type": 3
+        ***REMOVED***
+          ]
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+  ],
+  "configuration_version": "1"
+***REMOVED***

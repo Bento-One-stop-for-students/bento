@@ -1,0 +1,28 @@
+{
+  "cli": {
+    "version": ">= 3.6.0"
+***REMOVED***,
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m1-medium"
+  ***REMOVED***
+***REMOVED***,
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m1-medium"
+  ***REMOVED***
+***REMOVED***,
+    "production": {
+      "ios": {
+        "resourceClass": "m1-medium"
+  ***REMOVED***
+***REMOVED***
+***REMOVED***,
+  "submit": {
+    "production": {***REMOVED***
+***REMOVED***
+***REMOVED***

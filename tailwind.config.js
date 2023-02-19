@@ -3,7 +3,11 @@
 module.exports = {
     content: ["./App.{js,jsx,ts,tsx***REMOVED***","./src/**/*.{js,jsx,ts,tsx***REMOVED***"],
     theme: {
-        extend: {***REMOVED***,
+        extend: {
+            colors:{
+                'primary-purple':'#7345F6'
+        ***REMOVED***
+    ***REMOVED***,
 ***REMOVED***,
     plugins: [],
 ***REMOVED***

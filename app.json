@@ -21,17 +21,25 @@
       "supportsTablet": true
 ***REMOVED***,
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-  ***REMOVED***
+  ***REMOVED***,
+      "package": "com.devesh16.bento"
 ***REMOVED***,
     "web": {
       "favicon": "./assets/favicon.png"
 ***REMOVED***,
     "androidNavigationBar": {
-     "barStyle": "dark-content",
-     "backgroundColor": "#ffffff"
- ***REMOVED***
+      "barStyle": "dark-content",
+      "backgroundColor": "#ffffff"
+***REMOVED***,
+    "extra": {
+      "eas": {
+        "projectId": "fe7a000a-8e23-49d8-a285-ca907efb4e0e"
+  ***REMOVED***
+***REMOVED***,
+    "plugins": ["@react-native-google-signin/google-signin"]
 ***REMOVED***
 ***REMOVED***
