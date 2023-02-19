@@ -7,6 +7,7 @@ import TabNavigator from "./navigation";
 
 
 export default function Main() {
+    const insets = useSafeAreaInsets();
     let [fontsLoaded] = useFonts({
         Lato_400Regular, Lato_900Black, Lato_700Bold
     });
@@ -14,13 +15,11 @@ export default function Main() {
     if (!fontsLoaded) {
         return null;
     };
-    const insets = useSafeAreaInsets();
 
     return (
         <View style={{ marginTop: insets.top, flex: 1 }}>
-            
             <NavigationContainer>
-                <TabNavigator/>
+                <TabNavigator />
             </NavigationContainer>
         </View>
     );
