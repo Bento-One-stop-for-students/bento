@@ -1,26 +1,20 @@
+import { useState } from "react";
 import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFonts, Lato_400Regular, Lato_900Black, Lato_700Bold } from '@expo-google-fonts/lato';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import TabNavigator from "./navigation";
-
+import TabNavigator from "./navigation/TabNavigator";
+import AuthNavigator from "./navigation/AuthNavigator";
 
 export default function Main() {
-    const insets = useSafeAreaInsets();
-    let [fontsLoaded] = useFonts({
-        Lato_400Regular, Lato_900Black, Lato_700Bold
-    });
+  const insets = useSafeAreaInsets();
+  const [loggedIn, setLoggedIn] = useState("true");
 
-    if (!fontsLoaded) {
-        return null;
-    };
-
-    return (
-        <View style={{ marginTop: insets.top, flex: 1 }}>
-            <NavigationContainer>
-                <TabNavigator />
-            </NavigationContainer>
-        </View>
-    );
+  return (
+    <View style={{ marginTop: insets.top, flex: 1 }}>
+      <NavigationContainer>
+        {loggedIn ? <AuthNavigator /> : <TabNavigator />}
+      </NavigationContainer>
+    </View>
+  );
 }
