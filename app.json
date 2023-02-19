@@ -30,7 +30,6 @@
       "favicon": "./assets/favicon.png"
 ***REMOVED***,
     "androidNavigationBar": {
-     "visible": true,
      "barStyle": "dark-content",
      "backgroundColor": "#ffffff"
  ***REMOVED***
