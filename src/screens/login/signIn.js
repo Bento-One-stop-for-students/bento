@@ -1,37 +1,11 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-***REMOVED*** from "@react-native-google-signin/google-signin";
 import { View, Text, TouchableOpacity ***REMOVED*** from "react-native";
 import React, { useEffect, useState ***REMOVED*** from "react";
 import { AntDesign ***REMOVED*** from "@expo/vector-icons";
-import auth from "@react-native-firebase/auth";
+import Auth from "../../../hooks/auth";
 
 const SignIn = () => {
-  ***REMOVED***
-    webClientId:
-      "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
-    forceCodeForRefreshToken: true,
-  ***REMOVED***
+  const { user, isValid, onGoogleButtonPress ***REMOVED*** = Auth();
 
-  async function onGoogleButtonPress() {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    const googleCredential = auth.GoogleAuthProvider.credential(
-      userInfo.idToken,
-      userInfo.accessToken
-    );
-    const user_sign_in = auth().signInWithCredential(googleCredential);
-    user_sign_in
-      .then((user) => console.log(user))
-      .catch((error) => console.log(error));
-***REMOVED***
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -46,8 +20,7 @@ const SignIn = () => {
       >
         Let's get you started
       </Text>
-      <GoogleSigninButton onPress={onGoogleButtonPress***REMOVED*** />
-      {/* 
+
       <TouchableOpacity
         className="mt-14 flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
         onPress={onGoogleButtonPress***REMOVED***
@@ -59,7 +32,7 @@ const SignIn = () => {
           Sign Up with Google
         </Text>
         <AntDesign name="google" size={32***REMOVED*** color="white" className="" />
-      </TouchableOpacity> */***REMOVED***
+      </TouchableOpacity>
       <View className="flex-row mt-[1vh]">
         <Text className="text-xs">Already have an Account?</Text>
         <Text className="text-xs text-primary-purple"> Sign in here</Text>
