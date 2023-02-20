@@ -27,10 +27,10 @@ const SignUp = ({navigation, route***REMOVED***) => {
       >
         Let's get you started
       </Text>
-      <View className="mt-14 justify-center items-center ">
+      <View className="mt-7 justify-center items-center ">
         <Text
-          className="text-primary-purple font-bold text-xs "
-          style={{ fontFamily: "Lato_400Regular" ***REMOVED******REMOVED***
+          className="text-primary-purple text-xs "
+          style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
           Login with Official e-mail
         </Text>
