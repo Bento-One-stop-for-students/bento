@@ -3,15 +3,17 @@ import { createNativeStackNavigator ***REMOVED*** from "@react-navigation/native
 
 import SignIn from "../screens/login/signIn";
 import SignUp from "../screens/login/signUp";
+import Register from "../screens/login/register";
 
 const Auth = createNativeStackNavigator();
 
 const AuthNavigator = () => {
   const isLoggedIn = true;
   return (
-    <Auth.Navigator screenOptions={{headerShown:false***REMOVED******REMOVED***>
-      <Auth.Screen name="sign-in" component={SignIn***REMOVED*** />
+    <Auth.Navigator screenOptions={{headerShown:false***REMOVED******REMOVED*** initialRouteName="sign-up">
       <Auth.Screen name="sign-up" component={SignUp***REMOVED*** />
+      <Auth.Screen name="register" component={Register***REMOVED*** />
+      <Auth.Screen name="sign-in" component={SignIn***REMOVED*** />
     </Auth.Navigator>
   );
 ***REMOVED***

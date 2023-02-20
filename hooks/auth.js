@@ -38,6 +38,7 @@ const Auth = () => {
         if (handleMail(user.additionalUserInfo.profile.email)) {
           setIsValid(true);
           setUser(user);
+          console.log(user)
     ***REMOVED***
 
         console.log(isValid)
