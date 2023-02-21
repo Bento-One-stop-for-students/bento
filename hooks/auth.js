@@ -1,17 +1,11 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-***REMOVED*** from "@react-native-google-signin/google-signin";
+import React from "react";
 import auth from "@react-native-firebase/auth";
-import { useState ***REMOVED*** from "react";
-
-const handleMail = (mail) => {
-  return mail.includes("nitj.ac.in") ? true : false;
 ***REMOVED***
 
 const Auth = () => {
-  const [user, setUser] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const [user, setUser] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   ***REMOVED***
     webClientId:
@@ -19,7 +13,7 @@ const Auth = () => {
     forceCodeForRefreshToken: true,
   ***REMOVED***
 
-  async function onGoogleButtonPress() {
+  async function signIn() {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -32,21 +26,65 @@ const Auth = () => {
       userInfo.idToken,
       userInfo.accessToken
     );
+    setIsLoading(true);
     const signedInUser = auth().signInWithCredential(googleCredential);
     signedInUser
       .then((user) => {
-        if (handleMail(user.additionalUserInfo.profile.email)) {
-          setIsValid(true);
-          setUser(user);
-          console.log(user)
+        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
+          setUser(userInfo);
+          console.log(userInfo);
+          setIsLoading(false);
+          setIsLoggedIn(true);
     ***REMOVED***
-
-        console.log(isValid)
   ***REMOVED***)
       .catch((error) => console.log(error));
 ***REMOVED***
 
-  return {user,isValid,onGoogleButtonPress***REMOVED***
+  async function isSignedIn(idToken, accessToken) {
+    setIsLoading(true);
+    const googleCredential = auth.GoogleAuthProvider.credential(
+      idToken,
+      accessToken
+    );
+    const signedInUser = auth().signInWithCredential(googleCredential);
+    signedInUser
+      .then((user) => {
+        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
+          setUser(userInfo);
+          console.log(userInfo);
+          setIsLoading(false);
+          setIsLoggedIn(true);
+    ***REMOVED***
+  ***REMOVED***)
+      .catch((error) => console.log(error));
+***REMOVED***
+
+  signOut = async () => {
+    setIsLoading(true);
+  ***REMOVED***
+***REMOVED***
+      setUser(null);
+      setIsLoggedIn(false);
+      setTimeout(
+        () => {
+          setIsLoading(false);
+    ***REMOVED***,
+        500 // Remember to remove the user from your app's state as well
+      );
+***REMOVED*** catch (error) {
+      console.error(error);
+***REMOVED***
+***REMOVED***;
+
+  const authContext = React.useMemo(() => ({
+    user,
+    isLoggedIn,
+    signIn,
+    signOut,
+    isSignedIn,
+***REMOVED***));
+
+  return { authContext, isLoading, isLoggedIn, user ***REMOVED***
 ***REMOVED***
 
 export default Auth;

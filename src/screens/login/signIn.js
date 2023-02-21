@@ -7,16 +7,11 @@ import {
   TouchableWithoutFeedback,
 ***REMOVED*** from "react-native";
 
-import Auth from "../../../hooks/auth";
+import { AuthContext ***REMOVED*** from "../../../hooks/context";
 
-const SignUp = ({ navigation, route ***REMOVED***) => {
-  const { user, isValid, onGoogleButtonPress ***REMOVED*** = Auth();
+const SignIn = ({ navigation, route ***REMOVED***) => {
+  const { signIn ***REMOVED*** = React.useContext(AuthContext);
 
-  React.useEffect(() => {
-    if (isValid) {
-      navigation.navigate("sign-up", { user ***REMOVED***
-***REMOVED***
-***REMOVED***, [user]);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -34,7 +29,7 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
       <View className="mt-10 justify-center items-center ">
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          // onPress={onGoogleButtonPress***REMOVED***
+          onPress={signIn***REMOVED***
         >
           <Text
             className="ml-[18vw] text-white"
@@ -59,4 +54,4 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
   );
 ***REMOVED***
 
-export default SignUp;
+export default SignIn;

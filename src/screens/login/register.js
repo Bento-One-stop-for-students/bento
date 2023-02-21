@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState ***REMOVED*** from "react";
-import { View, Text, TouchableWithoutFeedback, FlatList ***REMOVED*** from "react-native";
+import React from "react";
+import { View, Text, TouchableWithoutFeedback ***REMOVED*** from "react-native";
 import DropDown from "../../components/shared/DropDown";
-import { Input ***REMOVED*** from "native-base";
 import InputField from "../../components/shared/InputField";
 import Button from "../../components/shared/Button";
 
@@ -9,9 +8,9 @@ const Register = ({ navigation, route ***REMOVED***) => {
   const userName =
     route.params.user.additionalUserInfo.profile.name.split(" ")[0];
 
-  const [open, setOpen] = useState(false);
-  const [hostelValue, setHostelValue] = useState(null);
-  const [hostelItems, setHostelItems] = useState([
+  const [open, setOpen] = React.useState(false);
+  const [hostelValue, setHostelValue] = React.useState(null);
+  const [hostelItems, setHostelItems] = React.useState([
     { label: "MBH-A", value: "mbh-a" ***REMOVED***,
     { label: "MBH-B", value: "mbh-b" ***REMOVED***,
     { label: "MBH-F", value: "mbh-f" ***REMOVED***,
@@ -23,13 +22,13 @@ const Register = ({ navigation, route ***REMOVED***) => {
     { label: "BH-6", value: "bh-6" ***REMOVED***,
     { label: "BH-7", value: "bh-7" ***REMOVED***,
   ]);
-  const [genderValue, setGenderValue] = useState(null);
-  const [genderItems, setGenderItems] = useState([
+  const [genderValue, setGenderValue] = React.useState(null);
+  const [genderItems, setGenderItems] = React.useState([
     { label: "Male", value: "male" ***REMOVED***,
     { label: "Female", value: "female" ***REMOVED***,
   ]);
-  const [roomValue, setRoomValue] = useState(null);
-  const [phoneNumber,setPhoneNumber] = useState(null);
+  const [roomValue, setRoomValue] = React.useState(null);
+  const [phoneNumber,setPhoneNumber] = React.useState(null);
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)***REMOVED***
@@ -67,7 +66,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
           placeholder={"Select Hostel"***REMOVED***
         />
         <InputField placeholder="Room No." />
-        <InputField placeholder="Mobile No." s/>
+        <InputField placeholder="Mobile No." />
         <Button text={"Let's Go"***REMOVED*** />
       </View>
     </TouchableWithoutFeedback>

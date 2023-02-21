@@ -11,9 +11,9 @@ const AuthNavigator = () => {
   const isLoggedIn = true;
   return (
     <Auth.Navigator screenOptions={{headerShown:false***REMOVED******REMOVED*** initialRouteName="sign-up">
+      <Auth.Screen name="sign-in" component={SignIn***REMOVED*** />
       <Auth.Screen name="sign-up" component={SignUp***REMOVED*** />
       <Auth.Screen name="register" component={Register***REMOVED*** />
-      <Auth.Screen name="sign-in" component={SignIn***REMOVED*** />
     </Auth.Navigator>
   );
 ***REMOVED***
