@@ -1,17 +1,21 @@
-import { View, Text, TouchableOpacity ***REMOVED*** from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+***REMOVED*** from "react-native";
 import React, { useEffect, useState ***REMOVED*** from "react";
 import { AntDesign ***REMOVED*** from "@expo/vector-icons";
 import Auth from "../../../hooks/auth";
 
-const SignUp = ({navigation, route***REMOVED***) => {
+const SignUp = ({ navigation, route ***REMOVED***) => {
   const { user, isValid, onGoogleButtonPress ***REMOVED*** = Auth();
 
   useEffect(() => {
-    if(isValid){
-      navigation.navigate('register',{user***REMOVED***)
+    if (isValid) {
+      navigation.navigate("register", { user ***REMOVED***
 ***REMOVED***
-***REMOVED***, [user])
-  
+***REMOVED***, [user]);
 
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
@@ -32,7 +36,7 @@ const SignUp = ({navigation, route***REMOVED***) => {
           className="text-primary-purple text-xs "
           style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
-          Login with Official e-mail
+          Use Institute e-mail
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
@@ -42,14 +46,20 @@ const SignUp = ({navigation, route***REMOVED***) => {
             className="ml-[18vw] text-white"
             style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
           >
-            Sign Up with Google
+            Sign up with Google
           </Text>
           <AntDesign name="google" size={32***REMOVED*** color="white" className="" />
         </TouchableOpacity>
       </View>
-      <View className="flex-row mt-[1vh]">
+      <View className="flex-row mt-1 items-center justify-center">
         <Text className="text-xs">Already have an Account?</Text>
-        <Text className="text-xs text-primary-purple"> Sign in here</Text>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            navigation.navigate("sign-in");
+      ***REMOVED******REMOVED***
+        >
+          <Text className="text-xs text-primary-purple "> Sign in</Text>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );

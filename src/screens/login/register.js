@@ -3,8 +3,12 @@ import { View, Text, TouchableWithoutFeedback, FlatList ***REMOVED*** from "reac
 import DropDown from "../../components/shared/DropDown";
 import { Input ***REMOVED*** from "native-base";
 import InputField from "../../components/shared/InputField";
+import Button from "../../components/shared/Button";
 
 const Register = ({ navigation, route ***REMOVED***) => {
+  const userName =
+    route.params.user.additionalUserInfo.profile.name.split(" ")[0];
+
   const [open, setOpen] = useState(false);
   const [hostelValue, setHostelValue] = useState(null);
   const [hostelItems, setHostelItems] = useState([
@@ -21,9 +25,11 @@ const Register = ({ navigation, route ***REMOVED***) => {
   ]);
   const [genderValue, setGenderValue] = useState(null);
   const [genderItems, setGenderItems] = useState([
-    { label: "male", value: "male" ***REMOVED***,
-    { label: "female", value: "female" ***REMOVED***,
+    { label: "Male", value: "male" ***REMOVED***,
+    { label: "Female", value: "female" ***REMOVED***,
   ]);
+  const [roomValue, setRoomValue] = useState(null);
+  const [phoneNumber,setPhoneNumber] = useState(null);
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)***REMOVED***
@@ -31,12 +37,17 @@ const Register = ({ navigation, route ***REMOVED***) => {
     >
       <View className="flex-1 bg-white justify-center items-center flex-col">
         <Text
-          className="text-black font-bold text-xl mb-14 "
+          className="text-primary-purple font-bold text-xl  w-full ml-20 "
+          style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
+        >
+          Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()***REMOVED***,
+        </Text>
+        <Text
+          className="text-black font-bold text-xl mb-6 "
           style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
           We need some more details
         </Text>
-
         <DropDown
           elevation={3***REMOVED***
           open={open***REMOVED***
@@ -55,8 +66,9 @@ const Register = ({ navigation, route ***REMOVED***) => {
           setItems={setHostelItems***REMOVED***
           placeholder={"Select Hostel"***REMOVED***
         />
-        <InputField placeholder="Room No."/>
-        <InputField placeholder="Mobile No."/>
+        <InputField placeholder="Room No." />
+        <InputField placeholder="Mobile No." s/>
+        <Button text={"Let's Go"***REMOVED*** />
       </View>
     </TouchableWithoutFeedback>
   );
