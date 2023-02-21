@@ -1,12 +1,11 @@
 import React from "react";
-import auth from "@react-native-firebase/auth";
-***REMOVED***
+import auth, { firebase ***REMOVED*** from "@react-native-firebase/auth";
+***REMOVED*** 
 
 const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [isSignedUp, setIsSignedUp] = React.useState(false);
 
   // ***REMOVED***
   //   webClientId:
@@ -25,51 +24,60 @@ const Auth = () => {
 
   async function signIn() {
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-  ***REMOVED***
-      setIsLoading(true);
-  ***REMOVED***
-      setUser(userInfo);
-      setIsLoading(false);
-      setIsLoggedIn(true);
-***REMOVED*** catch (error) {
-  ***REMOVED***
-      setIsLoading(false);
-***REMOVED***
-***REMOVED***
-
-  async function signUp() {
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-      setUser(userInfo);
-***REMOVED*** catch (error) {
-  ***REMOVED***
-***REMOVED***
-    setIsSignedUp(true);
-***REMOVED***
-
-  async function isSignedIn() {
     setIsLoading(true);
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
   ***REMOVED***
   ***REMOVED***
-      setIsLoggedIn(isSignedIn);
-      setTimeout(
-        () => {
-          setIsLoading(false);
-    ***REMOVED***,
-        500 // Remember to remove the user from your app's state as well
-      );
+      if (userInfo.user.email.includes("@nitj.ac.in")) {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+      ***REMOVED***
+          setIsLoggedIn(true);
+        ***REMOVED***
+  ***REMOVED***
+***REMOVED*** catch (error) {***REMOVED***
+    setIsLoading(false);
+***REMOVED***
+
+  async function signUp(navigation) {
+***REMOVED***
+    // setIsLoading(true);
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+      if (userInfo.user.email.includes("@nitj.ac.in")) {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+      ***REMOVED***
+        ***REMOVED***
+  ***REMOVED***
+***REMOVED*** catch (error) {
+  ***REMOVED***
+***REMOVED***
+    navigation.navigate('register')
+    // setIsLoading(false);
+***REMOVED***
+
+  async function checkSignedIn() {
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+        firebase.auth().onAuthStateChanged((user) => {
+          setUser(user);
+        ***REMOVED***
+  ***REMOVED***
 ***REMOVED*** catch (error) {
   ***REMOVED***
 ***REMOVED***
@@ -79,45 +87,38 @@ const Auth = () => {
     setIsLoading(true);
   ***REMOVED***
 ***REMOVED***
-      setUser(null);
-      setIsSignedUp(false);
       setIsLoggedIn(false);
-      setTimeout(
-        () => {
-          setIsLoading(false);
-    ***REMOVED***,
-        500 // Remember to remove the user from your app's state as well
-      );
+      setUser(null);
 ***REMOVED*** catch (error) {
-      console.error(error);
+  ***REMOVED***
 ***REMOVED***
+    setIsLoading(false);
 ***REMOVED***
 
   const authContext = React.useMemo(() => ({
-    user,
-    isLoggedIn,
     signIn,
     signUp,
     signOut,
-    isSignedIn,
+    checkSignedIn,
+    user,
+    isLoggedIn,
     isLoading,
-    isSignedUp,
+    setUser,
     setIsLoggedIn,
-    setIsSignedUp,
+    setIsLoading,
 ***REMOVED***));
-
   return {
     authContext,
-    user,
-    isLoggedIn,
     signIn,
     signUp,
     signOut,
-    isSignedIn,
+    checkSignedIn,
+    user,
+    isLoggedIn,
     isLoading,
-    isSignedUp,
+    setUser,
     setIsLoggedIn,
-    setIsSignedUp,
+    setIsLoading,
 ***REMOVED***;
 ***REMOVED***
 

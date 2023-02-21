@@ -11,9 +11,11 @@ import GetStarted from "./splashScreen";
 import { AuthContext ***REMOVED*** from "../hooks/context";
 import Auth from "../hooks/auth";
 import { ActivityIndicator ***REMOVED*** from "react-native";
+import { handleSignUp ***REMOVED*** from "../lib/user";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
+  const [splashScreen, setSplashScreen] = React.useState(true);
 
   const {
     authContext,
@@ -21,14 +23,17 @@ export default function Main() {
     isLoggedIn,
     signIn,
     signOut,
-    isSignedIn,
+    checkSignedIn,
     isLoading,
+    isAuthenticated,
 ***REMOVED*** = Auth();
 
-  // function to check if a already signed user exists
+  setTimeout(() => {
+    setSplashScreen(false);
+***REMOVED***, 1000);
 
   React.useEffect(() => {
-    isSignedIn();
+    checkSignedIn();
 ***REMOVED***, []);
 
   if (isLoading) {
@@ -39,15 +44,17 @@ export default function Main() {
     );
 ***REMOVED***
 
-  return (
-    <AuthContext.Provider value={authContext***REMOVED***>
-      <NativeBaseProvider>
-        <View style={{ marginTop: insets.top, flex: 1 ***REMOVED******REMOVED***>
-          <NavigationContainer>
+  return splashScreen ? (
+    <GetStarted />
+  ) : (
+    <NativeBaseProvider>
+      <View style={{ marginTop: insets.top, flex: 1 ***REMOVED******REMOVED***>
+        <NavigationContainer>
+          <AuthContext.Provider value={authContext***REMOVED***>
             {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />***REMOVED***
-          </NavigationContainer>
-        </View>
-      </NativeBaseProvider>
-    </AuthContext.Provider>
+          </AuthContext.Provider>
+        </NavigationContainer>
+      </View>
+    </NativeBaseProvider>
   );
 ***REMOVED***

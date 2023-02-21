@@ -1,4 +1,4 @@
-import React, { useEffect ***REMOVED*** from "react";
+import React from "react";
 import { View, Text, TouchableWithoutFeedback ***REMOVED*** from "react-native";
 import DropDown from "../../components/shared/DropDown";
 import InputField from "../../components/shared/InputField";
@@ -6,8 +6,8 @@ import Button from "../../components/shared/Button";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
 
 const Register = ({ navigation, route ***REMOVED***) => {
-  const { user,setIsLoggedIn ***REMOVED*** = React.useContext(AuthContext);
-  const userName = user.user.name.split(" ")[0];
+  const { user, setIsLoggedIn ***REMOVED*** = React.useContext(AuthContext);
+  // const userName = user.displayName.split(" ")[0];
 
   const [open, setOpen] = React.useState(false);
   const [hostelValue, setHostelValue] = React.useState(null);
@@ -40,7 +40,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
           className="text-primary-purple font-bold text-xl  w-full ml-20 "
           style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
-          Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()***REMOVED***,
+          {/* Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()***REMOVED***, */***REMOVED***
         </Text>
         <Text
           className="text-black font-bold text-xl mb-6 "
@@ -66,9 +66,14 @@ const Register = ({ navigation, route ***REMOVED***) => {
           setItems={setHostelItems***REMOVED***
           placeholder={"Select Hostel"***REMOVED***
         />
-        <InputField placeholder="Room No." />
-        <InputField placeholder="Mobile No." />
-        <Button text={"Let's Go"***REMOVED*** onPress={()=>{setIsLoggedIn(true)***REMOVED******REMOVED*** />
+        <InputField placeholder="Room No." setValue={setRoomValue***REMOVED*** />
+        <InputField placeholder="Mobile No." setValue={setPhoneNumber***REMOVED*** />
+        <Button
+          text={"Let's Go"***REMOVED***
+          onPress={() => {
+            setIsLoggedIn(true);
+      ***REMOVED******REMOVED***
+        />
       </View>
     </TouchableWithoutFeedback>
   );
