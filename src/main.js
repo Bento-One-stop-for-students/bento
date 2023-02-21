@@ -15,8 +15,22 @@ import { ActivityIndicator } from "react-native";
 export default function Main() {
   const insets = useSafeAreaInsets();
 
-  const { authContext, isLoading, isLoggedIn, user } = Auth();
-  
+  const {
+    authContext,
+    user,
+    isLoggedIn,
+    signIn,
+    signOut,
+    isSignedIn,
+    isLoading,
+  } = Auth();
+
+  // function to check if a already signed user exists
+
+  React.useEffect(() => {
+    isSignedIn();
+  }, []);
+
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center">
