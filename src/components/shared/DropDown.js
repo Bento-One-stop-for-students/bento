@@ -12,11 +12,11 @@ const DropDown = (props) => {
   return (
     <DropDownPicker
       containerStyle={{
-        width: 300,
+        width: 270,
         marginVertical: 12,
-        zIndex: props.elevation
+        zIndex: props.elevation,
       }}
-      placeholderStyle={{color:'#72777A'}}
+      placeholderStyle={{ color: "#72777A" }}
       style={{
         borderColor: "#D9D9D9",
       }}
@@ -25,6 +25,12 @@ const DropDown = (props) => {
       }}
       dropDownContainerStyle={{
         borderColor: "#D9D9D9",
+        position: "relative",
+        top: 0,
+      }}
+      listMode="SCROLLVIEW"
+      scrollViewProps={{
+        nestedScrollEnabled: true,
       }}
       placeholder={props.placeholder}
       open={open}

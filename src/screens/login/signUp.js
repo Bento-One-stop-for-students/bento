@@ -1,17 +1,21 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Auth from "../../../hooks/auth";
 
-const SignUp = ({navigation, route}) => {
+const SignUp = ({ navigation, route }) => {
   const { user, isValid, onGoogleButtonPress } = Auth();
 
   useEffect(() => {
-    if(isValid){
-      navigation.navigate('register',{user})
+    if (isValid) {
+      navigation.navigate("register", { user });
     }
-  }, [user])
-  
+  }, [user]);
 
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
@@ -32,7 +36,7 @@ const SignUp = ({navigation, route}) => {
           className="text-primary-purple text-xs "
           style={{ fontFamily: "Lato_700Bold" }}
         >
-          Login with Official e-mail
+          Use Institute e-mail
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
@@ -42,14 +46,20 @@ const SignUp = ({navigation, route}) => {
             className="ml-[18vw] text-white"
             style={{ fontFamily: "Lato_700Bold" }}
           >
-            Sign Up with Google
+            Sign up with Google
           </Text>
           <AntDesign name="google" size={32} color="white" className="" />
         </TouchableOpacity>
       </View>
-      <View className="flex-row mt-[1vh]">
+      <View className="flex-row mt-1 items-center justify-center">
         <Text className="text-xs">Already have an Account?</Text>
-        <Text className="text-xs text-primary-purple"> Sign in here</Text>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            navigation.navigate("sign-in");
+          }}
+        >
+          <Text className="text-xs text-primary-purple "> Sign in</Text>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );

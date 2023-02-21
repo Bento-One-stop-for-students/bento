@@ -1,5 +1,5 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Main from "./src";
+import Main from "./src/main";
 import { StatusBar } from "react-native";
 import {
   useFonts,
@@ -7,12 +7,9 @@ import {
   Lato_900Black,
   Lato_700Bold,
 } from "@expo-google-fonts/lato";
-import GetStarted from "./src/screens/login";
-import { useState } from "react";
 import { NativeBaseProvider } from "native-base";
 
 export default function App() {
-  const [showGetStartedScreen, setShowGetStartedScreen] = useState(true);
   let [fontsLoaded] = useFonts({
     Lato_400Regular,
     Lato_900Black,
@@ -21,8 +18,6 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
-  setTimeout(() => setShowGetStartedScreen(false), 1000);
 
   return (
     <NativeBaseProvider>
@@ -34,7 +29,7 @@ export default function App() {
           showHideTransition={"fade"}
           hidden={false}
         />
-        {showGetStartedScreen ? <GetStarted /> : <Main />}
+        <Main />
       </SafeAreaProvider>
     </NativeBaseProvider>
   );

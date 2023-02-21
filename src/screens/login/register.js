@@ -3,8 +3,12 @@ import { View, Text, TouchableWithoutFeedback, FlatList } from "react-native";
 import DropDown from "../../components/shared/DropDown";
 import { Input } from "native-base";
 import InputField from "../../components/shared/InputField";
+import Button from "../../components/shared/Button";
 
 const Register = ({ navigation, route }) => {
+  const userName =
+    route.params.user.additionalUserInfo.profile.name.split(" ")[0];
+
   const [open, setOpen] = useState(false);
   const [hostelValue, setHostelValue] = useState(null);
   const [hostelItems, setHostelItems] = useState([
@@ -21,9 +25,11 @@ const Register = ({ navigation, route }) => {
   ]);
   const [genderValue, setGenderValue] = useState(null);
   const [genderItems, setGenderItems] = useState([
-    { label: "male", value: "male" },
-    { label: "female", value: "female" },
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
   ]);
+  const [roomValue, setRoomValue] = useState(null);
+  const [phoneNumber,setPhoneNumber] = useState(null);
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)}
@@ -31,12 +37,17 @@ const Register = ({ navigation, route }) => {
     >
       <View className="flex-1 bg-white justify-center items-center flex-col">
         <Text
-          className="text-black font-bold text-xl mb-14 "
+          className="text-primary-purple font-bold text-xl  w-full ml-20 "
+          style={{ fontFamily: "Lato_700Bold" }}
+        >
+          Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()},
+        </Text>
+        <Text
+          className="text-black font-bold text-xl mb-6 "
           style={{ fontFamily: "Lato_700Bold" }}
         >
           We need some more details
         </Text>
-
         <DropDown
           elevation={3}
           open={open}
@@ -55,8 +66,9 @@ const Register = ({ navigation, route }) => {
           setItems={setHostelItems}
           placeholder={"Select Hostel"}
         />
-        <InputField placeholder="Room No."/>
-        <InputField placeholder="Mobile No."/>
+        <InputField placeholder="Room No." />
+        <InputField placeholder="Mobile No." s/>
+        <Button text={"Let's Go"} />
       </View>
     </TouchableWithoutFeedback>
   );
