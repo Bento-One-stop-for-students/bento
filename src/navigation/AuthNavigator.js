@@ -8,9 +8,8 @@ import Register from "../screens/login/register";
 const Auth = createNativeStackNavigator();
 
 const AuthNavigator = () => {
-  const isLoggedIn = true;
   return (
-    <Auth.Navigator screenOptions={{headerShown:false}} initialRouteName="sign-up">
+    <Auth.Navigator screenOptions={{headerShown:false}} initialRouteName="sign-in">
       <Auth.Screen name="sign-in" component={SignIn} />
       <Auth.Screen name="sign-up" component={SignUp} />
       <Auth.Screen name="register" component={Register} />
