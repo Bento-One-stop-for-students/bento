@@ -9,36 +9,20 @@ import AuthNavigator from "./navigation/AuthNavigator";
 import { NativeBaseProvider } from "native-base";
 import GetStarted from "./splashScreen";
 import { AuthContext } from "../hooks/context";
+import Auth from "../hooks/auth";
+import { ActivityIndicator } from "react-native";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [userToken, setUserToken] = React.useState(null);
-  const [loggedIn, setLoggedIn] = React.useState("true");
 
-  const authContext = React.useMemo(() => ({
-    signIn: () => {
-      setUserToken("sddas");
-      setIsLoading(false);
-    },
-    signUp: () => {
-      setUserToken(null);
-      setIsLoading(false);
-    },
-    SignOut: () => {
-      setUserToken("sddas");
-      setIsLoading(false);
-    },
-  }));
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-
+  const { authContext, isLoading, isLoggedIn, user } = Auth();
+  
   if (isLoading) {
-    return <GetStarted />;
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" color="#7345F6" />
+      </View>
+    );
   }
 
   return (
@@ -46,7 +30,7 @@ export default function Main() {
       <NativeBaseProvider>
         <View style={{ marginTop: insets.top, flex: 1 }}>
           <NavigationContainer>
-            {loggedIn ? <AuthNavigator /> : <TabNavigator />}
+            {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />}
           </NavigationContainer>
         </View>
       </NativeBaseProvider>

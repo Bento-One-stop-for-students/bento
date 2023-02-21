@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, TouchableWithoutFeedback, FlatList } from "react-native";
+import React from "react";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import DropDown from "../../components/shared/DropDown";
-import { Input } from "native-base";
 import InputField from "../../components/shared/InputField";
 import Button from "../../components/shared/Button";
 
@@ -9,9 +8,9 @@ const Register = ({ navigation, route }) => {
   const userName =
     route.params.user.additionalUserInfo.profile.name.split(" ")[0];
 
-  const [open, setOpen] = useState(false);
-  const [hostelValue, setHostelValue] = useState(null);
-  const [hostelItems, setHostelItems] = useState([
+  const [open, setOpen] = React.useState(false);
+  const [hostelValue, setHostelValue] = React.useState(null);
+  const [hostelItems, setHostelItems] = React.useState([
     { label: "MBH-A", value: "mbh-a" },
     { label: "MBH-B", value: "mbh-b" },
     { label: "MBH-F", value: "mbh-f" },
@@ -23,13 +22,13 @@ const Register = ({ navigation, route }) => {
     { label: "BH-6", value: "bh-6" },
     { label: "BH-7", value: "bh-7" },
   ]);
-  const [genderValue, setGenderValue] = useState(null);
-  const [genderItems, setGenderItems] = useState([
+  const [genderValue, setGenderValue] = React.useState(null);
+  const [genderItems, setGenderItems] = React.useState([
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
   ]);
-  const [roomValue, setRoomValue] = useState(null);
-  const [phoneNumber,setPhoneNumber] = useState(null);
+  const [roomValue, setRoomValue] = React.useState(null);
+  const [phoneNumber,setPhoneNumber] = React.useState(null);
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)}
@@ -67,7 +66,7 @@ const Register = ({ navigation, route }) => {
           placeholder={"Select Hostel"}
         />
         <InputField placeholder="Room No." />
-        <InputField placeholder="Mobile No." s/>
+        <InputField placeholder="Mobile No." />
         <Button text={"Let's Go"} />
       </View>
     </TouchableWithoutFeedback>

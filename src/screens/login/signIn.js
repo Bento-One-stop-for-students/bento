@@ -7,16 +7,11 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-import Auth from "../../../hooks/auth";
+import { AuthContext } from "../../../hooks/context";
 
-const SignUp = ({ navigation, route }) => {
-  const { user, isValid, onGoogleButtonPress } = Auth();
+const SignIn = ({ navigation, route }) => {
+  const { signIn } = React.useContext(AuthContext);
 
-  React.useEffect(() => {
-    if (isValid) {
-      navigation.navigate("sign-up", { user });
-    }
-  }, [user]);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -34,7 +29,7 @@ const SignUp = ({ navigation, route }) => {
       <View className="mt-10 justify-center items-center ">
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          // onPress={onGoogleButtonPress}
+          onPress={signIn}
         >
           <Text
             className="ml-[18vw] text-white"
@@ -59,4 +54,4 @@ const SignUp = ({ navigation, route }) => {
   );
 };
 
-export default SignUp;
+export default SignIn;

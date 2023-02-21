@@ -1,17 +1,11 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from "@react-native-google-signin/google-signin";
+import React from "react";
 import auth from "@react-native-firebase/auth";
-import { useState } from "react";
-
-const handleMail = (mail) => {
-  return mail.includes("nitj.ac.in") ? true : false;
-};
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const Auth = () => {
-  const [user, setUser] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const [user, setUser] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   GoogleSignin.configure({
     webClientId:
@@ -19,7 +13,7 @@ const Auth = () => {
     forceCodeForRefreshToken: true,
   });
 
-  async function onGoogleButtonPress() {
+  async function signIn() {
     // Check if your device supports Google Play
     const isSignedIn = await GoogleSignin.isSignedIn();
     if (isSignedIn) {
@@ -32,21 +26,65 @@ const Auth = () => {
       userInfo.idToken,
       userInfo.accessToken
     );
+    setIsLoading(true);
     const signedInUser = auth().signInWithCredential(googleCredential);
     signedInUser
       .then((user) => {
-        if (handleMail(user.additionalUserInfo.profile.email)) {
-          setIsValid(true);
-          setUser(user);
-          console.log(user)
+        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
+          setUser(userInfo);
+          console.log(userInfo);
+          setIsLoading(false);
+          setIsLoggedIn(true);
         }
-
-        console.log(isValid)
       })
       .catch((error) => console.log(error));
   }
 
-  return {user,isValid,onGoogleButtonPress}
+  async function isSignedIn(idToken, accessToken) {
+    setIsLoading(true);
+    const googleCredential = auth.GoogleAuthProvider.credential(
+      idToken,
+      accessToken
+    );
+    const signedInUser = auth().signInWithCredential(googleCredential);
+    signedInUser
+      .then((user) => {
+        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
+          setUser(userInfo);
+          console.log(userInfo);
+          setIsLoading(false);
+          setIsLoggedIn(true);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  signOut = async () => {
+    setIsLoading(true);
+    try {
+      await GoogleSignin.signOut();
+      setUser(null);
+      setIsLoggedIn(false);
+      setTimeout(
+        () => {
+          setIsLoading(false);
+        },
+        500 // Remember to remove the user from your app's state as well
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const authContext = React.useMemo(() => ({
+    user,
+    isLoggedIn,
+    signIn,
+    signOut,
+    isSignedIn,
+  }));
+
+  return { authContext, isLoading, isLoggedIn, user };
 };
 
 export default Auth;

@@ -6,16 +6,10 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import Auth from "../../../hooks/auth";
+import { AuthContext } from "../../../hooks/context";
 
 const SignUp = ({ navigation, route }) => {
-  const { user, isValid, onGoogleButtonPress } = Auth();
-
-  useEffect(() => {
-    if (isValid) {
-      navigation.navigate("register", { user });
-    }
-  }, [user]);
+  const { signIn } = React.useContext(AuthContext);
 
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
@@ -40,7 +34,7 @@ const SignUp = ({ navigation, route }) => {
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={onGoogleButtonPress}
+          onPress={signIn}
         >
           <Text
             className="ml-[18vw] text-white"
