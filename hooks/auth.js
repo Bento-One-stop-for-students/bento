@@ -40,26 +40,23 @@ const Auth = () => {
       .catch((error) => console.log(error));
 ***REMOVED***
 
-  async function isSignedIn(idToken, accessToken) {
+  async function isSignedIn() {
     setIsLoading(true);
-    const googleCredential = auth.GoogleAuthProvider.credential(
-      idToken,
-      accessToken
-    );
-    const signedInUser = auth().signInWithCredential(googleCredential);
-    signedInUser
-      .then((user) => {
-        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
-          setUser(userInfo);
-          console.log(userInfo);
+  ***REMOVED***
+  ***REMOVED***
+      setIsLoggedIn(isSignedIn);
+      setTimeout(
+        () => {
           setIsLoading(false);
-          setIsLoggedIn(true);
-    ***REMOVED***
-  ***REMOVED***)
-      .catch((error) => console.log(error));
+    ***REMOVED***,
+        500 // Remember to remove the user from your app's state as well
+      );
+***REMOVED*** catch (error) {
+  ***REMOVED***
+***REMOVED***
 ***REMOVED***
 
-  signOut = async () => {
+  async function signOut() {
     setIsLoading(true);
   ***REMOVED***
 ***REMOVED***
@@ -74,7 +71,7 @@ const Auth = () => {
 ***REMOVED*** catch (error) {
       console.error(error);
 ***REMOVED***
-***REMOVED***;
+***REMOVED***
 
   const authContext = React.useMemo(() => ({
     user,
@@ -82,9 +79,18 @@ const Auth = () => {
     signIn,
     signOut,
     isSignedIn,
+    isLoading,
 ***REMOVED***));
 
-  return { authContext, isLoading, isLoggedIn, user ***REMOVED***
+  return {
+    authContext,
+    user,
+    isLoggedIn,
+    signIn,
+    signOut,
+    isSignedIn,
+    isLoading,
+***REMOVED***;
 ***REMOVED***
 
 export default Auth;
