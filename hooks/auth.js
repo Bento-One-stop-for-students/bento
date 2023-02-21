@@ -1,12 +1,11 @@
 import React from "react";
-import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import auth, { firebase } from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin"; 
 
 const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [isSignedUp, setIsSignedUp] = React.useState(false);
 
   // GoogleSignin.configure({
   //   webClientId:
@@ -25,51 +24,60 @@ const Auth = () => {
 
   async function signIn() {
     // Check if your device supports Google Play
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-    }
-    await GoogleSignin.hasPlayServices();
-    try {
-      setIsLoading(true);
-      const userInfo = await GoogleSignin.signIn();
-      setUser(userInfo);
-      setIsLoading(false);
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  }
-
-  async function signUp() {
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-    }
-    await GoogleSignin.hasPlayServices();
-    try {
-      const userInfo = await GoogleSignin.signIn();
-      setUser(userInfo);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsSignedUp(true);
-  }
-
-  async function isSignedIn() {
     setIsLoading(true);
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    if (isSignedIn) {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+    }
+    await GoogleSignin.hasPlayServices();
+    try {
+      const userInfo = await GoogleSignin.signIn();
+      if (userInfo.user.email.includes("@nitj.ac.in")) {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+          }
+          setIsLoggedIn(true);
+        });
+      }
+    } catch (error) {}
+    setIsLoading(false);
+  }
+
+  async function signUp(navigation) {
+    // Check if your device supports Google Play
+    // setIsLoading(true);
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    if (isSignedIn) {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+    }
+    await GoogleSignin.hasPlayServices();
+    try {
+      const userInfo = await GoogleSignin.signIn();
+      if (userInfo.user.email.includes("@nitj.ac.in")) {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    navigation.navigate('register')
+    // setIsLoading(false);
+  }
+
+  async function checkSignedIn() {
     try {
       const isSignedIn = await GoogleSignin.isSignedIn();
-      setIsLoggedIn(isSignedIn);
-      setTimeout(
-        () => {
-          setIsLoading(false);
-        },
-        500 // Remember to remove the user from your app's state as well
-      );
+      if (isSignedIn) {
+        firebase.auth().onAuthStateChanged((user) => {
+          setUser(user);
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -79,45 +87,38 @@ const Auth = () => {
     setIsLoading(true);
     try {
       await GoogleSignin.signOut();
-      setUser(null);
-      setIsSignedUp(false);
       setIsLoggedIn(false);
-      setTimeout(
-        () => {
-          setIsLoading(false);
-        },
-        500 // Remember to remove the user from your app's state as well
-      );
+      setUser(null);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
+    setIsLoading(false);
   }
 
   const authContext = React.useMemo(() => ({
-    user,
-    isLoggedIn,
     signIn,
     signUp,
     signOut,
-    isSignedIn,
+    checkSignedIn,
+    user,
+    isLoggedIn,
     isLoading,
-    isSignedUp,
+    setUser,
     setIsLoggedIn,
-    setIsSignedUp,
+    setIsLoading,
   }));
-
   return {
     authContext,
-    user,
-    isLoggedIn,
     signIn,
     signUp,
     signOut,
-    isSignedIn,
+    checkSignedIn,
+    user,
+    isLoggedIn,
     isLoading,
-    isSignedUp,
+    setUser,
     setIsLoggedIn,
-    setIsSignedUp,
+    setIsLoading,
   };
 };
 

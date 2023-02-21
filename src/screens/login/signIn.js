@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
-
 import { AuthContext } from "../../../hooks/context";
+
 
 const SignIn = ({ navigation, route }) => {
   const { signIn } = React.useContext(AuthContext);
@@ -44,7 +44,7 @@ const SignIn = ({ navigation, route }) => {
         <Text className="text-xs">Don't have an Account?</Text>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate("sign-up");
+            navigation.navigate('sign-up');
           }}
         >
           <Text className="text-xs text-primary-purple "> Sign Up here</Text>

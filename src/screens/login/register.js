@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, TouchableWithoutFeedback } from "react-native";
 import DropDown from "../../components/shared/DropDown";
 import InputField from "../../components/shared/InputField";
@@ -6,8 +6,8 @@ import Button from "../../components/shared/Button";
 import { AuthContext } from "../../../hooks/context";
 
 const Register = ({ navigation, route }) => {
-  const { user,setIsLoggedIn } = React.useContext(AuthContext);
-  const userName = user.user.name.split(" ")[0];
+  const { user, setIsLoggedIn } = React.useContext(AuthContext);
+  // const userName = user.displayName.split(" ")[0];
 
   const [open, setOpen] = React.useState(false);
   const [hostelValue, setHostelValue] = React.useState(null);
@@ -40,7 +40,7 @@ const Register = ({ navigation, route }) => {
           className="text-primary-purple font-bold text-xl  w-full ml-20 "
           style={{ fontFamily: "Lato_700Bold" }}
         >
-          Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()},
+          {/* Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()}, */}
         </Text>
         <Text
           className="text-black font-bold text-xl mb-6 "
@@ -66,9 +66,14 @@ const Register = ({ navigation, route }) => {
           setItems={setHostelItems}
           placeholder={"Select Hostel"}
         />
-        <InputField placeholder="Room No." />
-        <InputField placeholder="Mobile No." />
-        <Button text={"Let's Go"} onPress={()=>{setIsLoggedIn(true)}} />
+        <InputField placeholder="Room No." setValue={setRoomValue} />
+        <InputField placeholder="Mobile No." setValue={setPhoneNumber} />
+        <Button
+          text={"Let's Go"}
+          onPress={() => {
+            setIsLoggedIn(true);
+          }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

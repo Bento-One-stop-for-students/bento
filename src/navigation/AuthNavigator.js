@@ -4,12 +4,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignIn from "../screens/login/signIn";
 import SignUp from "../screens/login/signUp";
 import Register from "../screens/login/register";
+import { AuthContext } from "../../hooks/context";
+import { fromRight } from "react-navigation-transitions";
 
 const Auth = createNativeStackNavigator();
 
 const AuthNavigator = () => {
   return (
-    <Auth.Navigator screenOptions={{headerShown:false}} initialRouteName="sign-in">
+    <Auth.Navigator
+      screenOptions={{ headerShown: false, animation:'slide_from_right',animationDuration:'50' }}
+      initialRouteName="sign-in" 
+    >
       <Auth.Screen name="sign-in" component={SignIn} />
       <Auth.Screen name="sign-up" component={SignUp} />
       <Auth.Screen name="register" component={Register} />

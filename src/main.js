@@ -11,9 +11,11 @@ import GetStarted from "./splashScreen";
 import { AuthContext } from "../hooks/context";
 import Auth from "../hooks/auth";
 import { ActivityIndicator } from "react-native";
+import { handleSignUp } from "../lib/user";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
+  const [splashScreen, setSplashScreen] = React.useState(true);
 
   const {
     authContext,
@@ -21,14 +23,17 @@ export default function Main() {
     isLoggedIn,
     signIn,
     signOut,
-    isSignedIn,
+    checkSignedIn,
     isLoading,
+    isAuthenticated,
   } = Auth();
 
-  // function to check if a already signed user exists
+  setTimeout(() => {
+    setSplashScreen(false);
+  }, 1000);
 
   React.useEffect(() => {
-    isSignedIn();
+    checkSignedIn();
   }, []);
 
   if (isLoading) {
@@ -39,15 +44,17 @@ export default function Main() {
     );
   }
 
-  return (
-    <AuthContext.Provider value={authContext}>
-      <NativeBaseProvider>
-        <View style={{ marginTop: insets.top, flex: 1 }}>
-          <NavigationContainer>
+  return splashScreen ? (
+    <GetStarted />
+  ) : (
+    <NativeBaseProvider>
+      <View style={{ marginTop: insets.top, flex: 1 }}>
+        <NavigationContainer>
+          <AuthContext.Provider value={authContext}>
             {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />}
-          </NavigationContainer>
-        </View>
-      </NativeBaseProvider>
-    </AuthContext.Provider>
+          </AuthContext.Provider>
+        </NavigationContainer>
+      </View>
+    </NativeBaseProvider>
   );
 }
