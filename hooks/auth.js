@@ -6,11 +6,21 @@ const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isSignedUp, setIsSignedUp] = React.useState(false);
 
+  // ***REMOVED***
+  //   webClientId:
+  //     "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
+  //   forceCodeForRefreshToken: true,
+  // ***REMOVED***
   ***REMOVED***
-    webClientId:
-      "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
-    forceCodeForRefreshToken: true,
+    apiKey: "AIzaSyAtoksjwwmh7dN1jGFlAgsigJC4mvnb3uU",
+    authDomain: "bento-5ad4e.firebaseapp.com",
+    projectId: "bento-5ad4e",
+    storageBucket: "bento-5ad4e.appspot.com",
+    messagingSenderId: "864652401846",
+    appId: "1:864652401846:web:4b331c0ba767e2a85a9a17",
+    measurementId: "G-BNV4R6N3EF",
   ***REMOVED***
 
   async function signIn() {
@@ -21,23 +31,32 @@ const Auth = () => {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+  ***REMOVED***
+      setIsLoading(true);
+  ***REMOVED***
+      setUser(userInfo);
+      setIsLoading(false);
+      setIsLoggedIn(true);
+***REMOVED*** catch (error) {
+  ***REMOVED***
+      setIsLoading(false);
 ***REMOVED***
-    const googleCredential = auth.GoogleAuthProvider.credential(
-      userInfo.idToken,
-      userInfo.accessToken
-    );
-    setIsLoading(true);
-    const signedInUser = auth().signInWithCredential(googleCredential);
-    signedInUser
-      .then((user) => {
-        if (user.additionalUserInfo.profile.email.includes("nitj.ac.in")) {
-          setUser(userInfo);
-          console.log(userInfo);
-          setIsLoading(false);
-          setIsLoggedIn(true);
-    ***REMOVED***
-  ***REMOVED***)
-      .catch((error) => console.log(error));
+***REMOVED***
+
+  async function signUp() {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+      setUser(userInfo);
+***REMOVED*** catch (error) {
+  ***REMOVED***
+***REMOVED***
+    setIsSignedUp(true);
 ***REMOVED***
 
   async function isSignedIn() {
@@ -61,6 +80,7 @@ const Auth = () => {
   ***REMOVED***
 ***REMOVED***
       setUser(null);
+      setIsSignedUp(false);
       setIsLoggedIn(false);
       setTimeout(
         () => {
@@ -77,9 +97,13 @@ const Auth = () => {
     user,
     isLoggedIn,
     signIn,
+    signUp,
     signOut,
     isSignedIn,
     isLoading,
+    isSignedUp,
+    setIsLoggedIn,
+    setIsSignedUp,
 ***REMOVED***));
 
   return {
@@ -87,9 +111,13 @@ const Auth = () => {
     user,
     isLoggedIn,
     signIn,
+    signUp,
     signOut,
     isSignedIn,
     isLoading,
+    isSignedUp,
+    setIsLoggedIn,
+    setIsSignedUp,
 ***REMOVED***;
 ***REMOVED***
 

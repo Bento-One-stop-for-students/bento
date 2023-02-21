@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect ***REMOVED*** from "react";
 import { View, Text, TouchableWithoutFeedback ***REMOVED*** from "react-native";
 import DropDown from "../../components/shared/DropDown";
 import InputField from "../../components/shared/InputField";
 import Button from "../../components/shared/Button";
+import { AuthContext ***REMOVED*** from "../../../hooks/context";
 
 const Register = ({ navigation, route ***REMOVED***) => {
-  const userName =
-    route.params.user.additionalUserInfo.profile.name.split(" ")[0];
+  const { user,setIsLoggedIn ***REMOVED*** = React.useContext(AuthContext);
+  const userName = user.user.name.split(" ")[0];
 
   const [open, setOpen] = React.useState(false);
   const [hostelValue, setHostelValue] = React.useState(null);
@@ -28,7 +29,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
     { label: "Female", value: "female" ***REMOVED***,
   ]);
   const [roomValue, setRoomValue] = React.useState(null);
-  const [phoneNumber,setPhoneNumber] = React.useState(null);
+  const [phoneNumber, setPhoneNumber] = React.useState(null);
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)***REMOVED***
@@ -67,7 +68,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
         <InputField placeholder="Room No." />
         <InputField placeholder="Mobile No." />
-        <Button text={"Let's Go"***REMOVED*** />
+        <Button text={"Let's Go"***REMOVED*** onPress={()=>{setIsLoggedIn(true)***REMOVED******REMOVED*** />
       </View>
     </TouchableWithoutFeedback>
   );

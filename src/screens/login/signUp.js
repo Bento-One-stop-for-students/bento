@@ -4,12 +4,18 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 ***REMOVED*** from "react-native";
-import React, { useEffect, useState ***REMOVED*** from "react";
+import React from "react";
 import { AntDesign ***REMOVED*** from "@expo/vector-icons";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
 
 const SignUp = ({ navigation, route ***REMOVED***) => {
-  const { signIn ***REMOVED*** = React.useContext(AuthContext);
+  const { signUp, isSignedUp,user ***REMOVED*** = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    if (isSignedUp) {
+      navigation.navigate("register");
+***REMOVED***
+***REMOVED***, [isSignedUp]);
 
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
@@ -34,7 +40,7 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={signIn***REMOVED***
+          onPress={signUp***REMOVED***
         >
           <Text
             className="ml-[18vw] text-white"
