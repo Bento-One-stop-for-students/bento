@@ -1,28 +1,38 @@
 import React from "react";
 import auth, { firebase } from "@react-native-firebase/auth";
-import { GoogleSignin } from "@react-native-google-signin/google-signin"; 
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
+import { db } from "../lib/firebase/firebaseConfig";
+import { getUser } from "../lib/firebase/User";
 
 const Auth = () => {
   const [user, setUser] = React.useState(null);
+  const [googleUser, setGoogleUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  // GoogleSignin.configure({
-  //   webClientId:
-  //     "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
-  //   forceCodeForRefreshToken: true,
-  // });
+  const verifyUser = async (user) => {
+    const { id } = user;
+    getUser(id)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setUser(res);
+        return true;
+      })
+      .catch((err) => {
+        console.log(error);
+        return false;
+      });
+  };
+
   GoogleSignin.configure({
-    apiKey: "AIzaSyAtoksjwwmh7dN1jGFlAgsigJC4mvnb3uU",
-    authDomain: "bento-5ad4e.firebaseapp.com",
-    projectId: "bento-5ad4e",
-    storageBucket: "bento-5ad4e.appspot.com",
-    messagingSenderId: "864652401846",
-    appId: "1:864652401846:web:4b331c0ba767e2a85a9a17",
-    measurementId: "G-BNV4R6N3EF",
+    webClientId:
+      "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
   });
 
-  async function signIn() {
+  async function handleGoogleSignIn() {
     // Check if your device supports Google Play
     setIsLoading(true);
     const isSignedIn = await GoogleSignin.isSignedIn();
@@ -30,65 +40,56 @@ const Auth = () => {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
     }
-    await GoogleSignin.hasPlayServices();
     try {
+      await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      if (userInfo.user.email.includes("@nitj.ac.in")) {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            setUser(user);
-          }
-          setIsLoggedIn(true);
-        });
-      }
-    } catch (error) {}
+      setGoogleUser(userInfo.user);
+      verifyUser(userInfo.user);
+    } catch (error) {
+      console.log(error);
+    }
     setIsLoading(false);
   }
 
-  async function signUp(navigation) {
+  async function handleGoogleSignUp(navigation) {
     // Check if your device supports Google Play
-    // setIsLoading(true);
     const isSignedIn = await GoogleSignin.isSignedIn();
     if (isSignedIn) {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
     }
-    await GoogleSignin.hasPlayServices();
     try {
+      await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      if (userInfo.user.email.includes("@nitj.ac.in")) {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            setUser(user);
-          }
-        });
-      }
+      setGoogleUser(userInfo.user);
     } catch (error) {
       console.log(error);
     }
-    navigation.navigate('register')
+    setTimeout(() => {
+      navigation.navigate("register");
+    }, 500);
     // setIsLoading(false);
   }
 
-  async function checkSignedIn() {
+  async function handleSignedIn() {
     try {
       const isSignedIn = await GoogleSignin.isSignedIn();
       if (isSignedIn) {
-        firebase.auth().onAuthStateChanged((user) => {
-          setUser(user);
-        });
+        const currentUser = await GoogleSignin.getCurrentUser();
+        verifyUser(currentUser.user);
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function signOut() {
+  async function handleSignOut() {
     setIsLoading(true);
     try {
       await GoogleSignin.signOut();
       setIsLoggedIn(false);
       setUser(null);
+      setGoogleUser(null);
     } catch (error) {
       console.log(error);
     }
@@ -96,29 +97,33 @@ const Auth = () => {
   }
 
   const authContext = React.useMemo(() => ({
-    signIn,
-    signUp,
-    signOut,
-    checkSignedIn,
+    handleSignedIn,
+    handleGoogleSignIn,
+    handleGoogleSignUp,
+    handleSignOut,
     user,
     isLoggedIn,
     isLoading,
     setUser,
+    googleUser,
     setIsLoggedIn,
     setIsLoading,
+    setGoogleUser,
   }));
   return {
+    handleSignedIn,
+    handleGoogleSignIn,
+    handleGoogleSignUp,
     authContext,
-    signIn,
-    signUp,
-    signOut,
-    checkSignedIn,
+    handleSignOut,
     user,
-    isLoggedIn,
     isLoading,
+    isLoggedIn,
+    googleUser,
     setUser,
     setIsLoggedIn,
     setIsLoading,
+    setGoogleUser,
   };
 };
 

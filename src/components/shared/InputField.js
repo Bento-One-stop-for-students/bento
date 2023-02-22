@@ -1,10 +1,9 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { Input } from 'native-base';
 
 const InputField = (props) => {
   return (
-    <Input size="md" placeholder={props.placeholder} w={270} marginY={3} borderColor={"#D9D9D9"} borderRadius={7} height={50} placeholderTextColor={'#72777A'} onChange={(value)=>{props.setValue(value)}}  fontFamily={'Lato_700Bold'}/>
+    <Input size="md" placeholder={props.placeholder} keyboardType='numeric' w={270} marginY={3} borderColor={"#D9D9D9"} borderRadius={7} height={50} placeholderTextColor={'#72777A'} onChangeText={text=>props.setValue(text)}  fontFamily={'Lato_700Bold'}/>
   )
 }
 

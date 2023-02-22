@@ -8,10 +8,8 @@ import {
 } from "react-native";
 import { AuthContext } from "../../../hooks/context";
 
-
 const SignIn = ({ navigation, route }) => {
-  const { signIn } = React.useContext(AuthContext);
-
+  const { handleGoogleSignIn } = React.useContext(AuthContext);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -29,7 +27,7 @@ const SignIn = ({ navigation, route }) => {
       <View className="mt-10 justify-center items-center ">
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={signIn}
+          onPress={handleGoogleSignIn}
         >
           <Text
             className="ml-[18vw] text-white"
@@ -44,7 +42,7 @@ const SignIn = ({ navigation, route }) => {
         <Text className="text-xs">Don't have an Account?</Text>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate('sign-up');
+            navigation.navigate("sign-up");
           }}
         >
           <Text className="text-xs text-primary-purple "> Sign Up here</Text>

@@ -5,9 +5,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import Home from "../screens";
-import Settings from "../screens/settings";
+import Settings from "../screens/settings/settings";
 import Cafeteria from "../screens/cafeteria";
 import Appointments from "../screens/appointments";
+import Profile from "../screens/settings/profile";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -16,9 +17,6 @@ function HomeStackScreen() {
     <HomeStack.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        headerStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-        },
         headerTitleStyle: {
           fontSize: 15,
           fontFamily: "Lato_700Bold",
@@ -38,7 +36,6 @@ function AppointmentsStackScreen() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
         },
         headerTitleStyle: {
           fontSize: 15,
@@ -89,6 +86,7 @@ function SettingsStackScreen() {
       }}
     >
       <SettingsStack.Screen name="Settings" component={Settings} />
+      <SettingsStack.Screen name="Profile" component={Profile} />
     </SettingsStack.Navigator>
   );
 }
