@@ -1,17 +1,15 @@
 import React from "react";
 
-import { View ***REMOVED*** from "react-native";
+import { NativeBaseProvider ***REMOVED*** from "native-base";
+import { View, ActivityIndicator ***REMOVED*** from "react-native";
 import { NavigationContainer ***REMOVED*** from "@react-navigation/native";
 import { useSafeAreaInsets ***REMOVED*** from "react-native-safe-area-context";
 
 import TabNavigator from "./navigation/TabNavigator";
 import AuthNavigator from "./navigation/AuthNavigator";
-import { NativeBaseProvider ***REMOVED*** from "native-base";
 import GetStarted from "./splashScreen";
 import { AuthContext ***REMOVED*** from "../hooks/context";
 import Auth from "../hooks/auth";
-import { ActivityIndicator ***REMOVED*** from "react-native";
-import { handleSignUp ***REMOVED*** from "../lib/user";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
@@ -21,11 +19,8 @@ export default function Main() {
     authContext,
     user,
     isLoggedIn,
-    signIn,
-    signOut,
-    checkSignedIn,
     isLoading,
-    isAuthenticated,
+    handleSignedIn
 ***REMOVED*** = Auth();
 
   setTimeout(() => {
@@ -33,8 +28,14 @@ export default function Main() {
 ***REMOVED***, 1000);
 
   React.useEffect(() => {
-    checkSignedIn();
+    console.log(user)
+***REMOVED***, [user]);
+
+  React.useEffect(() => {
+    handleSignedIn()
 ***REMOVED***, []);
+
+
 
   if (isLoading) {
     return (
@@ -48,7 +49,9 @@ export default function Main() {
     <GetStarted />
   ) : (
     <NativeBaseProvider>
-      <View style={{ marginTop: insets.top, flex: 1 ***REMOVED******REMOVED***>
+      <View
+        style={{ marginTop: insets.top, flex: 1, backgroundColor: "white" ***REMOVED******REMOVED***
+      >
         <NavigationContainer>
           <AuthContext.Provider value={authContext***REMOVED***>
             {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />***REMOVED***

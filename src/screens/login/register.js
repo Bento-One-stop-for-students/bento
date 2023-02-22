@@ -1,16 +1,23 @@
 import React from "react";
-import { View, Text, TouchableWithoutFeedback ***REMOVED*** from "react-native";
-import DropDown from "../../components/shared/DropDown";
-import InputField from "../../components/shared/InputField";
 import Button from "../../components/shared/Button";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
+import DropDown from "../../components/shared/DropDown";
+import InputField from "../../components/shared/InputField";
+import { View, Text, TouchableWithoutFeedback, Alert ***REMOVED*** from "react-native";
+import { createUser ***REMOVED*** from "../../../lib/firebase/User";
+import { checkValidInputs ***REMOVED*** from "../../../hooks/validators";
 
 const Register = ({ navigation, route ***REMOVED***) => {
-  const { user, setIsLoggedIn ***REMOVED*** = React.useContext(AuthContext);
-  // const userName = user.displayName.split(" ")[0];
+  const { googleUser, setIsLoggedIn, setUser ***REMOVED*** = React.useContext(AuthContext);
+
+  const { id, givenName, photo, email, name ***REMOVED*** = googleUser;
+  const splitEmail = email.split(".");
+
+  const branchCode = splitEmail[1];
+  const userName = givenName;
 
   const [open, setOpen] = React.useState(false);
-  const [hostelValue, setHostelValue] = React.useState(null);
+  const [hostelValue, setHostelValue] = React.useState("");
   const [hostelItems, setHostelItems] = React.useState([
     { label: "MBH-A", value: "mbh-a" ***REMOVED***,
     { label: "MBH-B", value: "mbh-b" ***REMOVED***,
@@ -22,14 +29,58 @@ const Register = ({ navigation, route ***REMOVED***) => {
     { label: "BH-5", value: "bh-5" ***REMOVED***,
     { label: "BH-6", value: "bh-6" ***REMOVED***,
     { label: "BH-7", value: "bh-7" ***REMOVED***,
+    { label: "GH-1", value: "gh-1" ***REMOVED***,
+    { label: "GH-2", value: "gh-2" ***REMOVED***,
+    { label: "MGH", value: "mgh" ***REMOVED***,
   ]);
-  const [genderValue, setGenderValue] = React.useState(null);
+  const [genderValue, setGenderValue] = React.useState("");
   const [genderItems, setGenderItems] = React.useState([
     { label: "Male", value: "male" ***REMOVED***,
     { label: "Female", value: "female" ***REMOVED***,
   ]);
-  const [roomValue, setRoomValue] = React.useState(null);
-  const [phoneNumber, setPhoneNumber] = React.useState(null);
+  const [roomValue, setRoomValue] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [rollNoValue, setRollNoValue] = React.useState("");
+
+  const newUser = {
+    name: name,
+    email: email,
+    img: photo,
+    branch: branchCode,
+    club: {
+      head: false,
+      name: "",
+***REMOVED***,
+    gender: genderValue,
+    hostel: hostelValue,
+    room_no: roomValue,
+    roll_no: rollNoValue,
+    mobile_no: phoneNumber,
+***REMOVED***;
+
+  const handleRegister = () => {
+    if (
+      checkValidInputs(
+        hostelValue,
+        genderValue,
+        roomValue,
+        phoneNumber,
+        rollNoValue
+      )
+    ) {
+      const res = createUser(newUser, id);
+  ***REMOVED***
+        setIsLoggedIn(true);
+        setUser(newUser);
+        console.log(res);
+  ***REMOVED*** else {
+        Alert.alert("Some error occured. Try again later.");
+  ***REMOVED***
+***REMOVED*** else {
+      Alert.alert("Error", "Invalid input");
+***REMOVED***
+***REMOVED***;
+
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setOpen(true)***REMOVED***
@@ -40,7 +91,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
           className="text-primary-purple font-bold text-xl  w-full ml-20 "
           style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
-          {/* Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()***REMOVED***, */***REMOVED***
+          Hi! {userName.charAt(0) + userName.slice(1).toLowerCase()***REMOVED***,
         </Text>
         <Text
           className="text-black font-bold text-xl mb-6 "
@@ -66,14 +117,10 @@ const Register = ({ navigation, route ***REMOVED***) => {
           setItems={setHostelItems***REMOVED***
           placeholder={"Select Hostel"***REMOVED***
         />
+        <InputField placeholder="Roll No." setValue={setRollNoValue***REMOVED*** />
         <InputField placeholder="Room No." setValue={setRoomValue***REMOVED*** />
         <InputField placeholder="Mobile No." setValue={setPhoneNumber***REMOVED*** />
-        <Button
-          text={"Let's Go"***REMOVED***
-          onPress={() => {
-            setIsLoggedIn(true);
-      ***REMOVED******REMOVED***
-        />
+        <Button text={"Let's Go"***REMOVED*** fun={handleRegister***REMOVED*** />
       </View>
     </TouchableWithoutFeedback>
   );

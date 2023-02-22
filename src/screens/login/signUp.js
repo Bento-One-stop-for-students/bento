@@ -4,12 +4,12 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 ***REMOVED*** from "react-native";
-import React, { useEffect ***REMOVED*** from "react";
+import React from "react";
 import { AntDesign ***REMOVED*** from "@expo/vector-icons";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
 
 const SignUp = ({ navigation, route ***REMOVED***) => {
-  const { signUp ***REMOVED*** = React.useContext(AuthContext);
+  const { handleGoogleSignUp ***REMOVED*** = React.useContext(AuthContext);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -34,7 +34,7 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
           onPress={() => {
-            signUp(navigation);
+            handleGoogleSignUp(navigation);
       ***REMOVED******REMOVED***
         >
           <Text

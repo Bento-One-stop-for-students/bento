@@ -1,28 +1,38 @@
 import React from "react";
 import auth, { firebase ***REMOVED*** from "@react-native-firebase/auth";
-***REMOVED*** 
+import {
+  GoogleSignin,
+  statusCodes,
+***REMOVED*** from "@react-native-google-signin/google-signin";
+import { db ***REMOVED*** from "../lib/firebase/firebaseConfig";
+import { getUser ***REMOVED*** from "../lib/firebase/User";
 
 const Auth = () => {
   const [user, setUser] = React.useState(null);
+  const [googleUser, setGoogleUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  // ***REMOVED***
-  //   webClientId:
-  //     "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
-  //   forceCodeForRefreshToken: true,
-  // ***REMOVED***
   ***REMOVED***
-    apiKey: "AIzaSyAtoksjwwmh7dN1jGFlAgsigJC4mvnb3uU",
-    authDomain: "bento-5ad4e.firebaseapp.com",
-    projectId: "bento-5ad4e",
-    storageBucket: "bento-5ad4e.appspot.com",
-    messagingSenderId: "864652401846",
-    appId: "1:864652401846:web:4b331c0ba767e2a85a9a17",
-    measurementId: "G-BNV4R6N3EF",
+***REMOVED***
+    getUser(id)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setUser(res);
+***REMOVED***
+  ***REMOVED***)
+      .catch((err) => {
+    ***REMOVED***
+  ***REMOVED***
+      ***REMOVED***
+***REMOVED***;
+
+  ***REMOVED***
+    webClientId:
+      "864652401846-tai9latbdbms7o0solohb8n9a0kf1g0o.apps.googleusercontent.com",
   ***REMOVED***
 
-  async function signIn() {
+  async function handleGoogleSignIn() {
 ***REMOVED***
     setIsLoading(true);
 ***REMOVED***
@@ -30,24 +40,18 @@ const Auth = () => {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+      setGoogleUser(userInfo.user);
+      verifyUser(userInfo.user);
+***REMOVED*** catch (error) {
+  ***REMOVED***
 ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-      if (userInfo.user.email.includes("@nitj.ac.in")) {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            setUser(user);
-      ***REMOVED***
-          setIsLoggedIn(true);
-        ***REMOVED***
-  ***REMOVED***
-***REMOVED*** catch (error) {***REMOVED***
     setIsLoading(false);
 ***REMOVED***
 
-  async function signUp(navigation) {
-***REMOVED***
-    // setIsLoading(true);
+  async function handleGoogleSignUp(navigation) {
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -56,39 +60,36 @@ const Auth = () => {
 ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-      if (userInfo.user.email.includes("@nitj.ac.in")) {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            setUser(user);
-      ***REMOVED***
-        ***REMOVED***
   ***REMOVED***
+      setGoogleUser(userInfo.user);
 ***REMOVED*** catch (error) {
   ***REMOVED***
 ***REMOVED***
-    navigation.navigate('register')
+    setTimeout(() => {
+      navigation.navigate("register");
+***REMOVED***, 500);
     // setIsLoading(false);
 ***REMOVED***
 
-  async function checkSignedIn() {
+  async function handleSignedIn() {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-        firebase.auth().onAuthStateChanged((user) => {
-          setUser(user);
-        ***REMOVED***
+  ***REMOVED***
+        verifyUser(currentUser.user);
   ***REMOVED***
 ***REMOVED*** catch (error) {
   ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
-  async function signOut() {
+  async function handleSignOut() {
     setIsLoading(true);
   ***REMOVED***
 ***REMOVED***
       setIsLoggedIn(false);
       setUser(null);
+      setGoogleUser(null);
 ***REMOVED*** catch (error) {
   ***REMOVED***
 ***REMOVED***
@@ -96,29 +97,33 @@ const Auth = () => {
 ***REMOVED***
 
   const authContext = React.useMemo(() => ({
-    signIn,
-    signUp,
-    signOut,
-    checkSignedIn,
+    handleSignedIn,
+    handleGoogleSignIn,
+    handleGoogleSignUp,
+    handleSignOut,
     user,
     isLoggedIn,
     isLoading,
     setUser,
+    googleUser,
     setIsLoggedIn,
     setIsLoading,
+    setGoogleUser,
 ***REMOVED***));
   return {
+    handleSignedIn,
+    handleGoogleSignIn,
+    handleGoogleSignUp,
     authContext,
-    signIn,
-    signUp,
-    signOut,
-    checkSignedIn,
+    handleSignOut,
     user,
-    isLoggedIn,
     isLoading,
+    isLoggedIn,
+    googleUser,
     setUser,
     setIsLoggedIn,
     setIsLoading,
+    setGoogleUser,
 ***REMOVED***;
 ***REMOVED***
 
