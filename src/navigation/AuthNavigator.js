@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignIn from "../screens/login/signIn";
 import SignUp from "../screens/login/signUp";
 import Register from "../screens/login/register";
-import { AuthContext } from "../../hooks/context";
-import { fromRight } from "react-navigation-transitions";
 
 const Auth = createNativeStackNavigator();
 

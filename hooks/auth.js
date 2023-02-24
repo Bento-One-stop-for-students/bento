@@ -17,13 +17,13 @@ const Auth = () => {
     const { id } = user;
     getUser(id)
       .then((res) => {
-        setIsLoggedIn(true);
-        setUser(res);
-        return true;
+        if (res) {
+          setIsLoggedIn(true);
+          setUser(res);
+        }
       })
       .catch((err) => {
         console.log(error);
-        return false;
       });
   };
 
@@ -47,6 +47,11 @@ const Auth = () => {
       verifyUser(userInfo.user);
     } catch (error) {
       console.log(error);
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      if (isSignedIn) {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+      }
     }
     setIsLoading(false);
   }
@@ -64,6 +69,11 @@ const Auth = () => {
       setGoogleUser(userInfo.user);
     } catch (error) {
       console.log(error);
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      if (isSignedIn) {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+      }
     }
     setTimeout(() => {
       navigation.navigate("register");

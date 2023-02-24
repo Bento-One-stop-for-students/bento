@@ -4,6 +4,7 @@
   },
   "build": {
     "development": {
+      "node":"14.18.1",
       "developmentClient": true,
       "distribution": "internal",
       "ios": {

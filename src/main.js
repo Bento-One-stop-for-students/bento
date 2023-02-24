@@ -28,14 +28,12 @@ export default function Main() {
   }, 1000);
 
   React.useEffect(() => {
-    console.log(user)
+    console.log({user,isLoggedIn})
   }, [user]);
 
   React.useEffect(() => {
     handleSignedIn()
   }, []);
-
-
 
   if (isLoading) {
     return (
