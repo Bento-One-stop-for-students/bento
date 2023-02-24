@@ -28,14 +28,12 @@ export default function Main() {
 ***REMOVED***, 1000);
 
   React.useEffect(() => {
-    console.log(user)
+    console.log({user,isLoggedIn***REMOVED***)
 ***REMOVED***, [user]);
 
   React.useEffect(() => {
     handleSignedIn()
 ***REMOVED***, []);
-
-
 
   if (isLoading) {
     return (

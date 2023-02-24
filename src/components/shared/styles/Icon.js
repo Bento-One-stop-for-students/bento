@@ -3,7 +3,7 @@ import React from "react";
 
 const Icon = (props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress***REMOVED***>
       <View>
         <View
           className="h-20 rounded-xl bg-white m-2 w-20 items-center justify-center"

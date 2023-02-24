@@ -17,13 +17,13 @@ const Auth = () => {
 ***REMOVED***
     getUser(id)
       .then((res) => {
-        setIsLoggedIn(true);
-        setUser(res);
-***REMOVED***
+    ***REMOVED***
+          setIsLoggedIn(true);
+          setUser(res);
+    ***REMOVED***
   ***REMOVED***)
       .catch((err) => {
     ***REMOVED***
-  ***REMOVED***
       ***REMOVED***
 ***REMOVED***;
 
@@ -47,6 +47,11 @@ const Auth = () => {
       verifyUser(userInfo.user);
 ***REMOVED*** catch (error) {
   ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
 ***REMOVED***
     setIsLoading(false);
 ***REMOVED***
@@ -63,6 +68,11 @@ const Auth = () => {
   ***REMOVED***
       setGoogleUser(userInfo.user);
 ***REMOVED*** catch (error) {
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
   ***REMOVED***
 ***REMOVED***
     setTimeout(() => {

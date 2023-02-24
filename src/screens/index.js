@@ -9,11 +9,10 @@ import {
 import React from "react";
 import { MaterialIcons ***REMOVED*** from "@expo/vector-icons";
 import { Feather ***REMOVED*** from "@expo/vector-icons";
-import { AntDesign ***REMOVED*** from "@expo/vector-icons";
 import { Octicons ***REMOVED*** from "@expo/vector-icons";
-import Icon from "../components/shared/Icon";
+import Icon from "../components/shared/styles/Icon";
 
-const Home = () => {
+const Home = ({navigation, route***REMOVED***) => {
   return (
     <View className="bg-white h-full w-full">
       <View className="  mt-4 flex-row items-start px-2">
@@ -99,7 +98,7 @@ const Home = () => {
             />
             <Icon
               icon={<Feather name="scissors" size={40***REMOVED*** color="black" />***REMOVED***
-              name="Barber"
+              name="Barber" onPress={()=>{navigation.navigate('Barber')***REMOVED******REMOVED***
             />
             <Icon
               icon={<MaterialIcons name="logout" size={40***REMOVED*** color="black" />***REMOVED***

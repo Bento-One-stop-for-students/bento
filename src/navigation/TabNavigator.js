@@ -5,6 +5,7 @@ import { createNativeStackNavigator ***REMOVED*** from "@react-navigation/native
 import { createMaterialTopTabNavigator ***REMOVED*** from "@react-navigation/material-top-tabs";
 
 import Home from "../screens";
+import Barber from "../screens/barber/";
 import Settings from "../screens/settings/settings";
 import Cafeteria from "../screens/cafeteria";
 import Appointments from "../screens/appointments";
@@ -12,88 +13,9 @@ import Profile from "../screens/settings/profile";
 
 const HomeStack = createNativeStackNavigator();
 
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          fontSize: 15,
-          fontFamily: "Lato_700Bold",
-    ***REMOVED***,
-  ***REMOVED******REMOVED***
-    >
-      <HomeStack.Screen name="Home" component={Home***REMOVED*** />
-    </HomeStack.Navigator>
-  );
-***REMOVED***
-
-const AppointmentsStack = createNativeStackNavigator();
-
-function AppointmentsStackScreen() {
-  return (
-    <AppointmentsStack.Navigator
-      screenOptions={{
-        headerTitleAlign: "center",
-        headerStyle: {
-    ***REMOVED***,
-        headerTitleStyle: {
-          fontSize: 15,
-          fontFamily: "Lato_700Bold",
-    ***REMOVED***,
-  ***REMOVED******REMOVED***
-    >
-      <AppointmentsStack.Screen name="Appointments" component={Appointments***REMOVED*** />
-    </AppointmentsStack.Navigator>
-  );
-***REMOVED***
-
-const CafeteriaStack = createNativeStackNavigator();
-
-function CafeteriaStackScreen() {
-  return (
-    <CafeteriaStack.Navigator
-      screenOptions={{
-        headerTitleAlign: "center",
-        headerStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-    ***REMOVED***,
-        headerTitleStyle: {
-          fontSize: 15,
-          fontFamily: "Lato_700Bold",
-    ***REMOVED***,
-  ***REMOVED******REMOVED***
-    >
-      <CafeteriaStack.Screen name="Cafeteria" component={Cafeteria***REMOVED*** />
-    </CafeteriaStack.Navigator>
-  );
-***REMOVED***
-
-const SettingsStack = createNativeStackNavigator();
-
-function SettingsStackScreen() {
-  return (
-    <SettingsStack.Navigator
-      screenOptions={{
-        headerTitleAlign: "center",
-        headerStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-    ***REMOVED***,
-        headerTitleStyle: {
-          fontSize: 15,
-          fontFamily: "Lato_700Bold",
-    ***REMOVED***,
-  ***REMOVED******REMOVED***
-    >
-      <SettingsStack.Screen name="Settings" component={Settings***REMOVED*** />
-      <SettingsStack.Screen name="Profile" component={Profile***REMOVED*** />
-    </SettingsStack.Navigator>
-  );
-***REMOVED***
-
 const Tab = createMaterialTopTabNavigator();
 
-const TabNavigator = () => {
+const HomeTabNavigator = () => {
   return (
     <Tab.Navigator
       tabBarPosition="bottom"
@@ -127,7 +49,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="home"
-        component={HomeStackScreen***REMOVED***
+        component={Home***REMOVED***
         options={{
           title: "",
           tabBarIcon: ({ color, size ***REMOVED***) => (
@@ -137,7 +59,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="appointments"
-        component={AppointmentsStackScreen***REMOVED***
+        component={Appointments***REMOVED***
         options={{
           title: "",
           tabBarIcon: ({ color, size ***REMOVED***) => (
@@ -147,7 +69,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="cafeteria"
-        component={CafeteriaStackScreen***REMOVED***
+        component={Cafeteria***REMOVED***
         options={{
           title: "",
           tabBarIcon: ({ color, size ***REMOVED***) => (
@@ -157,7 +79,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="settings"
-        component={SettingsStackScreen***REMOVED***
+        component={Settings***REMOVED***
         options={{
           title: "",
           tabBarIcon: ({ color, size ***REMOVED***) => (
@@ -166,6 +88,28 @@ const TabNavigator = () => {
     ***REMOVED******REMOVED***
       />
     </Tab.Navigator>
+  );
+***REMOVED***
+
+const TabNavigator = () => {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          fontSize: 15,
+          fontFamily: "Lato_700Bold",
+    ***REMOVED***,
+        animation: "slide_from_right",
+        animationDuration: "50",
+  ***REMOVED******REMOVED***
+    >
+      <HomeStack.Screen name="TabNavigator" component={HomeTabNavigator***REMOVED*** options={{headerShown:false***REMOVED******REMOVED*** />
+      <HomeStack.Screen name="Home" component={Home***REMOVED*** />
+      <HomeStack.Screen name="Barber" component={Barber***REMOVED*** />
+      <HomeStack.Screen name="Profile" component={Profile***REMOVED*** />
+      <HomeStack.Screen name="Appointments" component={Appointments***REMOVED*** />
+    </HomeStack.Navigator>
   );
 ***REMOVED***
 

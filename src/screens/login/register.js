@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "../../components/shared/Button";
+import Button from "../../components/shared/styles/Button";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
-import DropDown from "../../components/shared/DropDown";
-import InputField from "../../components/shared/InputField";
+import DropDown from "../../components/shared/styles/DropDown";
+import InputField from "../../components/shared/styles/InputField";
 import { View, Text, TouchableWithoutFeedback, Alert ***REMOVED*** from "react-native";
 import { createUser ***REMOVED*** from "../../../lib/firebase/User";
 import { checkValidInputs ***REMOVED*** from "../../../hooks/validators";
@@ -43,6 +43,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
   const [rollNoValue, setRollNoValue] = React.useState("");
 
   const newUser = {
+    id: id,
     name: name,
     email: email,
     img: photo,
@@ -120,7 +121,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         <InputField placeholder="Roll No." setValue={setRollNoValue***REMOVED*** />
         <InputField placeholder="Room No." setValue={setRoomValue***REMOVED*** />
         <InputField placeholder="Mobile No." setValue={setPhoneNumber***REMOVED*** />
-        <Button text={"Let's Go"***REMOVED*** fun={handleRegister***REMOVED*** />
+        <Button text={"Let's Go"***REMOVED*** onPress={handleRegister***REMOVED*** />
       </View>
     </TouchableWithoutFeedback>
   );

@@ -1,6 +1,6 @@
 import { SafeAreaProvider ***REMOVED*** from "react-native-safe-area-context";
 import Main from "./src/main";
-import { StatusBar ***REMOVED*** from "react-native";
+import { LogBox, StatusBar ***REMOVED*** from "react-native";
 import {
   useFonts,
   Lato_400Regular,
@@ -19,6 +19,7 @@ export default function App() {
     return null;
 ***REMOVED***
 
+  LogBox.ignoreAllLogs();
   return (
     <NativeBaseProvider>
       <SafeAreaProvider>
