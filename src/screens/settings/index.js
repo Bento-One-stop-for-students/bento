@@ -3,8 +3,10 @@ import React from "react";
 import { Feather ***REMOVED*** from "@expo/vector-icons";
 import { Ionicons ***REMOVED*** from "@expo/vector-icons";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
+import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const Setting = ({ navigation, route ***REMOVED***) => {
+  const [showErrorModal, setShowErrorModal] = React.useState(false);
   const { handleSignOut ***REMOVED*** = React.useContext(AuthContext);
   const handleProfile = () => {
     navigation.navigate("Profile");
@@ -59,10 +61,19 @@ const Setting = ({ navigation, route ***REMOVED***) => {
 
       <View className="mt-10 px-9">
         <Text className="text-[16px] my-3">Help</Text>
-        <TouchableOpacity onPress={handleSignOut***REMOVED***>
+        <TouchableOpacity
+          onPress={() => {
+          ***REMOVED***
+              handleSignOut();
+        ***REMOVED*** catch (error) {
+              setShowErrorModal(true);
+        ***REMOVED***
+      ***REMOVED******REMOVED***
+        >
           <Text className="text-[16px] my-3">Log out</Text>
         </TouchableOpacity>
       </View>
+      <ErrorModal isOpen={showErrorModal***REMOVED*** onClose={setShowErrorModal***REMOVED*** title ="Error Signing Out" error="Couldn't sign Out. Try again later."/>
     </View>
   );
 ***REMOVED***

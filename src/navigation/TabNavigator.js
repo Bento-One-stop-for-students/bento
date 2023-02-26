@@ -6,10 +6,12 @@ import { createMaterialTopTabNavigator ***REMOVED*** from "@react-navigation/mat
 
 import Home from "../screens";
 import Barber from "../screens/barber/";
-import Settings from "../screens/settings/settings";
-import Cafeteria from "../screens/cafeteria";
+import Settings from "../screens/settings";
+import FoodService from "../screens/foodService";
 import Appointments from "../screens/appointments";
 import Profile from "../screens/settings/profile";
+import Cantene from "../screens/foodService/cantene";
+import Outpass from "../screens/outpass";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -27,7 +29,7 @@ const HomeTabNavigator = () => {
         tabBarIndicatorStyle: {
           width: 21,
           backgroundColor: "#7345F6",
-          left: (Dimensions.get("window").width / 4 - 19.5) / 2,
+          left: (Dimensions.get("screen").width / 3 - 21) / 2,
           marginBottom: 9,
           height: 4,
           borderRadius: 100,
@@ -35,6 +37,8 @@ const HomeTabNavigator = () => {
         tabBarStyle: [
           {
             height: 55,
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderColor: "#D9D9D9",
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             shadowOpacity: 0.58,
@@ -57,7 +61,7 @@ const HomeTabNavigator = () => {
           ),
     ***REMOVED******REMOVED***
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="appointments"
         component={Appointments***REMOVED***
         options={{
@@ -66,10 +70,10 @@ const HomeTabNavigator = () => {
             <Feather name="calendar" size={24***REMOVED*** color={color***REMOVED*** />
           ),
     ***REMOVED******REMOVED***
-      />
+      /> */***REMOVED***
       <Tab.Screen
-        name="cafeteria"
-        component={Cafeteria***REMOVED***
+        name="food-service"
+        component={FoodService***REMOVED***
         options={{
           title: "",
           tabBarIcon: ({ color, size ***REMOVED***) => (
@@ -104,11 +108,18 @@ const TabNavigator = () => {
         animationDuration: "50",
   ***REMOVED******REMOVED***
     >
-      <HomeStack.Screen name="TabNavigator" component={HomeTabNavigator***REMOVED*** options={{headerShown:false***REMOVED******REMOVED*** />
+      <HomeStack.Screen
+        name="TabNavigator"
+        component={HomeTabNavigator***REMOVED***
+        options={{ headerShown: false ***REMOVED******REMOVED***
+      />
       <HomeStack.Screen name="Home" component={Home***REMOVED*** />
       <HomeStack.Screen name="Barber" component={Barber***REMOVED*** />
       <HomeStack.Screen name="Profile" component={Profile***REMOVED*** />
+      <HomeStack.Screen name="Food Service" component={FoodService***REMOVED*** />
+      <HomeStack.Screen name="Cantene" component={Cantene***REMOVED*** />
       <HomeStack.Screen name="Appointments" component={Appointments***REMOVED*** />
+      <HomeStack.Screen name="Outpass" component={Outpass***REMOVED*** />
     </HomeStack.Navigator>
   );
 ***REMOVED***

@@ -1,10 +1,6 @@
 import React from "react";
-import auth, { firebase ***REMOVED*** from "@react-native-firebase/auth";
-import {
-  GoogleSignin,
-  statusCodes,
-***REMOVED*** from "@react-native-google-signin/google-signin";
-import { db ***REMOVED*** from "../lib/firebase/firebaseConfig";
+***REMOVED***
+
 import { getUser ***REMOVED*** from "../lib/firebase/User";
 
 const Auth = () => {
@@ -14,17 +10,18 @@ const Auth = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+        setIsLoggedIn(true);
+        setUser(res);
+  ***REMOVED***
+  ***REMOVED***
+***REMOVED*** catch (error) {
+  ***REMOVED***
+  ***REMOVED***
 ***REMOVED***
-    getUser(id)
-      .then((res) => {
-    ***REMOVED***
-          setIsLoggedIn(true);
-          setUser(res);
-    ***REMOVED***
-  ***REMOVED***)
-      .catch((err) => {
-    ***REMOVED***
-      ***REMOVED***
 ***REMOVED***;
 
   ***REMOVED***
@@ -35,17 +32,23 @@ const Auth = () => {
   async function handleGoogleSignIn() {
 ***REMOVED***
     setIsLoading(true);
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-      setGoogleUser(userInfo.user);
-      verifyUser(userInfo.user);
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+        setIsLoading(false);
+        throw { err: "user already exists" ***REMOVED***
+  ***REMOVED*** else {
+        setGoogleUser(userInfo.user);
+  ***REMOVED***
 ***REMOVED*** catch (error) {
+  ***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
@@ -58,15 +61,23 @@ const Auth = () => {
 
   async function handleGoogleSignUp(navigation) {
 ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-      setGoogleUser(userInfo.user);
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+        throw { err: "user already exists" ***REMOVED***
+  ***REMOVED*** else {
+        setGoogleUser(userInfo.user);
+        setTimeout(() => {
+          navigation.navigate("register");
+    ***REMOVED***, 500);
+  ***REMOVED***
 ***REMOVED*** catch (error) {
   ***REMOVED***
   ***REMOVED***
@@ -74,10 +85,8 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
+  ***REMOVED***
 ***REMOVED***
-    setTimeout(() => {
-      navigation.navigate("register");
-***REMOVED***, 500);
     // setIsLoading(false);
 ***REMOVED***
 
@@ -86,9 +95,10 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-        verifyUser(currentUser.user);
+        await verifyUser(currentUser.user);
   ***REMOVED***
 ***REMOVED*** catch (error) {
+  ***REMOVED***
   ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -96,11 +106,13 @@ const Auth = () => {
   async function handleSignOut() {
     setIsLoading(true);
   ***REMOVED***
-***REMOVED***
+      const res = await GoogleSignin.signOut();
+      console.log({ res ***REMOVED***
       setIsLoggedIn(false);
       setUser(null);
       setGoogleUser(null);
 ***REMOVED*** catch (error) {
+  ***REMOVED***
   ***REMOVED***
 ***REMOVED***
     setIsLoading(false);

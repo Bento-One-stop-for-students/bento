@@ -7,9 +7,11 @@ import {
 import React from "react";
 import { AntDesign ***REMOVED*** from "@expo/vector-icons";
 import { AuthContext ***REMOVED*** from "../../../hooks/context";
+import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const SignUp = ({ navigation, route ***REMOVED***) => {
   const { handleGoogleSignUp ***REMOVED*** = React.useContext(AuthContext);
+  const [showErrorModal, setShowErrorModal] = React.useState(false);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -26,15 +28,20 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
       </Text>
       <View className="mt-7 justify-center items-center ">
         <Text
-          className="text-primary-purple text-xs mb-1"
+          className="text-primary-purple text-md mb-1"
           style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
         >
           Use Institute e-mail
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={() => {
-            handleGoogleSignUp(navigation);
+          onPress={async () => {
+          ***REMOVED***
+              await handleGoogleSignUp(navigation);
+        ***REMOVED*** catch (error) {
+              console.log({ error ***REMOVED***
+              setShowErrorModal(true);
+        ***REMOVED***
       ***REMOVED******REMOVED***
         >
           <Text
@@ -47,7 +54,7 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
         </TouchableOpacity>
       </View>
       <View className="flex-row mt-2 items-center justify-center">
-        <Text className="text-xs" style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***>
+        <Text className="text-md" style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***>
           Already have an Account?
         </Text>
         <TouchableWithoutFeedback
@@ -56,7 +63,7 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
       ***REMOVED******REMOVED***
         >
           <Text
-            className="text-xs text-primary-purple "
+            className="text-md text-primary-purple "
             style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
           >
             {" "***REMOVED***
@@ -64,6 +71,12 @@ const SignUp = ({ navigation, route ***REMOVED***) => {
           </Text>
         </TouchableWithoutFeedback>
       </View>
+      <ErrorModal
+        isOpen={showErrorModal***REMOVED***
+        onClose={setShowErrorModal***REMOVED***
+        title="Error Signing Up"
+        error="Couldn't sign up. Try again later."
+      />
     </View>
   );
 ***REMOVED***

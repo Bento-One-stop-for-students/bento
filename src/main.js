@@ -8,31 +8,46 @@ import { useSafeAreaInsets ***REMOVED*** from "react-native-safe-area-context";
 import TabNavigator from "./navigation/TabNavigator";
 import AuthNavigator from "./navigation/AuthNavigator";
 import GetStarted from "./splashScreen";
-import { AuthContext ***REMOVED*** from "../hooks/context";
+import { AuthContext, CartContext ***REMOVED*** from "../hooks/context";
 import Auth from "../hooks/auth";
+import Cart from "../hooks/cart";
+import NetInfo from "@react-native-community/netinfo";
+import ErrorModal from "./components/shared/styles/ErrorModal";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
+
+  const [isConnected, setIsConnected] = React.useState(false);
+  const [showErrorModal, setShowErrorModal] = React.useState(false);
   const [splashScreen, setSplashScreen] = React.useState(true);
-
-  const {
-    authContext,
-    user,
-    isLoggedIn,
-    isLoading,
-    handleSignedIn
-***REMOVED*** = Auth();
-
-  setTimeout(() => {
-    setSplashScreen(false);
-***REMOVED***, 1000);
+  const { cartContext ***REMOVED*** = Cart();
+  const { authContext, user, isLoggedIn, isLoading, handleSignedIn ***REMOVED*** = Auth();
 
   React.useEffect(() => {
-    console.log({user,isLoggedIn***REMOVED***)
+    console.log({ user, isLoggedIn ***REMOVED***
 ***REMOVED***, [user]);
 
+  const isAlreadySignedIn = async () => {
+  ***REMOVED***
+      NetInfo.fetch().then((state) => {
+        console.log("Connection type", state.type);
+        setIsConnected(state.isConnected);
+      ***REMOVED***
+      if (isConnected) {
+        setShowErrorModal(true);
+  ***REMOVED***
+      await handleSignedIn();
+      setTimeout(() => {
+        setSplashScreen(false);
+  ***REMOVED***, 500);
+***REMOVED*** catch (err) {
+      console.log(err);
+      setSplashScreen(false);
+***REMOVED***
+***REMOVED***;
+
   React.useEffect(() => {
-    handleSignedIn()
+    isAlreadySignedIn();
 ***REMOVED***, []);
 
   if (isLoading) {
@@ -52,7 +67,15 @@ export default function Main() {
       >
         <NavigationContainer>
           <AuthContext.Provider value={authContext***REMOVED***>
-            {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />***REMOVED***
+            <CartContext.Provider value={cartContext***REMOVED***>
+              {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />***REMOVED***
+              <ErrorModal
+                isOpen={showErrorModal***REMOVED***
+                onClose={setShowErrorModal***REMOVED***
+                title="Network Error"
+                error="No Internet Connection. Try again later."
+              />
+            </CartContext.Provider>
           </AuthContext.Provider>
         </NavigationContainer>
       </View>
