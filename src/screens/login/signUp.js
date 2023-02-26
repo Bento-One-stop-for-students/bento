@@ -7,9 +7,11 @@ import {
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../../../hooks/context";
+import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const SignUp = ({ navigation, route }) => {
   const { handleGoogleSignUp } = React.useContext(AuthContext);
+  const [showErrorModal, setShowErrorModal] = React.useState(false);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -26,15 +28,20 @@ const SignUp = ({ navigation, route }) => {
       </Text>
       <View className="mt-7 justify-center items-center ">
         <Text
-          className="text-primary-purple text-xs mb-1"
+          className="text-primary-purple text-md mb-1"
           style={{ fontFamily: "Lato_700Bold" }}
         >
           Use Institute e-mail
         </Text>
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={() => {
-            handleGoogleSignUp(navigation);
+          onPress={async () => {
+            try {
+              await handleGoogleSignUp(navigation);
+            } catch (error) {
+              console.log({ error });
+              setShowErrorModal(true);
+            }
           }}
         >
           <Text
@@ -47,7 +54,7 @@ const SignUp = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
       <View className="flex-row mt-2 items-center justify-center">
-        <Text className="text-xs" style={{ fontFamily: "Lato_700Bold" }}>
+        <Text className="text-md" style={{ fontFamily: "Lato_700Bold" }}>
           Already have an Account?
         </Text>
         <TouchableWithoutFeedback
@@ -56,7 +63,7 @@ const SignUp = ({ navigation, route }) => {
           }}
         >
           <Text
-            className="text-xs text-primary-purple "
+            className="text-md text-primary-purple "
             style={{ fontFamily: "Lato_700Bold" }}
           >
             {" "}
@@ -64,6 +71,12 @@ const SignUp = ({ navigation, route }) => {
           </Text>
         </TouchableWithoutFeedback>
       </View>
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={setShowErrorModal}
+        title="Error Signing Up"
+        error="Couldn't sign up. Try again later."
+      />
     </View>
   );
 };

@@ -1,10 +1,6 @@
 import React from "react";
-import auth, { firebase } from "@react-native-firebase/auth";
-import {
-  GoogleSignin,
-  statusCodes,
-} from "@react-native-google-signin/google-signin";
-import { db } from "../lib/firebase/firebaseConfig";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
 import { getUser } from "../lib/firebase/User";
 
 const Auth = () => {
@@ -14,17 +10,18 @@ const Auth = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const verifyUser = async (user) => {
-    const { id } = user;
-    getUser(id)
-      .then((res) => {
-        if (res) {
-          setIsLoggedIn(true);
-          setUser(res);
-        }
-      })
-      .catch((err) => {
-        console.log(error);
-      });
+    try {
+      const { id } = user;
+      const res = await getUser(id);
+      if (res) {
+        setIsLoggedIn(true);
+        setUser(res);
+      }
+      return res;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 
   GoogleSignin.configure({
@@ -35,16 +32,21 @@ const Auth = () => {
   async function handleGoogleSignIn() {
     // Check if your device supports Google Play
     setIsLoading(true);
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-    }
     try {
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      if (isSignedIn) {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+      }
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      setGoogleUser(userInfo.user);
-      verifyUser(userInfo.user);
+      const res = await verifyUser(userInfo.user);
+      if (res) {
+        setIsLoading(false);
+        throw { err: "user already exists" };
+      } else {
+        setGoogleUser(userInfo.user);
+      }
     } catch (error) {
       console.log(error);
       const isSignedIn = await GoogleSignin.isSignedIn();
@@ -52,21 +54,30 @@ const Auth = () => {
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
       }
+      throw error;
     }
     setIsLoading(false);
   }
 
   async function handleGoogleSignUp(navigation) {
     // Check if your device supports Google Play
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-    }
     try {
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      if (isSignedIn) {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+      }
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      setGoogleUser(userInfo.user);
+      const res = await verifyUser(userInfo.user);
+      if (res) {
+        throw { err: "user already exists" };
+      } else {
+        setGoogleUser(userInfo.user);
+        setTimeout(() => {
+          navigation.navigate("register");
+        }, 500);
+      }
     } catch (error) {
       console.log(error);
       const isSignedIn = await GoogleSignin.isSignedIn();
@@ -74,10 +85,8 @@ const Auth = () => {
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
       }
+      throw error;
     }
-    setTimeout(() => {
-      navigation.navigate("register");
-    }, 500);
     // setIsLoading(false);
   }
 
@@ -86,22 +95,25 @@ const Auth = () => {
       const isSignedIn = await GoogleSignin.isSignedIn();
       if (isSignedIn) {
         const currentUser = await GoogleSignin.getCurrentUser();
-        verifyUser(currentUser.user);
+        await verifyUser(currentUser.user);
       }
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 
   async function handleSignOut() {
     setIsLoading(true);
     try {
-      await GoogleSignin.signOut();
+      const res = await GoogleSignin.signOut();
+      console.log({ res });
       setIsLoggedIn(false);
       setUser(null);
       setGoogleUser(null);
     } catch (error) {
       console.log(error);
+      throw error;
     }
     setIsLoading(false);
   }

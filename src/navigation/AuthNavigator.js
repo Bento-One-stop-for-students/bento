@@ -11,8 +11,8 @@ const AuthNavigator = () => {
   return (
     <Auth.Navigator
       screenOptions={{ headerShown: false, animation:'slide_from_right',animationDuration:'50' }}
-      initialRouteName="sign-in" 
-    >
+      initialRouteName="sign-up" 
+    > 
       <Auth.Screen name="sign-in" component={SignIn} />
       <Auth.Screen name="sign-up" component={SignUp} />
       <Auth.Screen name="register" component={Register} />

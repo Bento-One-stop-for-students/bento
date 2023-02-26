@@ -7,9 +7,11 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { AuthContext } from "../../../hooks/context";
+import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const SignIn = ({ navigation, route }) => {
   const { handleGoogleSignIn } = React.useContext(AuthContext);
+  const [showErrorModal, setShowErrorModal] = React.useState(false);
   return (
     <View className="flex-1 flex-col items-center justify-center bg-white">
       <Text
@@ -27,7 +29,14 @@ const SignIn = ({ navigation, route }) => {
       <View className="mt-10 justify-center items-center ">
         <TouchableOpacity
           className="flex-row rounded-[100px] w-[80vw] bg-primary-purple items-center justify-between h-[6vh] px-[2vw]"
-          onPress={handleGoogleSignIn}
+          onPress={async () => {
+            try {
+              await handleGoogleSignIn(navigation);
+            } catch (error) {
+              console.log({ error });
+              setShowErrorModal(true);
+            }
+          }}
         >
           <Text
             className="ml-[18vw] text-white"
@@ -48,6 +57,12 @@ const SignIn = ({ navigation, route }) => {
           <Text className="text-xs text-primary-purple "> Sign Up here</Text>
         </TouchableWithoutFeedback>
       </View>
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={setShowErrorModal}
+        title="Error Signing In"
+        error="Couldn't sign in. Try again later."
+      />
     </View>
   );
 };

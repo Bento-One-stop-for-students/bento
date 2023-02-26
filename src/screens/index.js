@@ -5,14 +5,15 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
-import Icon from "../components/shared/styles/Icon";
+import Icon from "../components/home/Icon";
 
-const Home = ({navigation, route}) => {
+const Home = ({ navigation, route }) => {
   return (
     <View className="bg-white h-full w-full">
       <View className="  mt-4 flex-row items-start px-2">
@@ -98,15 +99,25 @@ const Home = ({navigation, route}) => {
             />
             <Icon
               icon={<Feather name="scissors" size={40} color="black" />}
-              name="Barber" onPress={()=>{navigation.navigate('Barber')}}
+              name="Barber"
+              onPress={() => {
+                navigation.navigate("Barber");
+              }}
             />
             <Icon
               icon={<MaterialIcons name="logout" size={40} color="black" />}
               name="Outpass"
+              onPress={() => {
+                navigation.navigate("Outpass");
+              }}
+              
             />
             <Icon
               icon={<Octicons name="issue-opened" size={40} color="black" />}
               name="Complaints"
+              onPress={() => {
+                navigation.navigate("Appointments");
+              }}
             />
           </View>
 
@@ -114,10 +125,13 @@ const Home = ({navigation, route}) => {
             className="mt-6 justify-between  flex-row"
             style={{ elevation: 44 }}
           >
-            <View
+            <TouchableOpacity
               className="  w-[47%] mx-2 h-40 rounded-2xl bg-[#FF9E00] flex-1 items-center justify-center border-black "
               style={{
                 elevation: 6,
+              }}
+              onPress={() => {
+                navigation.navigate("Food Service");
               }}
             >
               <Text
@@ -134,7 +148,7 @@ const Home = ({navigation, route}) => {
               >
                 Order
               </Text>
-            </View>
+            </TouchableOpacity>
             <View
               className="  w-[47%] mx-2 h-40 rounded-2xl bg-[#7345F6] flex-1 items-center justify-center border-black "
               style={{
