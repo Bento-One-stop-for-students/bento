@@ -6,7 +6,7 @@ import { bookBarber, getBarberIdFromUser } from "../../../lib/firebase/Barber";
 import { AuthContext } from "../../../hooks/context";
 import React from "react";
 
-const ModalBox = (props) => {
+const BarberModal = (props) => {
   const { user } = React.useContext(AuthContext);
   const [check, setCheck] = React.useState();
   return (
@@ -88,4 +88,4 @@ const ModalBox = (props) => {
   );
 };
 
-export default ModalBox;
+export default BarberModal;

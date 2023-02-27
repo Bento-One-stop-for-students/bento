@@ -73,7 +73,6 @@ const Register = ({ navigation, route }) => {
       if (res) {
         setIsLoggedIn(true);
         setUser(newUser);
-        console.log(res);
       } else {
         Alert.alert("Some error occured. Try again later.");
       }

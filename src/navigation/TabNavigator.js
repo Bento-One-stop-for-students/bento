@@ -12,6 +12,7 @@ import Appointments from "../screens/appointments";
 import Profile from "../screens/settings/profile";
 import Cantene from "../screens/foodService/cantene";
 import Outpass from "../screens/outpass";
+import GetStarted from "../splashScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -29,7 +30,7 @@ const HomeTabNavigator = () => {
         tabBarIndicatorStyle: {
           width: 21,
           backgroundColor: "#7345F6",
-          left: (Dimensions.get("screen").width / 3 - 21) / 2,
+          left: (Dimensions.get("window").width / 2 - 21) / 2,
           marginBottom: 9,
           height: 4,
           borderRadius: 100,
@@ -71,7 +72,7 @@ const HomeTabNavigator = () => {
           ),
         }}
       /> */}
-      <Tab.Screen
+      {/* <Tab.Screen
         name="food-service"
         component={FoodService}
         options={{
@@ -80,7 +81,7 @@ const HomeTabNavigator = () => {
             <Feather name="shopping-bag" size={24} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="settings"
         component={Settings}
@@ -96,7 +97,14 @@ const HomeTabNavigator = () => {
 };
 
 const TabNavigator = () => {
-  return (
+  const [loading, setLoading] = React.useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+  return loading ? (
+    <GetStarted />
+  ) : (
     <HomeStack.Navigator
       screenOptions={{
         headerTitleAlign: "center",

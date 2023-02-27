@@ -21,16 +21,15 @@ export default function Main() {
   const [showErrorModal, setShowErrorModal] = React.useState(false);
   const [splashScreen, setSplashScreen] = React.useState(true);
   const { cartContext } = Cart();
-  const { authContext, user, isLoggedIn, isLoading, handleSignedIn } = Auth();
+  const { authContext, user, isLoggedIn, handleSignedIn, googleUser } = Auth();
 
   React.useEffect(() => {
-    console.log({ user, isLoggedIn });
-  }, [user]);
+    console.log({ user, isLoggedIn, googleUser });
+  }, [user, googleUser]);
 
   const isAlreadySignedIn = async () => {
     try {
       NetInfo.fetch().then((state) => {
-        console.log("Connection type", state.type);
         setIsConnected(state.isConnected);
       });
       if (isConnected) {
@@ -49,15 +48,6 @@ export default function Main() {
   React.useEffect(() => {
     isAlreadySignedIn();
   }, []);
-
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#7345F6" />
-      </View>
-    );
-  }
-
   return splashScreen ? (
     <GetStarted />
   ) : (

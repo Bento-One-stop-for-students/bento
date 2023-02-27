@@ -40,7 +40,9 @@ const SignUp = ({ navigation, route }) => {
               await handleGoogleSignUp(navigation);
             } catch (error) {
               console.log({ error });
-              setShowErrorModal(true);
+              if (error.message !== "Sign in action cancelled") {
+                setShowErrorModal(true);
+              }
             }
           }}
         >
@@ -75,7 +77,7 @@ const SignUp = ({ navigation, route }) => {
         isOpen={showErrorModal}
         onClose={setShowErrorModal}
         title="Error Signing Up"
-        error="Couldn't sign up. Try again later."
+        error="Either email is not of institute or some other error occured"
       />
     </View>
   );

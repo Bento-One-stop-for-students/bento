@@ -6,17 +6,16 @@ import { getUser } from "../lib/firebase/User";
 const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [googleUser, setGoogleUser] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const verifyUser = async (user) => {
     try {
+      if (!user.email.includes("nitj.ac.in")) {
+        throw { err: "use institute mail" };
+        // console.log(user.email)
+      }
       const { id } = user;
       const res = await getUser(id);
-      if (res) {
-        setIsLoggedIn(true);
-        setUser(res);
-      }
       return res;
     } catch (error) {
       console.log(error);
@@ -30,9 +29,8 @@ const Auth = () => {
   });
 
   async function handleGoogleSignIn() {
-    // Check if your device supports Google Play
-    setIsLoading(true);
     try {
+      // Check if your device supports Google Play
       const isSignedIn = await GoogleSignin.isSignedIn();
       if (isSignedIn) {
         await GoogleSignin.revokeAccess();
@@ -42,10 +40,11 @@ const Auth = () => {
       const userInfo = await GoogleSignin.signIn();
       const res = await verifyUser(userInfo.user);
       if (res) {
-        setIsLoading(false);
-        throw { err: "user already exists" };
-      } else {
         setGoogleUser(userInfo.user);
+        setIsLoggedIn(true);
+        setUser(res);
+      } else {
+        throw { err: "user does not exists" };
       }
     } catch (error) {
       console.log(error);
@@ -56,11 +55,8 @@ const Auth = () => {
       }
       throw error;
     }
-    setIsLoading(false);
   }
-
   async function handleGoogleSignUp(navigation) {
-    // Check if your device supports Google Play
     try {
       const isSignedIn = await GoogleSignin.isSignedIn();
       if (isSignedIn) {
@@ -69,9 +65,14 @@ const Auth = () => {
       }
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      if (!userInfo.user.email.includes("@nitj.ac.in")) {
+        throw { err: "use institute mail" };
+      }
       const res = await verifyUser(userInfo.user);
       if (res) {
-        throw { err: "user already exists" };
+        setGoogleUser(userInfo.user);
+        setIsLoggedIn(true);
+        setUser(res);
       } else {
         setGoogleUser(userInfo.user);
         setTimeout(() => {
@@ -87,7 +88,6 @@ const Auth = () => {
       }
       throw error;
     }
-    // setIsLoading(false);
   }
 
   async function handleSignedIn() {
@@ -95,7 +95,12 @@ const Auth = () => {
       const isSignedIn = await GoogleSignin.isSignedIn();
       if (isSignedIn) {
         const currentUser = await GoogleSignin.getCurrentUser();
-        await verifyUser(currentUser.user);
+        const res = await verifyUser(currentUser.user);
+        if (res) {
+          setGoogleUser(currentUser.user);
+          setIsLoggedIn(true);
+          setUser(res);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -104,10 +109,8 @@ const Auth = () => {
   }
 
   async function handleSignOut() {
-    setIsLoading(true);
     try {
       const res = await GoogleSignin.signOut();
-      console.log({ res });
       setIsLoggedIn(false);
       setUser(null);
       setGoogleUser(null);
@@ -115,7 +118,6 @@ const Auth = () => {
       console.log(error);
       throw error;
     }
-    setIsLoading(false);
   }
 
   const authContext = React.useMemo(() => ({
@@ -125,11 +127,9 @@ const Auth = () => {
     handleSignOut,
     user,
     isLoggedIn,
-    isLoading,
     setUser,
     googleUser,
     setIsLoggedIn,
-    setIsLoading,
     setGoogleUser,
   }));
   return {
@@ -139,12 +139,10 @@ const Auth = () => {
     authContext,
     handleSignOut,
     user,
-    isLoading,
     isLoggedIn,
     googleUser,
     setUser,
     setIsLoggedIn,
-    setIsLoading,
     setGoogleUser,
   };
 };
