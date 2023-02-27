@@ -6,16 +6,15 @@ import { getUser ***REMOVED*** from "../lib/firebase/User";
 const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [googleUser, setGoogleUser] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
+        // console.log(user.email)
   ***REMOVED***
-        setIsLoggedIn(true);
-        setUser(res);
+  ***REMOVED***
   ***REMOVED***
   ***REMOVED***
 ***REMOVED*** catch (error) {
@@ -30,8 +29,6 @@ const Auth = () => {
   ***REMOVED***
 
   async function handleGoogleSignIn() {
-***REMOVED***
-    setIsLoading(true);
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
@@ -42,10 +39,12 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-        setIsLoading(false);
-        throw { err: "user already exists" ***REMOVED***
-  ***REMOVED*** else {
+  ***REMOVED***
         setGoogleUser(userInfo.user);
+        setIsLoggedIn(true);
+        setUser(res);
+  ***REMOVED*** else {
+        throw { err: "user does not exists" ***REMOVED***
   ***REMOVED***
 ***REMOVED*** catch (error) {
   ***REMOVED***
@@ -56,11 +55,8 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-    setIsLoading(false);
 ***REMOVED***
-
   async function handleGoogleSignUp(navigation) {
-***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
@@ -69,9 +65,14 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
+      if (!userInfo.user.email.includes("@nitj.ac.in")) {
   ***REMOVED***
   ***REMOVED***
-        throw { err: "user already exists" ***REMOVED***
+  ***REMOVED***
+  ***REMOVED***
+        setGoogleUser(userInfo.user);
+        setIsLoggedIn(true);
+        setUser(res);
   ***REMOVED*** else {
         setGoogleUser(userInfo.user);
         setTimeout(() => {
@@ -87,7 +88,6 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-    // setIsLoading(false);
 ***REMOVED***
 
   async function handleSignedIn() {
@@ -95,7 +95,12 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-        await verifyUser(currentUser.user);
+  ***REMOVED***
+    ***REMOVED***
+          setGoogleUser(currentUser.user);
+          setIsLoggedIn(true);
+          setUser(res);
+    ***REMOVED***
   ***REMOVED***
 ***REMOVED*** catch (error) {
   ***REMOVED***
@@ -104,10 +109,8 @@ const Auth = () => {
 ***REMOVED***
 
   async function handleSignOut() {
-    setIsLoading(true);
   ***REMOVED***
       const res = await GoogleSignin.signOut();
-      console.log({ res ***REMOVED***
       setIsLoggedIn(false);
       setUser(null);
       setGoogleUser(null);
@@ -115,7 +118,6 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-    setIsLoading(false);
 ***REMOVED***
 
   const authContext = React.useMemo(() => ({
@@ -125,11 +127,9 @@ const Auth = () => {
     handleSignOut,
     user,
     isLoggedIn,
-    isLoading,
     setUser,
     googleUser,
     setIsLoggedIn,
-    setIsLoading,
     setGoogleUser,
 ***REMOVED***));
   return {
@@ -139,12 +139,10 @@ const Auth = () => {
     authContext,
     handleSignOut,
     user,
-    isLoading,
     isLoggedIn,
     googleUser,
     setUser,
     setIsLoggedIn,
-    setIsLoading,
     setGoogleUser,
 ***REMOVED***;
 ***REMOVED***

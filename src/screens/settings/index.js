@@ -7,27 +7,31 @@ import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const Setting = ({ navigation, route ***REMOVED***) => {
   const [showErrorModal, setShowErrorModal] = React.useState(false);
-  const { handleSignOut ***REMOVED*** = React.useContext(AuthContext);
+  const { handleSignOut, user ***REMOVED*** = React.useContext(AuthContext);
   const handleProfile = () => {
     navigation.navigate("Profile");
 ***REMOVED***;
+
+  const name =
+    user.name.split(" ")[0].charAt(0) +
+    user.name.split(" ")[0].slice(1).toLowerCase() +
+    " " +
+    user.name.split(" ")[1].charAt(0) +
+    user.name.split(" ")[1].slice(1).toLowerCase();
+
   return (
-    <View className="pt-10 border-t  bg-white h-full w-full">
-      <View className="flex-row px-6 my-3">
-        <View className="rounded-full  w-[64] h-[64]">
-          <Image
-            className="h-full w-full rounded-full"
-            source={{
-              uri: "https://www.looper.com/img/gallery/the-modern-family-connection-you-never-noticed-in-mr-peabody-sherman/intro-1597442856.jpg",
-        ***REMOVED******REMOVED***
-          />
-        </View>
-        <View className="px-4 justify-center">
-          <Text className="text-[24px] text-[#090A0A] font-[700]">
-            Ujjawal Rachhoya
-          </Text>
+    <View className="pt-5 border-t  bg-white h-full w-full">
+      <View className="flex-row px-6 my-3 items-center justify-center">
+        <Image
+          className="w-[64] h-[64] rounded-full"
+          source={{
+            uri: `${user.img***REMOVED***`,
+      ***REMOVED******REMOVED***
+        />
+        <View className="px-4  items-start justify-center">
+          <Text className="text-[24px] text-[#090A0A] font-[700]">{name***REMOVED***</Text>
           <Text className="font-[400] text-[#090A0A] text-[16px]">
-            ujjawalr.cs.20@nitj.ac.in
+            {user.email***REMOVED***
           </Text>
         </View>
       </View>
@@ -39,15 +43,6 @@ const Setting = ({ navigation, route ***REMOVED***) => {
         </View>
       </TouchableOpacity>
       <View className="mt-6  px-7">
-        <View className="flex-row my-2  justify-between">
-          <TouchableOpacity className="flex-row justify-center items-center">
-            <Feather name="lock" size={28***REMOVED*** color="black" />
-            <Text className="mx-3 text-[16px] font-[400]">Password</Text>
-          </TouchableOpacity>
-          <View className="flex-row">
-            <Feather name="chevron-right" size={28***REMOVED*** color="black" />
-          </View>
-        </View>
         <View className="flex-row my-2  justify-between">
           <View className="flex-row justify-center items-center">
             <Ionicons name="notifications-outline" size={28***REMOVED*** color="black" />
@@ -73,7 +68,12 @@ const Setting = ({ navigation, route ***REMOVED***) => {
           <Text className="text-[16px] my-3">Log out</Text>
         </TouchableOpacity>
       </View>
-      <ErrorModal isOpen={showErrorModal***REMOVED*** onClose={setShowErrorModal***REMOVED*** title ="Error Signing Out" error="Couldn't sign Out. Try again later."/>
+      <ErrorModal
+        isOpen={showErrorModal***REMOVED***
+        onClose={setShowErrorModal***REMOVED***
+        title="Error Signing Out"
+        error="Couldn't sign Out. Try again later."
+      />
     </View>
   );
 ***REMOVED***

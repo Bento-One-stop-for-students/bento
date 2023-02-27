@@ -8,159 +8,91 @@ import {
   TouchableOpacity,
 ***REMOVED*** from "react-native";
 import React from "react";
-import { MaterialIcons ***REMOVED*** from "@expo/vector-icons";
-import { Feather ***REMOVED*** from "@expo/vector-icons";
-import { Octicons ***REMOVED*** from "@expo/vector-icons";
-import Icon from "../components/home/Icon";
+import ViewBox from "../components/shared/styles/ViewBox";
+import TextBox from "../components/shared/styles/TextBox";
+import Button from "../components/shared/styles/Button";
+import { AuthContext ***REMOVED*** from "../../hooks/context";
 
 const Home = ({ navigation, route ***REMOVED***) => {
+  const { user ***REMOVED*** = React.useContext(AuthContext);
   return (
-    <View className="bg-white h-full w-full">
-      <View className="  mt-4 flex-row items-start px-2">
-        <View className="w-10/12 mx-2 " style={{ elevation: 20 ***REMOVED******REMOVED***>
-          <TextInput
-            placeholder="Search"
-            className="py-2 px-2 border border-[#D9D9D9] "
-          />
-        </View>
-        <View className="w-2/12 mx-2 flex-1 justify-center items-center  ">
-          <Image
-            className="h-12 w-12  rounded-full"
-            source={{ uri: "https://reactnative.dev/img/tiny_logo.png" ***REMOVED******REMOVED***
-          />
-        </View>
+    <View class="flex-1 bg-white ">
+      <View className="flex-row items-center  bg-white justify-between w-full px-10 pt-2">
+        <TextBox bold class="text-xl">
+          Home
+        </TextBox>
+        <Image
+          source={{
+            uri: `${user.img***REMOVED***`,
+            method: "POST",
+            headers: {
+              Pragma: "no-cache",
+        ***REMOVED***,
+            body: "Your Body goes here",
+      ***REMOVED******REMOVED***
+          style={{ width: 40, height: 40 ***REMOVED******REMOVED***
+          className="rounded-3xl"
+        />
       </View>
-
-      <View className="mt-2 border-red-100">
-        <Text className="text-lg px-6 " style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***>
-          Upcoming Events
-        </Text>
-        <ScrollView
-          showsHorizontalScrollIndicator={false***REMOVED***
-          showsVerticalScrollIndicator={false***REMOVED***
-          className="my-4 px-1 bg-white"
-          horizontal={true***REMOVED***
-        >
-          {[1, 2, 3, 5, 6, 7, 8, 0].map((e, index) => {
-            return (
-              <View
-                key={index***REMOVED***
-                className="h-50 rounded-lg w-64 border border-[#D9D9D9] mx-2 "
-              >
-                <Image
-                  className=" w-full h-36 object-center rounded-md"
-                  source={{
-                    uri: "https://cdn.pixabay.com/photo/2020/04/11/08/26/lake-5029360__480.jpg",
-              ***REMOVED******REMOVED***
-                />
-                <View className="m-2">
-                  <Text
-                    className=" text-[10px] text-[#000000]"
-                    style={{ fontFamily: "Lato_400Regular" ***REMOVED******REMOVED***
-                  >
-                    10-12 January, 2023
-                  </Text>
-                  <Text
-                    className=" text-[#403C56] font-[400]  text-[13px]"
-                    style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
-                  >
-                    Holi Festival
-                  </Text>
-                </View>
-              </View>
-            );
-      ***REMOVED***)***REMOVED***
-        </ScrollView>
-      </View>
-
-      <View
-        className="h-full rounded-t-[30px]  bg-white "
-        style={{
-          elevation: 20,
-    ***REMOVED******REMOVED***
-      >
-        <View className="px-4 mt-3">
-          <Text
-            className="text-lg px-2 "
-            style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
-          >
-            Services
-          </Text>
-          <View className="flex-row">
-            <Icon
-              icon={
-                <MaterialIcons
-                  name="cleaning-services"
-                  size={40***REMOVED***
-                  color="black"
-                />
-          ***REMOVED***
-              name="Cleaning"
-            />
-            <Icon
-              icon={<Feather name="scissors" size={40***REMOVED*** color="black" />***REMOVED***
-              name="Barber"
+      <View className="flex-col bg-white h-full">
+        <ViewBox class="p-5 mx-10 my-5 items-start">
+          <TextBox bold class="text-xl">
+            Barber
+          </TextBox>
+          <View className="flex-col justify-evenly w-full mt-4">
+            <View className="flex-row">
+              <TextBox bold>Status : </TextBox>
+              <TextBox>On </TextBox>
+            </View>
+            <View className="flex-row mb-3">
+              <TextBox bold>Crowd : </TextBox>
+              <TextBox>15 People in Queue </TextBox>
+            </View>
+            <Button
+              class="w-full"
+              text="Book Appointment"
               onPress={() => {
                 navigation.navigate("Barber");
           ***REMOVED******REMOVED***
             />
-            <Icon
-              icon={<MaterialIcons name="logout" size={40***REMOVED*** color="black" />***REMOVED***
-              name="Outpass"
-              onPress={() => {
-                navigation.navigate("Outpass");
-          ***REMOVED******REMOVED***
-              
-            />
-            <Icon
-              icon={<Octicons name="issue-opened" size={40***REMOVED*** color="black" />***REMOVED***
-              name="Complaints"
-              onPress={() => {
-                navigation.navigate("Appointments");
-          ***REMOVED******REMOVED***
-            />
           </View>
-
-          <View
-            className="mt-6 justify-between  flex-row"
-            style={{ elevation: 44 ***REMOVED******REMOVED***
-          >
-            <TouchableOpacity
-              className="  w-[47%] mx-2 h-40 rounded-2xl bg-[#FF9E00] flex-1 items-center justify-center border-black "
-              style={{
-                elevation: 6,
-          ***REMOVED******REMOVED***
+        </ViewBox>
+        <ViewBox class="p-5 mx-10 my-5 items-start">
+          <TextBox bold class="text-xl">
+            Snackmen Services
+          </TextBox>
+          <View className="flex-col justify-evenly w-full mt-4">
+            <View className="flex-row mb-3">
+              <TextBox bold>Status : </TextBox>
+              <TextBox>On </TextBox>
+            </View>
+            <Button
+              class="w-full"
+              text="Order Food"
               onPress={() => {
                 navigation.navigate("Food Service");
           ***REMOVED******REMOVED***
-            >
-              <Text
-                className="text-[32px] font-[600] text-textWhite"
-                style={{ fontFamily: "Lato_700Bold" ***REMOVED******REMOVED***
-              >
-                Food
-              </Text>
-              <Text
-                className="text-[32px] font-[600] "
-                style={{
-                  fontFamily: "Lato_700Bold",
-            ***REMOVED******REMOVED***
-              >
-                Order
-              </Text>
-            </TouchableOpacity>
-            <View
-              className="  w-[47%] mx-2 h-40 rounded-2xl bg-[#7345F6] flex-1 items-center justify-center border-black "
-              style={{
-                elevation: 6,
-          ***REMOVED******REMOVED***
-            >
-              <Text className="text-[32px] font-[600] text-textWhite">
-                Clubs
-              </Text>
-            </View>
+            />
           </View>
-        </View>
+        </ViewBox>
+        <ViewBox class="p-5 mx-10 my-5 items-start">
+          <TextBox bold class="text-xl">
+            Outpass
+          </TextBox>
+          <View className="flex-col justify-evenly w-full mt-4">
+            <View className="flex-row mb-3">
+              <TextBox bold>Status : </TextBox>
+              <TextBox>On </TextBox>
+            </View>
+            <Button
+              class="w-full"
+              text="Take Outpass"
+              onPress={() => {
+                navigation.navigate("Outpass");
+          ***REMOVED******REMOVED***
+            />
+          </View>
+        </ViewBox>
       </View>
     </View>
   );

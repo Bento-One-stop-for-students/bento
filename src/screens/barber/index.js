@@ -3,8 +3,8 @@ import Button from "../../components/shared/styles/Button";
 import ViewBox from "../../components/shared/styles/ViewBox";
 import TextBox from "../../components/shared/styles/TextBox";
 import SwitchBox from "../../components/shared/styles/SwitchBox";
-import ModalBox from "../../components/barber/paymentModal";
 import { ScrollView ***REMOVED*** from "react-native-gesture-handler";
+import BarberModal from "../../components/barber/paymentModal";
 
 const Barber = () => {
   const [isHairOptionEnabled, setIsHairOptionEnabled] = React.useState(false);
@@ -82,7 +82,7 @@ const Barber = () => {
             setShowModal(true);
       ***REMOVED******REMOVED***
         />
-        <ModalBox
+        <BarberModal
           showModal={showModal***REMOVED***
           setShowModal={setShowModal***REMOVED***
           hair={isHairOptionEnabled***REMOVED***

@@ -33,8 +33,9 @@ const SignIn = ({ navigation, route ***REMOVED***) => {
           ***REMOVED***
               await handleGoogleSignIn(navigation);
         ***REMOVED*** catch (error) {
-              console.log({ error ***REMOVED***
-              setShowErrorModal(true);
+              if (error.message !== "Sign in action cancelled") {
+                setShowErrorModal(true);
+          ***REMOVED***
         ***REMOVED***
       ***REMOVED******REMOVED***
         >
