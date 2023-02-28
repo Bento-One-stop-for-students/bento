@@ -8,11 +8,10 @@ import Home from "../screens";
 import Barber from "../screens/barber/";
 import Settings from "../screens/settings";
 import FoodService from "../screens/foodService";
-import Appointments from "../screens/appointments";
 import Profile from "../screens/settings/profile";
-import Cantene from "../screens/foodService/cantene";
 import Outpass from "../screens/outpass";
 import GetStarted from "../splashScreen";
+import Bookings from "../screens/bookings/bookings";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -30,7 +29,7 @@ const HomeTabNavigator = () => {
         tabBarIndicatorStyle: {
           width: 21,
           backgroundColor: "#7345F6",
-          left: (Dimensions.get("window").width / 2 - 21) / 2,
+          left: (Dimensions.get("window").width / 3 - 21) / 2,
           marginBottom: 9,
           height: 4,
           borderRadius: 100,
@@ -72,16 +71,16 @@ const HomeTabNavigator = () => {
           ),
         }}
       /> */}
-      {/* <Tab.Screen
-        name="food-service"
-        component={FoodService}
+      <Tab.Screen
+        name="appointments"
+        component={Bookings}
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="shopping-bag" size={24} color={color} />
+            <Feather name="calendar" size={24} color={color} />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         name="settings"
         component={Settings}
@@ -125,8 +124,6 @@ const TabNavigator = () => {
       <HomeStack.Screen name="Barber" component={Barber} />
       <HomeStack.Screen name="Profile" component={Profile} />
       <HomeStack.Screen name="Food Service" component={FoodService} />
-      <HomeStack.Screen name="Cantene" component={Cantene} />
-      <HomeStack.Screen name="Appointments" component={Appointments} />
       <HomeStack.Screen name="Outpass" component={Outpass} />
     </HomeStack.Navigator>
   );

@@ -12,7 +12,6 @@ const Auth = () => {
     try {
       if (!user.email.includes("nitj.ac.in")) {
         throw { err: "use institute mail" };
-        // console.log(user.email)
       }
       const { id } = user;
       const res = await getUser(id);
