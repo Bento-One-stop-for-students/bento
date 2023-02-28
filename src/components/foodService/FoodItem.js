@@ -35,7 +35,7 @@ const FoodItem = ({ item, index }) => {
       </View>
       <View className="items-center justify-center flex-row">
         {count == 0 ? (
-          <TouchableOpacity onPress={() => addItemToCart(index)}>
+          <TouchableOpacity onPress={() => addItemToCart(index, item.name)}>
             <View className="mx-4 py-2 px-8 bg-primary-purple rounded-lg border-2 border-black ">
               <TextBox bold class="text-white">
                 add
@@ -50,7 +50,7 @@ const FoodItem = ({ item, index }) => {
               </TextBox>
             </TouchableOpacity>
             <TextBox class="text-white">{getItemCount(index)}</TextBox>
-            <TouchableOpacity onPress={() => addItemToCart(index)}>
+            <TouchableOpacity onPress={() => addItemToCart(index, item.name)}>
               <TextBox class="text-black p-1 ml-2 bg-white rounded-lg">
                 <Entypo name="plus" size={10} color="black" />
               </TextBox>

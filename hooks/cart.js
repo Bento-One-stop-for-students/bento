@@ -10,7 +10,7 @@ const Cart = () => {
     return itemFound;
   };
 
-  const addItemToCart = (id) => {
+  const addItemToCart = (id, name) => {
     let itemFound = findItem(id);
     if (itemFound >= 0) {
       setCart(
@@ -19,7 +19,7 @@ const Cart = () => {
         )
       );
     } else {
-      setCart(cart.concat({ id, amount: 1 }));
+      setCart(cart.concat({ id, amount: 1, name }));
     }
   };
 
@@ -28,7 +28,7 @@ const Cart = () => {
   const removeItemFromCart = (id) => {
     let itemFound = findItem(id);
     if (itemFound >= 0) {
-      if (cart[itemFound].amount > 0) {
+      if (cart[itemFound].amount > 1) {
         setCart(
           cart.map((item) =>
             item.id === id ? { ...item, amount: item.amount - 1 } : item
@@ -37,7 +37,8 @@ const Cart = () => {
       } else {
         setCart([
           ...cart.slice(0, itemFound),
-          ...cart.slice(itemFound + 1, carts.length),
+          ...cart.slice(itemFound + 1, cart.length),
+          // cart.filter(item => item.id != id)
         ]);
       }
     } else {
