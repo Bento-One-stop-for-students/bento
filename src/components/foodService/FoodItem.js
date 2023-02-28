@@ -4,24 +4,16 @@ import ViewBox from "../shared/styles/ViewBox";
 import { Image ***REMOVED*** from "react-native";
 import TextBox from "../shared/styles/TextBox";
 import { TouchableOpacity ***REMOVED*** from "react-native-gesture-handler";
-import { CartContext ***REMOVED*** from "../../../hooks/context";
+import { CartContext ***REMOVED*** from "../../../hooks/cart";
 import { Entypo ***REMOVED*** from "@expo/vector-icons";
 
 const FoodItem = ({ item, index ***REMOVED***) => {
-  const [count, setCount] = React.useState(0);
-  const {
-    addItemToCart,
-    removeItemFromCart,
-    getCartDetail,
-    cart,
-    getItemCount,
-***REMOVED*** = React.useContext(CartContext);
+  const { state, dispatch ***REMOVED*** = React.useContext(CartContext);
 
   React.useEffect(() => {
-    console.log(item)
-    setCount(getItemCount(item.id));
-    console.log(cart);
-***REMOVED***, [cart]);
+    console.log(state);
+    console.log(Object.keys(state.cart).length);
+***REMOVED***, [state]);
   return (
     <View
       className="flex-row w-full  items-center justify-between p-2 px-5"
@@ -35,9 +27,29 @@ const FoodItem = ({ item, index ***REMOVED***) => {
         <Text>{item.price***REMOVED*** Rs</Text>
       </View>
       <View className="items-center justify-center flex-row">
-        {count == 0 ? (
+        {state.cart[item.id] ? (
+          <View className="mx-4 py-2 px-3 bg-primary-purple rounded-lg border-2 border-black flex-row items-center justify-center">
+            <TouchableOpacity
+              onPress={() =>
+                dispatch({ type: "REMOVE_FROM_CART", payload: item ***REMOVED***)
+          ***REMOVED***
+            >
+              <TextBox class="text-black bg-white p-1 mr-2 rounded-lg">
+                <Entypo name="minus" size={10***REMOVED*** color="black" />
+              </TextBox>
+            </TouchableOpacity>
+            <TextBox class="text-white">{state.cart[item.id].qty***REMOVED***</TextBox>
+            <TouchableOpacity
+              onPress={() => dispatch({ type: "ADD_TO_CART", payload: item ***REMOVED***)***REMOVED***
+            >
+              <TextBox class="text-black p-1 ml-2 bg-white rounded-lg">
+                <Entypo name="plus" size={10***REMOVED*** color="black" />
+              </TextBox>
+            </TouchableOpacity>
+          </View>
+        ) : (
           <TouchableOpacity
-            onPress={() => addItemToCart({ id: item.id, ...item ***REMOVED***)***REMOVED***
+            onPress={() => dispatch({ type: "ADD_TO_CART", payload: item ***REMOVED***)***REMOVED***
           >
             <View className="mx-4 py-2 px-8 bg-primary-purple rounded-lg border-2 border-black ">
               <TextBox bold class="text-white">
@@ -45,22 +57,6 @@ const FoodItem = ({ item, index ***REMOVED***) => {
               </TextBox>
             </View>
           </TouchableOpacity>
-        ) : (
-          <View className="mx-4 py-2 px-3 bg-primary-purple rounded-lg border-2 border-black flex-row items-center justify-center">
-            <TouchableOpacity onPress={() => removeItemFromCart(item.id)***REMOVED***>
-              <TextBox class="text-black bg-white p-1 mr-2 rounded-lg">
-                <Entypo name="minus" size={10***REMOVED*** color="black" />
-              </TextBox>
-            </TouchableOpacity>
-            <TextBox class="text-white">{getItemCount(item.id)***REMOVED***</TextBox>
-            <TouchableOpacity
-              onPress={() => addItemToCart({ id: item.id, ...item ***REMOVED***)***REMOVED***
-            >
-              <TextBox class="text-black p-1 ml-2 bg-white rounded-lg">
-                <Entypo name="plus" size={10***REMOVED*** color="black" />
-              </TextBox>
-            </TouchableOpacity>
-          </View>
         )***REMOVED***
         <Image
           className="relative w-[30vw] h-[10vh]  rounded-lg"

@@ -2,18 +2,21 @@ import React from "react";
 import { FlatList ***REMOVED*** from "native-base";
 import { View, TouchableOpacity ***REMOVED*** from "react-native";
 
-import { CartContext ***REMOVED*** from "../../../hooks/context";
+
 import FoodItem from "../../components/foodService/FoodItem";
 import ViewBox from "../../components/shared/styles/ViewBox";
 import TextBox from "../../components/shared/styles/TextBox";
 import { getAllFoodItems ***REMOVED*** from "../../../lib/firebase/FoodService";
 import CheckoutModal from "../../components/foodService/CheckoutModal";
 import ErrorModal from "../../components/shared/styles/ErrorModal";
+import { CartContext ***REMOVED*** from "../../../hooks/cart";
 
 const Cantene = (props) => {
-  const { cart ***REMOVED*** = React.useContext(CartContext);
+  const { state ***REMOVED*** = React.useContext(CartContext);
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = React.useState([]);
+
+  var size = Object.keys(state.cart).length;
 
   React.useEffect(() => {
     getAllFoodItems()
@@ -36,11 +39,11 @@ const Cantene = (props) => {
           <View className="items-start justify-center px-4 py-2 bg-black rounded-lg">
             <TextBox class="text-white">Checkout</TextBox>
           </View>
-          {cart && cart.length ? (
+          {size > 1 && (
             <View className="mr-6 absolute z-1 bg-white border-2 rounded-full w-7 h-7 items-center justify-center">
-              <TextBox class="text-xs">{cart.length***REMOVED***</TextBox>
+              <TextBox class="text-xs">{size***REMOVED***</TextBox>
             </View>
-          ) : null***REMOVED***
+          )***REMOVED***
         </TouchableOpacity>
       </View>
       {data && data.length ? (
@@ -57,7 +60,7 @@ const Cantene = (props) => {
           <TextBox>Loading ...</TextBox>
         </View>
       )***REMOVED***
-      {cart.length ? (
+      {size ? (
         <CheckoutModal showModal={showModal***REMOVED*** setShowModal={setShowModal***REMOVED*** />
       ) : (
         <ErrorModal
