@@ -18,7 +18,8 @@ const FoodItem = ({ item, index ***REMOVED***) => {
 ***REMOVED*** = React.useContext(CartContext);
 
   React.useEffect(() => {
-    setCount(getItemCount(index));
+    console.log(item)
+    setCount(getItemCount(item.id));
     console.log(cart);
 ***REMOVED***, [cart]);
   return (
@@ -35,7 +36,9 @@ const FoodItem = ({ item, index ***REMOVED***) => {
       </View>
       <View className="items-center justify-center flex-row">
         {count == 0 ? (
-          <TouchableOpacity onPress={() => addItemToCart(index, item.name)***REMOVED***>
+          <TouchableOpacity
+            onPress={() => addItemToCart({ id: item.id, ...item ***REMOVED***)***REMOVED***
+          >
             <View className="mx-4 py-2 px-8 bg-primary-purple rounded-lg border-2 border-black ">
               <TextBox bold class="text-white">
                 add
@@ -44,13 +47,15 @@ const FoodItem = ({ item, index ***REMOVED***) => {
           </TouchableOpacity>
         ) : (
           <View className="mx-4 py-2 px-3 bg-primary-purple rounded-lg border-2 border-black flex-row items-center justify-center">
-            <TouchableOpacity onPress={() => removeItemFromCart(index)***REMOVED***>
+            <TouchableOpacity onPress={() => removeItemFromCart(item.id)***REMOVED***>
               <TextBox class="text-black bg-white p-1 mr-2 rounded-lg">
                 <Entypo name="minus" size={10***REMOVED*** color="black" />
               </TextBox>
             </TouchableOpacity>
-            <TextBox class="text-white">{getItemCount(index)***REMOVED***</TextBox>
-            <TouchableOpacity onPress={() => addItemToCart(index, item.name)***REMOVED***>
+            <TextBox class="text-white">{getItemCount(item.id)***REMOVED***</TextBox>
+            <TouchableOpacity
+              onPress={() => addItemToCart({ id: item.id, ...item ***REMOVED***)***REMOVED***
+            >
               <TextBox class="text-black p-1 ml-2 bg-white rounded-lg">
                 <Entypo name="plus" size={10***REMOVED*** color="black" />
               </TextBox>

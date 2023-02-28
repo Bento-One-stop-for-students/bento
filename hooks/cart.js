@@ -10,16 +10,21 @@ const Cart = () => {
     return itemFound;
 ***REMOVED***;
 
-  const addItemToCart = (id, name) => {
-    let itemFound = findItem(id);
+  const addItemToCart = (item) => {
+    let itemFound = findItem(item.id);
     if (itemFound >= 0) {
       setCart(
-        cart.map((item) =>
-          item.id === id ? { ...item, amount: item.amount + 1 ***REMOVED*** : item
-        )
+        cart.map((x) => (x.id === item.id ? { ...x, amount: x.amount + 1 ***REMOVED*** : x))
       );
 ***REMOVED*** else {
-      setCart(cart.concat({ id, amount: 1, name ***REMOVED***));
+      setCart(
+        cart.concat({
+          id: item.id,
+          amount: 1,
+          name: item.name,
+          price: item.price,
+    ***REMOVED***)
+      );
 ***REMOVED***
 ***REMOVED***;
 

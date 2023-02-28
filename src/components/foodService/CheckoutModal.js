@@ -31,7 +31,10 @@ const CheckoutModal = (props) => {
                   justifyContent="space-between"
                   key={item.id***REMOVED***
                 >
-                  <TextBox bold>{item.name***REMOVED***</TextBox>
+                  <TextBox>
+                    <TextBox bold>{item.name***REMOVED***{" : "***REMOVED***</TextBox>
+                    <TextBox bold>{item.price***REMOVED***</TextBox>
+                  </TextBox>
                   <TextBox>{item.amount***REMOVED***</TextBox>
                 </HStack>
               );

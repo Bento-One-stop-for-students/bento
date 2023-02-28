@@ -1,12 +1,14 @@
-import { View, Text, TouchableOpacity ***REMOVED*** from "react-native";
 import React from "react";
+import { FlatList ***REMOVED*** from "native-base";
+import { View, TouchableOpacity ***REMOVED*** from "react-native";
+
+import { CartContext ***REMOVED*** from "../../../hooks/context";
+import FoodItem from "../../components/foodService/FoodItem";
 import ViewBox from "../../components/shared/styles/ViewBox";
 import TextBox from "../../components/shared/styles/TextBox";
-import { FlatList ***REMOVED*** from "native-base";
-import FoodItem from "../../components/foodService/FoodItem";
 import { getAllFoodItems ***REMOVED*** from "../../../lib/firebase/FoodService";
 import CheckoutModal from "../../components/foodService/CheckoutModal";
-import { CartContext ***REMOVED*** from "../../../hooks/context";
+import ErrorModal from "../../components/shared/styles/ErrorModal";
 
 const Cantene = (props) => {
   const { cart ***REMOVED*** = React.useContext(CartContext);
@@ -25,6 +27,7 @@ const Cantene = (props) => {
           Items
         </TextBox>
         <TouchableOpacity
+          activeOpacity={0.9***REMOVED***
           className="pt-2 pl-3"
           onPress={() => {
             setShowModal(true);
@@ -51,10 +54,19 @@ const Cantene = (props) => {
         />
       ) : (
         <View>
-          <TextBox>no items</TextBox>
+          <TextBox>Loading ...</TextBox>
         </View>
       )***REMOVED***
-      <CheckoutModal showModal={showModal***REMOVED*** setShowModal={setShowModal***REMOVED*** />
+      {cart.length ? (
+        <CheckoutModal showModal={showModal***REMOVED*** setShowModal={setShowModal***REMOVED*** />
+      ) : (
+        <ErrorModal
+          title="Empty Cart"
+          error="Cart is empty. Add something to purchase."
+          isOpen={showModal***REMOVED***
+          onClose={setShowModal***REMOVED***
+        />
+      )***REMOVED***
     </ViewBox>
   );
 ***REMOVED***
