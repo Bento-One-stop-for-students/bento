@@ -12,7 +12,6 @@ const Auth = () => {
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-        // console.log(user.email)
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
