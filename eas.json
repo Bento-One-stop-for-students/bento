@@ -12,6 +12,9 @@
   ***REMOVED***
 ***REMOVED***,
     "preview": {
+      "android": {
+        "buildType": "apk"
+  ***REMOVED***,
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"

@@ -5,101 +5,12 @@ import TextBox from "../../components/shared/styles/TextBox";
 import { FlatList ***REMOVED*** from "native-base";
 import FoodItem from "../../components/foodService/FoodItem";
 import { getAllFoodItems ***REMOVED*** from "../../../lib/firebase/FoodService";
-
-const DATA = [
-  {
-    id: 1,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 2,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 3,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 1,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 2,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 3,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 1,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 2,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 3,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 1,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 2,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 3,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 1,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 2,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-  {
-    id: 3,
-    name: "lays",
-    price: 50,
-    img: "url",
-***REMOVED***,
-];
+import CheckoutModal from "../../components/foodService/CheckoutModal";
+import { CartContext ***REMOVED*** from "../../../hooks/context";
 
 const Cantene = (props) => {
+  const { cart ***REMOVED*** = React.useContext(CartContext);
+  const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
@@ -113,8 +24,20 @@ const Cantene = (props) => {
         <TextBox class="my-2 text-lg" bold>
           Items
         </TextBox>
-        <TouchableOpacity className="px-5 py-2 bg-black rounded-lg ">
-          <TextBox class="text-white">Checkout</TextBox>
+        <TouchableOpacity
+          className="pt-2 pl-3"
+          onPress={() => {
+            setShowModal(true);
+      ***REMOVED******REMOVED***
+        >
+          <View className="items-start justify-center px-4 py-2 bg-black rounded-lg">
+            <TextBox class="text-white">Checkout</TextBox>
+          </View>
+          {cart && cart.length ? (
+            <View className="mr-6 absolute z-1 bg-white border-2 rounded-full w-7 h-7 items-center justify-center">
+              <TextBox class="text-xs">{cart.length***REMOVED***</TextBox>
+            </View>
+          ) : null***REMOVED***
         </TouchableOpacity>
       </View>
       {data && data.length ? (
@@ -131,6 +54,7 @@ const Cantene = (props) => {
           <TextBox>no items</TextBox>
         </View>
       )***REMOVED***
+      <CheckoutModal showModal={showModal***REMOVED*** setShowModal={setShowModal***REMOVED*** />
     </ViewBox>
   );
 ***REMOVED***
