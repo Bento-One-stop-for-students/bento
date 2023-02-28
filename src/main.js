@@ -10,7 +10,7 @@ import AuthNavigator from "./navigation/AuthNavigator";
 import GetStarted from "./splashScreen";
 import { AuthContext, CartContext } from "../hooks/context";
 import Auth from "../hooks/auth";
-import Cart from "../hooks/cart";
+import { CartProvider } from "../hooks/cart";
 import NetInfo from "@react-native-community/netinfo";
 import ErrorModal from "./components/shared/styles/ErrorModal";
 
@@ -20,7 +20,6 @@ export default function Main() {
   const [isConnected, setIsConnected] = React.useState(false);
   const [showErrorModal, setShowErrorModal] = React.useState(false);
   const [splashScreen, setSplashScreen] = React.useState(true);
-  const { cartContext } = Cart();
   const { authContext, user, isLoggedIn, handleSignedIn, googleUser } = Auth();
 
   React.useEffect(() => {
@@ -51,24 +50,22 @@ export default function Main() {
   return splashScreen ? (
     <GetStarted />
   ) : (
-    <NativeBaseProvider>
-      <View
-        style={{ marginTop: insets.top, flex: 1, backgroundColor: "white" }}
-      >
-        <NavigationContainer>
-          <AuthContext.Provider value={authContext}>
-            <CartContext.Provider value={cartContext}>
-              {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />}
-              <ErrorModal
-                isOpen={showErrorModal}
-                onClose={setShowErrorModal}
-                title="Network Error"
-                error="No Internet Connection. Try again later."
-              />
-            </CartContext.Provider>
-          </AuthContext.Provider>
-        </NavigationContainer>
-      </View>
-    </NativeBaseProvider>
+    <NavigationContainer>
+      <AuthContext.Provider value={authContext}>
+        <CartProvider>
+          <View
+            style={{ marginTop: insets.top, flex: 1, backgroundColor: "white" }}
+          >
+            {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />}
+            <ErrorModal
+              isOpen={showErrorModal}
+              onClose={setShowErrorModal}
+              title="Network Error"
+              error="No Internet Connection. Try again later."
+            />
+          </View>
+        </CartProvider>
+      </AuthContext.Provider>
+    </NavigationContainer>
   );
 }
