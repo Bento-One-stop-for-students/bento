@@ -39,7 +39,7 @@ const Cantene = (props) => {
           <View className="items-start justify-center px-4 py-2 bg-black rounded-lg">
             <TextBox class="text-white">Checkout</TextBox>
           </View>
-          {size > 1 && (
+          {size >= 1 && (
             <View className="mr-6 absolute z-1 bg-white border-2 rounded-full w-7 h-7 items-center justify-center">
               <TextBox class="text-xs">{size}</TextBox>
             </View>

@@ -8,7 +8,7 @@ import React from "react";
 
 const BarberModal = (props) => {
   const { user } = React.useContext(AuthContext);
-  const [check, setCheck] = React.useState();
+  const [disabled, setDisabled] = React.useState(false);
   return (
     <Center>
       <Modal
@@ -57,6 +57,7 @@ const BarberModal = (props) => {
               class="w-[70vw]"
               text="Book my appointment"
               onPress={async () => {
+                setDisabled(true);
                 const newUser = {
                   ...user,
                   hair: props.hair,
@@ -79,7 +80,10 @@ const BarberModal = (props) => {
                 } catch (err) {
                   Alert.alert("couldn't make appointment. try again later");
                 }
+                props.setShowModal(false);
+                setDisabled(false);
               }}
+              disabled={disabled}
             />
           </Modal.Footer>
         </Modal.Content>

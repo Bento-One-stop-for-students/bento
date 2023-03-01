@@ -31,7 +31,7 @@ const FoodItem = ({ item, index }) => {
           <View className="mx-4 py-2 px-3 bg-primary-purple rounded-lg border-2 border-black flex-row items-center justify-center">
             <TouchableOpacity
               onPress={() =>
-                dispatch({ type: "REMOVE_FROM_CART", payload: item })
+                dispatch({ type: "REDUCE_FROM_CART", payload: item })
               }
             >
               <TextBox class="text-black bg-white p-1 mr-2 rounded-lg">

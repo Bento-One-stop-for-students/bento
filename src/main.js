@@ -5,22 +5,28 @@ import { View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import Auth from "../hooks/auth";
+import GetStarted from "./splashScreen";
+import { CartProvider } from "../hooks/cart";
 import TabNavigator from "./navigation/TabNavigator";
 import AuthNavigator from "./navigation/AuthNavigator";
-import GetStarted from "./splashScreen";
-import { AuthContext, CartContext } from "../hooks/context";
-import Auth from "../hooks/auth";
-import { CartProvider } from "../hooks/cart";
+import { AuthContext } from "../hooks/context";
 import NetInfo from "@react-native-community/netinfo";
 import ErrorModal from "./components/shared/styles/ErrorModal";
 
 export default function Main() {
   const insets = useSafeAreaInsets();
 
-  const [isConnected, setIsConnected] = React.useState(false);
-  const [showErrorModal, setShowErrorModal] = React.useState(false);
   const [splashScreen, setSplashScreen] = React.useState(true);
-  const { authContext, user, isLoggedIn, handleSignedIn, googleUser } = Auth();
+  const {
+    authContext,
+    user,
+    isLoggedIn,
+    handleSignedIn,
+    googleUser,
+    isConnected,
+    setIsConnected,
+  } = Auth();
 
   React.useEffect(() => {
     console.log({ user, isLoggedIn, googleUser });
@@ -28,12 +34,6 @@ export default function Main() {
 
   const isAlreadySignedIn = async () => {
     try {
-      NetInfo.fetch().then((state) => {
-        setIsConnected(state.isConnected);
-      });
-      if (isConnected) {
-        setShowErrorModal(true);
-      }
       await handleSignedIn();
       setTimeout(() => {
         setSplashScreen(false);
@@ -45,6 +45,11 @@ export default function Main() {
   };
 
   React.useEffect(() => {
+    NetInfo.addEventListener((state) => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
+      setIsConnected(state.isConnected);
+    });
     isAlreadySignedIn();
   }, []);
   return splashScreen ? (
@@ -58,8 +63,8 @@ export default function Main() {
           >
             {!isLoggedIn ? <AuthNavigator /> : <TabNavigator />}
             <ErrorModal
-              isOpen={showErrorModal}
-              onClose={setShowErrorModal}
+              isOpen={!isConnected}
+              onClose={setIsConnected}
               title="Network Error"
               error="No Internet Connection. Try again later."
             />

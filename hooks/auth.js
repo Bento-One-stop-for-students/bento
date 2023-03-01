@@ -1,4 +1,5 @@
 import React from "react";
+
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import { getUser } from "../lib/firebase/User";
@@ -7,6 +8,7 @@ const Auth = () => {
   const [user, setUser] = React.useState(null);
   const [googleUser, setGoogleUser] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isConnected, setIsConnected] = React.useState(false);
 
   const verifyUser = async (user) => {
     try {
@@ -130,6 +132,8 @@ const Auth = () => {
     googleUser,
     setIsLoggedIn,
     setGoogleUser,
+    isConnected,
+    setIsConnected,
   }));
   return {
     handleSignedIn,
@@ -143,6 +147,8 @@ const Auth = () => {
     setUser,
     setIsLoggedIn,
     setGoogleUser,
+    isConnected,
+    setIsConnected,
   };
 };
 
