@@ -85,9 +85,10 @@ const initialState = {
 const CartContext = React.createContext({***REMOVED***
 
 function cartReducer(state, action) {
-  const item = state.cart[action.payload.id];
+  let item;
   switch (action.type) {
     case "ADD_TO_CART":
+      item = state.cart[action.payload.id];
       return {
         ...state,
         cart: {
@@ -103,7 +104,8 @@ function cartReducer(state, action) {
           ***REMOVED***,
     ***REMOVED***,
   ***REMOVED***;
-    case "REMOVE_FROM_CART":
+    case "REDUCE_FROM_CART":
+      item = state.cart[action.payload.id];
       if (item.qty > 1) {
         return {
           ...state,
@@ -123,6 +125,15 @@ function cartReducer(state, action) {
           cart: newCart,
     ***REMOVED***;
   ***REMOVED***
+    case "REMOVE_FROM_CART":
+      let newCart = { ...state.cart ***REMOVED***
+      delete newCart[action.payload.id];
+      return {
+        ...state,
+        cart: newCart,
+  ***REMOVED***;
+    case "EMPTY_CART":
+      return { cart: {***REMOVED*** ***REMOVED***
     default:
       return state;
 ***REMOVED***

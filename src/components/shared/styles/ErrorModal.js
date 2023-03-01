@@ -5,7 +5,6 @@ const ErrorModal = (props) => {
   return (
     <Modal isOpen={props.isOpen***REMOVED*** onClose={()=>{props.onClose(false)***REMOVED******REMOVED*** size={"lg"***REMOVED***>
       <Modal.Content>
-        <Modal.CloseButton/>
         <Modal.Header>{props.title***REMOVED***</Modal.Header>
         <Modal.Body>
             <TextBox bold>
