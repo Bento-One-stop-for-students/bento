@@ -12,7 +12,8 @@ import { Pressable ***REMOVED*** from "react-native";
 import { CartContext ***REMOVED*** from "../lib/context/cartContext";
 import { getStatus ***REMOVED*** from "../lib/firebase/user";
 import { getBarberBooking ***REMOVED*** from "../lib/firebase/barber";
-import BookingItem from "../components/barber/BookingItem";
+import Barber from "../components/home/Barber";
+import SnackMen from "../components/home/SnackMen";
 
 const Home = ({ navigation ***REMOVED***) => {
   const { authState ***REMOVED*** = React.useContext(AuthContext);
@@ -20,6 +21,7 @@ const Home = ({ navigation ***REMOVED***) => {
   const { cartState ***REMOVED*** = value;
   const { status, statusLoading ***REMOVED*** = getStatus();
 
+  const [isLoading, setIsLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
   const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
   const [snackmenStatus, setIsSnackmenOpen] = React.useState("CLOSED");
@@ -34,15 +36,17 @@ const Home = ({ navigation ***REMOVED***) => {
 ***REMOVED***, [status, statusLoading]);
 
   React.useEffect(() => {
-    const getBooking = async () => {
+    const getInfoFromFirebase = async () => {
     ***REMOVED***
         const res = await getBarberBooking(authState.user.id);
         setBarberBooking(res);
   ***REMOVED*** catch (err) {
         console.log(err);
+  ***REMOVED*** finally {
+        setIsLoading(false);
   ***REMOVED***
 ***REMOVED***;
-    getBooking();
+    getInfoFromFirebase();
 ***REMOVED***, []);
 
   return (
@@ -91,116 +95,13 @@ const Home = ({ navigation ***REMOVED***) => {
           Hi, {authState.user ? authState.user.name.split(" ")[0] : ""***REMOVED***👋
         </TextBox>
       </View>
-      <View className="bg-[#AE78D3] w-[92vw] h-[32vh] rounded-3xl mt-3 p-5 flex-col justify-between">
-        <Image
-          source={require("../assets/images/hair_brush.png")***REMOVED***
-          className="absolute h-full w-full opacity-60"
-          resizeMode="contain"
-        />
-        <View className="flex-row justify-between">
-          <TextBox semibold classNames="text-3xl">
-            MBH Barber
-          </TextBox>
-          <View
-            className={`w-24 h-12 rounded-2xl items-center justify-center ${
-              barberStatus == "OPEN"
-                ? barberStatus == "BREAK"
-                  ? "bg-orange-500"
-                  : "bg-green-500"
-                : "bg-red-600"
-        ***REMOVED***`***REMOVED***
-          >
-            {statusLoading ? (
-              <ActivityIndicator color="white" size="small" />
-            ) : (
-              <TextBox semibold classNames="text-white">
-                {barberStatus***REMOVED***
-              </TextBox>
-            )***REMOVED***
-          </View>
-        </View>
-        {barberStatus == "OPEN" || barberStatus == "BREAK" ? (
-          !barberBooking ? (
-            <>
-              <TextBox
-                semibold
-                classNames="text-white text-[12px] p-2 py-4 bg-[#353232] rounded-2xl"
-              >
-                20 people in queue right now
-              </TextBox>
-              <Button
-                classNames={`bg-[#1E1B1B] ${
-                  barberStatus == "BREAK" && "opacity-50"
-            ***REMOVED***`***REMOVED***
-                onPress={(e) => {
-                  setShowBarberQueueModal(true);
-            ***REMOVED******REMOVED***
-                disabled={barberStatus == "BREAK" ? true : false***REMOVED***
-              >
-                <TextBox semibold classNames="text-white">
-                  {barberStatus == "OPEN" ? "Queue Now" : "Barber on break"***REMOVED***
-                </TextBox>
-              </Button>
-            </>
-          ) : (
-            <View>
-              <TextBox semibold classNames="mb-2">
-                You are already in queue!
-              </TextBox>
-              <BookingItem item={barberBooking***REMOVED*** />
-            </View>
-          )
-        ) : (
-          <View>
-            <TextBox semibold>Closed</TextBox>
-          </View>
-        )***REMOVED***
-      </View>
-      <View className="bg-[#FFA410] w-[92vw] rounded-3xl h-[32vh] mt-5 p-5 flex-col justify-between">
-        <Image
-          source={require("../assets/images/donut.png")***REMOVED***
-          className="absolute h-full w-full opacity-80 mt-5"
-          resizeMode="contain"
-        />
-        <View className="flex-row justify-between">
-          <TextBox semibold classNames="text-3xl">
-            Snackmen
-          </TextBox>
-          <View
-            className={`w-24 h-12 rounded-2xl items-center justify-center ${
-              snackmenStatus == "OPEN"
-                ? snackmenStatus == "BREAK"
-                  ? "bg-orange-500"
-                  : "bg-green-500"
-                : "bg-red-600"
-        ***REMOVED***`***REMOVED***
-          >
-            <TextBox semibold classNames="text-white">
-              {snackmenStatus***REMOVED***
-            </TextBox>
-          </View>
-        </View>
-        <Pressable
-          className="w-full h-16 border border-1 rounded-2xl items-center justify-center bg-[#FFA410]"
-          onPress={() => {
-            navigation.navigate("Your Orders");
-      ***REMOVED******REMOVED***
-        >
-          <TextBox semibold classNames="text-[15px]">
-            View Orders
-          </TextBox>
-        </Pressable>
-        <Button
-          classNames=" bg-[#1E1B1B]"
-          onPress={() => {
-            navigation.navigate("Food Order");
-      ***REMOVED******REMOVED***
-        >
-          <TextBox semibold classNames=" text-white">
-            Order Now
-          </TextBox>
-        </Button>
-      </View>
+      <Barber
+        isLoading={isLoading***REMOVED***
+        statusLoading={statusLoading***REMOVED***
+        barberStatus={barberStatus***REMOVED***
+        barberBooking={barberBooking***REMOVED***
+      />
+      <SnackMen snackmenStatus={snackmenStatus***REMOVED*** />
       <BarberQueueModal
         isOpen={showBarberQueueModal***REMOVED***
         onClose={setShowBarberQueueModal***REMOVED***

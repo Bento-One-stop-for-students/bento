@@ -20,7 +20,7 @@ const FoodItem = ({ item, index ***REMOVED***) => {
         <TextBox semibold    classNames="text-white text-xl">
           {item.name.charAt(0).toUpperCase() + item.name.slice(1)***REMOVED***
         </TextBox>
-        <TextBox semibold    classNames="text-white text-xl">{item.price***REMOVED*** Rs</TextBox>
+        <TextBox semibold    classNames="text-white text-xl">{item.price***REMOVED*** ₹</TextBox>
       </View>
       <View className="items-center justify-end flex-col py-6">
         <Image

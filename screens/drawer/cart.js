@@ -40,6 +40,7 @@ const Cart = ({ navigation ***REMOVED***) => {
       hostel: authState.user.hostel,
       room_no: authState.user.room_no,
       mobile_no: authState.user.mobile_no,
+      total,
       cart: cartItems,
     ***REMOVED***
 ***REMOVED***
@@ -54,7 +55,8 @@ const Cart = ({ navigation ***REMOVED***) => {
 
   return (
     <View className="flex-1 items-center flex-col">
-      <TextBox semibold   
+      <TextBox
+        semibold
         classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
         style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
       >
@@ -68,12 +70,18 @@ const Cart = ({ navigation ***REMOVED***) => {
             navigation.navigate("Home");
       ***REMOVED******REMOVED***
         >
-          <TextBox semibold    classNames="text-black text-3xl">{"<"***REMOVED***</TextBox>
+          <TextBox semibold classNames="text-black text-3xl">
+            {"<"***REMOVED***
+          </TextBox>
         </TouchableHighlight>
-        <TextBox semibold    classNames="text-white text-3xl">Cart</TextBox>
+        <TextBox semibold classNames="text-white text-3xl">
+          Cart
+        </TextBox>
       </View>
       {cartItems.length < 1 && (
-        <TextBox semibold    classNames="text-white mt-44">Nothing to see here!</TextBox>
+        <TextBox semibold classNames="text-white mt-44">
+          Nothing to see here!
+        </TextBox>
       )***REMOVED***
       <ScrollView className="mt-14 w-full px-5">
         {cartItems.map((item) => {
@@ -91,9 +99,11 @@ const Cart = ({ navigation ***REMOVED***) => {
                   resizeMode="contain"
                 />
                 <View>
-                  <TextBox semibold    classNames="text-white ml-5">{item.name***REMOVED***</TextBox>
-                  <TextBox semibold    classNames="text-white ml-5">
-                    Rs {item.price***REMOVED***
+                  <TextBox semibold classNames="text-white ml-5">
+                    {item.name***REMOVED***
+                  </TextBox>
+                  <TextBox semibold classNames="text-white ml-5">
+                    ₹ {item.price***REMOVED***
                   </TextBox>
                 </View>
               </View>
@@ -104,11 +114,11 @@ const Cart = ({ navigation ***REMOVED***) => {
                       cartDispatch({ type: "REDUCE_FROM_CART", payload: item ***REMOVED***)
                 ***REMOVED***
                   >
-                    <TextBox semibold    classNames="p-1 rounded-lg bg-black">
+                    <TextBox semibold classNames="p-1 rounded-lg bg-black">
                       <Entypo name="minus" size={15***REMOVED*** color="white" />
                     </TextBox>
                   </Pressable>
-                  <TextBox semibold    classNames="text-white">
+                  <TextBox semibold classNames="text-white">
                     {cartState.cart[item.id].qty***REMOVED***
                   </TextBox>
                   <Pressable
@@ -116,7 +126,7 @@ const Cart = ({ navigation ***REMOVED***) => {
                       cartDispatch({ type: "ADD_TO_CART", payload: item ***REMOVED***)
                 ***REMOVED***
                   >
-                    <TextBox semibold    classNames="p-1 rounded-lg bg-black">
+                    <TextBox semibold classNames="p-1 rounded-lg bg-black">
                       <Entypo name="plus" size={15***REMOVED*** color="white" />
                     </TextBox>
                   </Pressable>
@@ -129,20 +139,24 @@ const Cart = ({ navigation ***REMOVED***) => {
       {cartItems.length > 0 && (
         <View className="h-[35vh] w-full bg-[#353232] rounded-t-3xl top-auto bottom-0 px-10 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
-            <TextBox semibold    classNames="text-white text-lg">
+            <TextBox semibold classNames="text-white text-lg">
               {authState.user.name***REMOVED***
             </TextBox>
-            <TextBox semibold    classNames="text-white text-lg">
+            <TextBox semibold classNames="text-white text-lg">
               {authState.user.hostel.toUpperCase()***REMOVED*** {authState.user.room_no***REMOVED***
             </TextBox>
-            <TextBox semibold    classNames="text-white text-lg">
+            <TextBox semibold classNames="text-white text-lg">
               {authState.user.phone_no || "No phone no."***REMOVED***
             </TextBox>
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
-            <TextBox semibold    classNames="text-white text-xl">Total</TextBox>
-            <TextBox semibold    classNames="text-white text-xl">Rs {total***REMOVED***</TextBox>
+            <TextBox semibold classNames="text-white text-xl">
+              Total
+            </TextBox>
+            <TextBox semibold classNames="text-white text-xl">
+              ₹ {total***REMOVED***
+            </TextBox>
           </View>
           <Button
             disabled={cartItems.length < 1 ? true : false***REMOVED***
@@ -151,14 +165,16 @@ const Cart = ({ navigation ***REMOVED***) => {
             {disabled ? (
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (
-              <TextBox semibold    classNames="items-center justify-center text-lg">
+              <TextBox
+                semibold
+                classNames="items-center justify-center text-lg"
+              >
                 Create Order
               </TextBox>
             )***REMOVED***
           </Button>
         </View>
       )***REMOVED***
-      
     </View>
   );
 ***REMOVED***
