@@ -32,7 +32,7 @@ const Cart = ({ navigation }) => {
       items.forEach((item) => {
         amount += item.price * item.qty;
       });
-      setTotal(amount);
+      setTotal(amount + 5);
     };
     calculateTotal(cartItems);
   }, [cartState]);
@@ -49,16 +49,9 @@ const Cart = ({ navigation }) => {
         total,
         cart: cartItems,
       });
-      if (res) {
-        console.log(res);
-        authDispatch({ type: "NOTIFICATION_TRUE", payload: "Order Created" });
-        cartDispatch({ type: "EMPTY_CART" });
-      } else {
-        authDispatch({
-          type: "NOTIFICATION_TRUE",
-          payload: "Couldn't create order",
-        });
-      }
+      console.log(res);
+      authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
+      cartDispatch({ type: "EMPTY_CART" });
     } catch (err) {
       authDispatch({
         type: "NOTIFICATION_TRUE",
@@ -174,9 +167,14 @@ const Cart = ({ navigation }) => {
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
-            <TextBox semibold classNames="text-white text-xl">
-              Total
-            </TextBox>
+            <View className="flex-row items-center">
+              <TextBox semibold classNames="text-white text-xl">
+                Total
+              </TextBox>
+              <TextBox semibold classNames="text-white mt-1 ml-1">
+                (₹5 Delivery)
+              </TextBox>
+            </View>
             <TextBox semibold classNames="text-white text-xl">
               ₹ {total}
             </TextBox>

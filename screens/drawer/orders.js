@@ -40,7 +40,7 @@ const Orders = ({ navigation }) => {
         BENTO
       </TextBox>
       <View className="flex-row items-center justify-between w-full mt-16 px-10">
-        <TextBox semibold   classNames="text-white text-3xl">
+        <TextBox semibold classNames="text-white text-3xl">
           Orders
         </TextBox>
         <TouchableHighlight
@@ -56,7 +56,9 @@ const Orders = ({ navigation }) => {
         </TouchableHighlight>
       </View>
       {orders == [] ? (
-        <View>No Orders...</View>
+        <View>
+          <TextBox semibold>No Orders...</TextBox>
+        </View>
       ) : (
         <FlatList
           contentContainerStyle={{ paddingBottom: 150 }}

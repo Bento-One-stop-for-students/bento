@@ -65,12 +65,12 @@ const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
             </Button>
           </>
         ) : (
-          <View>
-            <TextBox semibold classNames="mb-2">
+          <>
+            <TextBox semibold classNames="mb-2 text-center">
               You are already in queue!
             </TextBox>
             <BookingItem item={barberBooking} />
-          </View>
+          </>
         )
       ) : (
         <>

@@ -23,10 +23,11 @@ const Login = ({ navigation }) => {
       }
       setIsInvalid(false);
     } catch (err) {
-      setIsInvalid(true);
       console.log(err);
+      setIsInvalid(true);
+    } finally {
+      setDisabled(false);
     }
-    setDisabled(false);
   };
 
   return (
@@ -37,10 +38,10 @@ const Login = ({ navigation }) => {
         resizeMode="contain"
       />
       <View className="m-10 flex-1">
-        <TextBox semibold    classNames="text-white mt-10 text-5xl py-10 ">
+        <TextBox semibold classNames="text-white mt-10 text-5xl py-10 ">
           Login to your account
         </TextBox>
-        <TextBox semibold    classNames="text-white mt-16 w-full text-center">
+        <TextBox semibold classNames="text-white mt-16 w-full text-center">
           Use institute email
         </TextBox>
         <Button
@@ -53,14 +54,16 @@ const Login = ({ navigation }) => {
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (
               <>
-                <TextBox semibold    classNames="mr-3">Login with google</TextBox>
+                <TextBox semibold classNames="mr-3">
+                  Login with google
+                </TextBox>
                 <AntDesign name="google" size={40} color="black" />
               </>
             )}
           </View>
         </Button>
         {isInvalid && (
-          <TextBox semibold    classNames="text-red-500 mt-1 w-full text-center">
+          <TextBox semibold classNames="text-red-500 mt-1 w-full text-center">
             Check email and try again
           </TextBox>
         )}
