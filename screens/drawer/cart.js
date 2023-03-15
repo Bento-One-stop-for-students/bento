@@ -32,7 +32,7 @@ const Cart = ({ navigation ***REMOVED***) => {
       items.forEach((item) => {
         amount += item.price * item.qty;
       ***REMOVED***
-      setTotal(amount);
+      setTotal(amount + 5);
 ***REMOVED***;
     calculateTotal(cartItems);
 ***REMOVED***, [cartState]);
@@ -49,16 +49,9 @@ const Cart = ({ navigation ***REMOVED***) => {
         total,
         cart: cartItems,
       ***REMOVED***
-  ***REMOVED***
-        console.log(res);
-  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Order Created" ***REMOVED***
-        cartDispatch({ type: "EMPTY_CART" ***REMOVED***
-  ***REMOVED*** else {
-  ***REMOVED***
-          type: "NOTIFICATION_TRUE",
-          payload: "Couldn't create order",
-        ***REMOVED***
-  ***REMOVED***
+      console.log(res);
+***REMOVED*** type: "NOTIFICATION_TRUE", payload: res ***REMOVED***
+      cartDispatch({ type: "EMPTY_CART" ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
@@ -174,9 +167,14 @@ const Cart = ({ navigation ***REMOVED***) => {
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
-            <TextBox semibold classNames="text-white text-xl">
-              Total
-            </TextBox>
+            <View className="flex-row items-center">
+              <TextBox semibold classNames="text-white text-xl">
+                Total
+              </TextBox>
+              <TextBox semibold classNames="text-white mt-1 ml-1">
+                (₹5 Delivery)
+              </TextBox>
+            </View>
             <TextBox semibold classNames="text-white text-xl">
               ₹ {total***REMOVED***
             </TextBox>
