@@ -8,7 +8,10 @@ import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 import { Pressable ***REMOVED*** from "react-native";
 import { CartContext ***REMOVED*** from "../lib/context/cartContext";
 import { getStatus ***REMOVED*** from "../lib/firebase/user";
-import { getBarberBooking ***REMOVED*** from "../lib/firebase/barber";
+import {
+  getBarberBooking,
+  getWaitingQueueLength,
+***REMOVED*** from "../lib/firebase/barber";
 import Barber from "../components/home/Barber";
 import SnackMen from "../components/home/SnackMen";
 import { getUserOrders ***REMOVED*** from "../lib/firebase/food-order";
@@ -19,7 +22,11 @@ const Home = ({ navigation ***REMOVED***) => {
   const { cartState ***REMOVED*** = value;
   const { status, statusLoading ***REMOVED*** = getStatus();
   const { booking, bookingLoading ***REMOVED*** = getBarberBooking(authState.user.id);
+  const { waitingQueueLength, waitingQueueLengthLoading ***REMOVED*** =
+    getWaitingQueueLength();
 
+  const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
+    React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
   const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
@@ -41,8 +48,15 @@ const Home = ({ navigation ***REMOVED***) => {
 ***REMOVED***, [booking, bookingLoading]);
 
   React.useEffect(() => {
+    if (!waitingQueueLengthLoading) {
+      barberWaitingQueueLength(waitingQueueLength);
+***REMOVED***
+***REMOVED***, [waitingQueueLength, waitingQueueLengthLoading]);
+
+  React.useEffect(() => {
     const getInfoFromFirebase = async () => {
     ***REMOVED***
+        setIsLoading(true);
         const orders = await getUserOrders(authState.user.id);
   ***REMOVED*** type: "GET_ORDERS", payload: orders ***REMOVED***
   ***REMOVED*** catch (err) {
@@ -105,6 +119,7 @@ const Home = ({ navigation ***REMOVED***) => {
         statusLoading={statusLoading***REMOVED***
         barberStatus={barberStatus***REMOVED***
         barberBooking={barberBooking***REMOVED***
+        barberWaitingQueueLength={barberWaitingQueueLength***REMOVED***
       />
       <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
     </View>
