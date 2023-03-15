@@ -6,7 +6,13 @@ import BarberQueueModal from "../barber/BarberQueueModal";
 import Button from "../Button";
 import CancelBookingModal from "../barber/CancelBookingModal";
 
-const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
+const Barber = ({
+  isLoading,
+  statusLoading,
+  barberStatus,
+  barberBooking,
+  barberWaitingQueueLength,
+}) => {
   const [showBarberQueueModal, setShowBarberQueueModal] = React.useState(false);
   const [showBarberCancelModal, setShowBarberCancelModal] =
     React.useState(false);
@@ -52,7 +58,7 @@ const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
               semibold
               classNames="text-white text-[12px] p-2 py-4 bg-[#353232] rounded-2xl text-center"
             >
-              20 people in queue right now
+              {barberWaitingQueueLength} people in queue right now
             </TextBox>
             <Button
               classNames={`bg-[#1E1B1B] ${

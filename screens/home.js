@@ -8,7 +8,10 @@ import { AuthContext } from "../lib/context/authContext";
 import { Pressable } from "react-native";
 import { CartContext } from "../lib/context/cartContext";
 import { getStatus } from "../lib/firebase/user";
-import { getBarberBooking } from "../lib/firebase/barber";
+import {
+  getBarberBooking,
+  getWaitingQueueLength,
+} from "../lib/firebase/barber";
 import Barber from "../components/home/Barber";
 import SnackMen from "../components/home/SnackMen";
 import { getUserOrders } from "../lib/firebase/food-order";
@@ -19,7 +22,11 @@ const Home = ({ navigation }) => {
   const { cartState } = value;
   const { status, statusLoading } = getStatus();
   const { booking, bookingLoading } = getBarberBooking(authState.user.id);
+  const { waitingQueueLength, waitingQueueLengthLoading } =
+    getWaitingQueueLength();
 
+  const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
+    React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
   const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
@@ -41,8 +48,15 @@ const Home = ({ navigation }) => {
   }, [booking, bookingLoading]);
 
   React.useEffect(() => {
+    if (!waitingQueueLengthLoading) {
+      barberWaitingQueueLength(waitingQueueLength);
+    }
+  }, [waitingQueueLength, waitingQueueLengthLoading]);
+
+  React.useEffect(() => {
     const getInfoFromFirebase = async () => {
       try {
+        setIsLoading(true);
         const orders = await getUserOrders(authState.user.id);
         authDispatch({ type: "GET_ORDERS", payload: orders });
       } catch (err) {
@@ -105,6 +119,7 @@ const Home = ({ navigation }) => {
         statusLoading={statusLoading}
         barberStatus={barberStatus}
         barberBooking={barberBooking}
+        barberWaitingQueueLength={barberWaitingQueueLength}
       />
       <SnackMen navigation={navigation} snackmenStatus={snackmenStatus} />
     </View>

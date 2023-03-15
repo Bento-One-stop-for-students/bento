@@ -10,7 +10,7 @@ const CancelBookingModal = (props) => {
   const [disabled, setDisabled] = React.useState(false);
   const { authState, authDispatch } = React.useContext(AuthContext);
 
-  const handleCancelOrder = async () => {
+  const handleCancelBooking = async () => {
     try {
       setDisabled(true);
       await deleteBarberBooking(authState.user.id);
@@ -45,7 +45,7 @@ const CancelBookingModal = (props) => {
         </Modal.Body>
         <Button
           classNames="bg-[#1e1b1b] items-center justify-center"
-          onPress={handleCancelOrder}
+          onPress={handleCancelBooking}
         >
           {disabled ? (
             <ActivityIndicator size="large" color="white" />
