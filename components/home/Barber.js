@@ -73,11 +73,16 @@ const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
           </View>
         )
       ) : (
-        <View className="w-full items-center justify-center border-[1px] rounded-2xl">
-          <TextBox semibold classNames="text-2xl" style={{lineHeight:50}}>
-            Closed
+        <>
+          <TextBox classNames="text-center">
+            {"Shop is closed for today.\nSee you tomorrow!"}
           </TextBox>
-        </View>
+          <View className="w-full items-center justify-center border-[1px] rounded-2xl">
+            <TextBox semibold classNames="text-2xl" style={{ lineHeight: 50 }}>
+              Closed
+            </TextBox>
+          </View>
+        </>
       )}
       <BarberQueueModal
         isOpen={showBarberQueueModal}
