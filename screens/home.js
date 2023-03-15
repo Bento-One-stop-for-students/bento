@@ -34,6 +34,8 @@ const Home = ({ navigation }) => {
 
   var size = Object.keys(cartState.cart).length;
 
+  // update status
+
   React.useEffect(() => {
     if (!statusLoading) {
       setIsBarberOpen(status[0].status);
@@ -41,15 +43,19 @@ const Home = ({ navigation }) => {
     }
   }, [status, statusLoading]);
 
+  // update barber booking
+
   React.useEffect(() => {
     if (!bookingLoading) {
       setBarberBooking(booking);
     }
   }, [booking, bookingLoading]);
 
+  // update barber queue length
+
   React.useEffect(() => {
     if (!waitingQueueLengthLoading) {
-      barberWaitingQueueLength(waitingQueueLength);
+      barberWaitingQueueLength(waitingQueueLength[0].queue_length);
     }
   }, [waitingQueueLength, waitingQueueLengthLoading]);
 
