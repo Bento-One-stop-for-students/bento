@@ -3,6 +3,7 @@ import React from "react";
 import { Image } from "react-native";
 import TextBox from "../TextBox";
 import { Pressable } from "react-native";
+import Button from "../Button";
 
 const SnackMen = ({ navigation, snackmenStatus }) => {
   return (
@@ -44,16 +45,24 @@ const SnackMen = ({ navigation, snackmenStatus }) => {
           View Orders
         </TextBox>
       </Pressable>
-      <Button
-        classNames=" bg-[#1E1B1B]"
-        onPress={() => {
-          navigation.navigate("Food Order");
-        }}
-      >
-        <TextBox semibold classNames=" text-white">
-          Order Now
-        </TextBox>
-      </Button>
+      {snackmenStatus == "OPEN" ? (
+        <Button
+          classNames=" bg-[#1E1B1B]"
+          onPress={() => {
+            navigation.navigate("Food Order");
+          }}
+        >
+          <TextBox semibold classNames=" text-white">
+            Order Now
+          </TextBox>
+        </Button>
+      ) : (
+        <View className="w-full items-center justify-center border-[1px] rounded-2xl">
+          <TextBox semibold classNames="text-3xl" style={{ lineHeight: 70 }}>
+            Closed
+          </TextBox>
+        </View>
+      )}
     </View>
   );
 };

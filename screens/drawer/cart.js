@@ -1,18 +1,23 @@
-import { ActivityIndicator, Touchable, View } from "react-native";
 import React from "react";
+
+import { Entypo } from "@expo/vector-icons";
+import { TouchableHighlight } from "react-native-gesture-handler";
+import {
+  ActivityIndicator,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+} from "react-native";
+
+import Button from "../../components/Button";
 import TextBox from "../../components/TextBox";
 import { CartContext } from "../../lib/context/cartContext";
 import { AuthContext } from "../../lib/context/authContext";
-import { TouchableHighlight } from "react-native-gesture-handler";
-import { Image } from "react-native";
-import { Pressable } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { ScrollView } from "react-native";
-import Button from "../../components/Button";
 import { createOrder } from "../../lib/firebase/food-order";
-import { Alert } from "react-native";
 
 const Cart = ({ navigation }) => {
+  const { authDispatch } = React.useContext(AuthContext);
   const { value } = React.useContext(CartContext);
   const { cartState, cartDispatch } = value;
   const { authState } = React.useContext(AuthContext);
@@ -33,24 +38,42 @@ const Cart = ({ navigation }) => {
   }, [cartState]);
 
   const handleCreateOrder = async () => {
-    setDisabled(true);
-    const res = await createOrder({
-      id: authState.user.id,
-      name: authState.user.name,
-      hostel: authState.user.hostel,
-      room_no: authState.user.room_no,
-      mobile_no: authState.user.mobile_no,
-      total,
-      cart: cartItems,
-    });
-    if (res) {
-      Alert.alert("order created");
-      cartDispatch({ type: "EMPTY_CART" });
+    try {
+      setDisabled(true);
+      const res = await createOrder({
+        id: authState.user.id,
+        name: authState.user.name,
+        hostel: authState.user.hostel,
+        room_no: authState.user.room_no,
+        mobile_no: authState.user.mobile_no,
+        total,
+        cart: cartItems,
+      });
+      if (res) {
+        console.log(res);
+        authDispatch({ type: "NOTIFICATION_TRUE", payload: "Order Created" });
+        cartDispatch({ type: "EMPTY_CART" });
+      } else {
+        authDispatch({
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create order",
+        });
+      }
+    } catch (err) {
+      authDispatch({
+        type: "NOTIFICATION_TRUE",
+        payload: "Couldn't create order",
+      });
+      console.log(err);
+    } finally {
+      setTimeout(() => {
+        authDispatch({
+          type: "NOTIFICATION_FALSE",
+        });
+      }, 3000);
+      setDisabled(false);
       navigation.navigate("Home");
-    } else {
-      Alert.alert("couldn't create order");
     }
-    setDisabled(false);
   };
 
   return (

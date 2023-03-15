@@ -2,8 +2,10 @@ import { View, ActivityIndicator, Image } from "react-native";
 import React from "react";
 import TextBox from "../TextBox";
 import BookingItem from "../barber/BookingItem";
+import BarberQueueModal from "../barber/BarberQueueModal";
 
 const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
+  const [showBarberQueueModal, setShowBarberQueueModal] = React.useState(false);
   return (
     <View
       className={`${
@@ -71,12 +73,16 @@ const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking }) => {
           </View>
         )
       ) : (
-        <View className="w-full items-center  justify-center h-full ">
-          <TextBox semibold classNames="text-5xl p-2">
+        <View className="w-full items-center justify-center border-[1px] rounded-2xl">
+          <TextBox semibold classNames="text-2xl" style={{lineHeight:50}}>
             Closed
           </TextBox>
         </View>
       )}
+      <BarberQueueModal
+        isOpen={showBarberQueueModal}
+        onClose={setShowBarberQueueModal}
+      />
     </View>
   );
 };
