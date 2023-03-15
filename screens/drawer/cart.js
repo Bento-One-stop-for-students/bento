@@ -180,10 +180,7 @@ const Cart = ({ navigation }) => {
               ₹ {total}
             </TextBox>
           </View>
-          <Button
-            disabled={cartItems.length < 1 ? true : false}
-            onPress={handleCreateOrder}
-          >
+          <Button disabled={disabled} onPress={handleCreateOrder}>
             {disabled ? (
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (

@@ -48,6 +48,7 @@ const CancelOrderModal = (props) => {
         <Button
           classNames="bg-[#1e1b1b] items-center justify-center"
           onPress={handleCancelOrder}
+          disabled={disabled}
         >
           {disabled ? (
             <ActivityIndicator size="large" color="white" />

@@ -14,7 +14,6 @@ const Orders = ({ navigation }) => {
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
   const { authState } = React.useContext(AuthContext);
   React.useEffect(() => {
-    console.log(authState.orders);
   }, [authState]);
   return (
     <View className="flex-1 items-center justify-start">
