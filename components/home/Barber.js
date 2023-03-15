@@ -3,9 +3,13 @@ import React from "react";
 import TextBox from "../TextBox";
 import BookingItem from "../barber/BookingItem";
 import BarberQueueModal from "../barber/BarberQueueModal";
+import Button from "../Button";
+import CancelBookingModal from "../barber/CancelBookingModal";
 
 const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking ***REMOVED***) => {
   const [showBarberQueueModal, setShowBarberQueueModal] = React.useState(false);
+  const [showBarberCancelModal, setShowBarberCancelModal] =
+    React.useState(false);
   return (
     <View
       className={`${
@@ -66,10 +70,19 @@ const Barber = ({ isLoading, statusLoading, barberStatus, barberBooking ***REMOV
           </>
         ) : (
           <>
-            <TextBox semibold classNames="mb-2 text-center">
-              You are already in queue!
-            </TextBox>
             <BookingItem item={barberBooking***REMOVED*** />
+            <Button
+              classNames="bg-[#1e1b1b]"
+              onPress={() => {
+                setShowBarberCancelModal(true);
+          ***REMOVED******REMOVED***
+            >
+              <TextBox classNames="text-white">Cancel</TextBox>
+            </Button>
+            <CancelBookingModal
+              isOpen={showBarberCancelModal***REMOVED***
+              onClose={setShowBarberCancelModal***REMOVED***
+            />
           </>
         )
       ) : (

@@ -3,23 +3,22 @@ import { View ***REMOVED*** from "react-native";
 import { Feather ***REMOVED*** from "@expo/vector-icons";
 import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
 
-import Button from "../components/Button";
 import TextBox from "../components/TextBox";
 import { AuthContext ***REMOVED*** from "../lib/context/authContext";
-import { Image ***REMOVED*** from "react-native";
-import BarberQueueModal from "../components/barber/BarberQueueModal";
 import { Pressable ***REMOVED*** from "react-native";
 import { CartContext ***REMOVED*** from "../lib/context/cartContext";
 import { getStatus ***REMOVED*** from "../lib/firebase/user";
 import { getBarberBooking ***REMOVED*** from "../lib/firebase/barber";
 import Barber from "../components/home/Barber";
 import SnackMen from "../components/home/SnackMen";
+import { getUserOrders ***REMOVED*** from "../lib/firebase/food-order";
 
 const Home = ({ navigation ***REMOVED***) => {
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
+  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState ***REMOVED*** = value;
   const { status, statusLoading ***REMOVED*** = getStatus();
+  const { booking, bookingLoading ***REMOVED*** = getBarberBooking(authState.user.id);
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
@@ -29,17 +28,23 @@ const Home = ({ navigation ***REMOVED***) => {
   var size = Object.keys(cartState.cart).length;
 
   React.useEffect(() => {
-    if (statusLoading == false) {
+    if (!statusLoading) {
       setIsBarberOpen(status[0].status);
       setIsSnackmenOpen(status[1].status);
 ***REMOVED***
 ***REMOVED***, [status, statusLoading]);
 
   React.useEffect(() => {
+    if (!bookingLoading) {
+      setBarberBooking(booking);
+***REMOVED***
+***REMOVED***, [booking, bookingLoading]);
+
+  React.useEffect(() => {
     const getInfoFromFirebase = async () => {
     ***REMOVED***
-        const res = await getBarberBooking(authState.user.id);
-        setBarberBooking(res);
+        const orders = await getUserOrders(authState.user.id);
+  ***REMOVED*** type: "GET_ORDERS", payload: orders ***REMOVED***
   ***REMOVED*** catch (err) {
         console.log(err);
   ***REMOVED*** finally {

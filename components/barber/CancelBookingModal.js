@@ -4,19 +4,17 @@ import { Modal ***REMOVED*** from "native-base";
 import TextBox from "../TextBox";
 import Button from "../Button";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { cancelUserOrder, getUserOrders ***REMOVED*** from "../../lib/firebase/food-order";
+import { deleteBarberBooking ***REMOVED*** from "../../lib/firebase/barber";
 
-const CancelOrderModal = (props) => {
+const CancelBookingModal = (props) => {
   const [disabled, setDisabled] = React.useState(false);
   const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
 
   const handleCancelOrder = async () => {
   ***REMOVED***
       setDisabled(true);
-      await cancelUserOrder(authState.user.id, props.isOpen);
-      const updatedOrders = await getUserOrders(authState.user.id);
-***REMOVED*** type: "GET_ORDERS", payload: updatedOrders ***REMOVED***
-***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Order Cancelled" ***REMOVED***
+      await deleteBarberBooking(authState.user.id);
+***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Booking Cancelled" ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
@@ -38,7 +36,7 @@ const CancelOrderModal = (props) => {
   ***REMOVED******REMOVED***
       animationPreset="slide"
     >
-      <Modal.Content className="bg-[#FFA410] rounded-3xl p-2">
+      <Modal.Content className="bg-[#AE78D3] rounded-3xl p-2">
         <Modal.CloseButton />
         <Modal.Body>
           <TextBox semibold classNames="text-black text-lg">
@@ -53,7 +51,7 @@ const CancelOrderModal = (props) => {
             <ActivityIndicator size="large" color="white" />
           ) : (
             <TextBox semibold classNames="text-white">
-              Cancel Order
+              Remove from queue
             </TextBox>
           )***REMOVED***
         </Button>
@@ -62,4 +60,4 @@ const CancelOrderModal = (props) => {
   );
 ***REMOVED***
 
-export default CancelOrderModal;
+export default CancelBookingModal;

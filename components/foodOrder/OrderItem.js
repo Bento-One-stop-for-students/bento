@@ -5,7 +5,7 @@ import { View, Animated ***REMOVED*** from "react-native";
 import TextBox from "../TextBox";
 import { Pressable ***REMOVED*** from "native-base";
 
-const ExpandableView = ({ expanded, cart, handleCancelOrder ***REMOVED***) => {
+const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) => {
   const [height] = React.useState(new Animated.Value(0));
   React.useEffect(() => {
     Animated.timing(height, {
@@ -19,7 +19,7 @@ const ExpandableView = ({ expanded, cart, handleCancelOrder ***REMOVED***) => {
       className="bg-[#353232] w-full"
       style={{ maxHeight: height ***REMOVED******REMOVED***
     >
-      {cart.map((item) => {
+      {item.cart.map((item) => {
         return (
           <Animated.View
             style={{ maxHeight: height ***REMOVED******REMOVED***
@@ -44,15 +44,15 @@ const ExpandableView = ({ expanded, cart, handleCancelOrder ***REMOVED***) => {
           </Animated.View>
         );
   ***REMOVED***)***REMOVED***
-      <Animated.View style={{ maxHeight: height ***REMOVED******REMOVED***>
-        <Pressable onPress={handleCancelOrder***REMOVED***>
-          <View className="mt-2 bg-[#CCCCCC] rounded-2xl items-center justify-center">
-            <TextBox semibold classNames="py-4">
-              Cancel Order
-            </TextBox>
-          </View>
-        </Pressable>
-      </Animated.View>
+      {!item.is_delivered && (
+          <Pressable onPress={handleCancelOrderModal***REMOVED***>
+            <View className="mt-2 bg-[#CCCCCC] rounded-2xl items-center justify-center">
+              <TextBox semibold classNames="py-4">
+                Cancel Order
+              </TextBox>
+            </View>
+          </Pressable>
+      )***REMOVED***
     </Animated.View>
   );
 ***REMOVED***
@@ -61,12 +61,12 @@ const OrderItem = ({
   item,
   setIsComponentOpen,
   isComponentOpen,
-  cancelOrder,
+  cancelOrderModal,
 ***REMOVED***) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const handleCancelOrder = () => {
-    cancelOrder(item.orderId);
+  const handleCancelOrderModal = async () => {
+    cancelOrderModal(item.orderId);
 ***REMOVED***;
 
   React.useEffect(() => {
@@ -89,7 +89,7 @@ const OrderItem = ({
             #{item.orderId***REMOVED***
           </TextBox>
           <TextBox semibold classNames="text-white">
-            {item.timeStamp.toDate().toDateString().slice(4)***REMOVED***
+            {item.timestamp.toDate().toDateString().slice(4)***REMOVED***
           </TextBox>
         </View>
         <View className="flex-row items-center justify-between w-full">
@@ -120,8 +120,8 @@ const OrderItem = ({
       </View>
       <ExpandableView
         expanded={isExpanded***REMOVED***
-        cart={item.cart***REMOVED***
-        handleCancelOrder={handleCancelOrder***REMOVED***
+        item={item***REMOVED***
+        handleCancelOrderModal={handleCancelOrderModal***REMOVED***
       />
     </Pressable>
   );

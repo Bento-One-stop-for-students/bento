@@ -1,9 +1,9 @@
-import { View, Text ***REMOVED*** from "react-native";
 import React from "react";
-import { Image ***REMOVED*** from "react-native";
-import TextBox from "../TextBox";
-import { Pressable ***REMOVED*** from "react-native";
+
+import { View, Image, Pressable ***REMOVED*** from "react-native";
+
 import Button from "../Button";
+import TextBox from "../TextBox";
 
 const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
   return (

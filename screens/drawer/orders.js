@@ -1,11 +1,9 @@
 import React from "react";
 
 import { View ***REMOVED*** from "react-native";
-import { useFocusEffect ***REMOVED*** from "@react-navigation/native";
 import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
 
 import TextBox from "../../components/TextBox";
-import { getUserOrders ***REMOVED*** from "../../lib/firebase/food-order";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
 import { FlatList ***REMOVED*** from "native-base";
 import OrderItem from "../../components/foodOrder/OrderItem";
@@ -15,21 +13,9 @@ const Orders = ({ navigation ***REMOVED***) => {
   const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
   const { authState ***REMOVED*** = React.useContext(AuthContext);
-  const [orders, setOrders] = React.useState([]);
-  useFocusEffect(
-    React.useCallback(() => {
-      setIsComponentOpen(false);
-      const getOrders = async () => {
-      ***REMOVED***
-          const res = await getUserOrders(authState.user.id);
-          setOrders(res);
-    ***REMOVED*** catch (err) {
-          console.log(err);
-    ***REMOVED***
-  ***REMOVED***;
-      getOrders();
-***REMOVED***, [])
-  );
+  React.useEffect(() => {
+    console.log(authState.orders);
+***REMOVED***, [authState]);
   return (
     <View className="flex-1 items-center justify-start">
       <TextBox
@@ -55,21 +41,23 @@ const Orders = ({ navigation ***REMOVED***) => {
           </>
         </TouchableHighlight>
       </View>
-      {orders == [] ? (
+      {authState.orders.length == 0 ? (
         <View>
-          <TextBox semibold>No Orders...</TextBox>
+          <TextBox semibold classNames="text-white pt-24">
+            No orders! Order now...
+          </TextBox>
         </View>
       ) : (
         <FlatList
           contentContainerStyle={{ paddingBottom: 150 ***REMOVED******REMOVED***
           className="w-full mt-10 px-5"
-          data={orders***REMOVED***
+          data={authState.orders***REMOVED***
           renderItem={({ item ***REMOVED***) => (
             <OrderItem
               item={item***REMOVED***
               isComponentOpen={isComponentOpen***REMOVED***
               setIsComponentOpen={setIsComponentOpen***REMOVED***
-              cancelOrder={setOpenCancelOrderModal***REMOVED***
+              cancelOrderModal={setOpenCancelOrderModal***REMOVED***
             />
           )***REMOVED***
           keyExtractor={(item, index) => index***REMOVED***
