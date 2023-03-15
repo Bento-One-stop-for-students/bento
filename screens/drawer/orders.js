@@ -14,7 +14,6 @@ const Orders = ({ navigation ***REMOVED***) => {
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
   const { authState ***REMOVED*** = React.useContext(AuthContext);
   React.useEffect(() => {
-    console.log(authState.orders);
 ***REMOVED***, [authState]);
   return (
     <View className="flex-1 items-center justify-start">

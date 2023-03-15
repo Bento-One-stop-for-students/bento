@@ -55,7 +55,7 @@ const Home = ({ navigation ***REMOVED***) => {
 
   React.useEffect(() => {
     if (!waitingQueueLengthLoading) {
-      barberWaitingQueueLength(waitingQueueLength[0].queue_length);
+      setBarberWaitingQueueLength(waitingQueueLength[0].queue_length);
 ***REMOVED***
 ***REMOVED***, [waitingQueueLength, waitingQueueLengthLoading]);
 

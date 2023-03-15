@@ -30,8 +30,8 @@ export default function AppWrapper({ navigation ***REMOVED***) {
           Poppins_600SemiBold,
         ***REMOVED***
         await handleIsSignedIn(authDispatch);
-  ***REMOVED*** catch (e) {
-        console.warn(e);
+  ***REMOVED*** catch (err) {
+        console.log(err);
   ***REMOVED*** finally {
         setAppIsReady(true);
   ***REMOVED***
