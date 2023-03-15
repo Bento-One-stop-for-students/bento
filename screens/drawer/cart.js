@@ -1,18 +1,23 @@
-import { ActivityIndicator, Touchable, View ***REMOVED*** from "react-native";
 import React from "react";
+
+import { Entypo ***REMOVED*** from "@expo/vector-icons";
+import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
+import {
+  ActivityIndicator,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+***REMOVED*** from "react-native";
+
+import Button from "../../components/Button";
 import TextBox from "../../components/TextBox";
 import { CartContext ***REMOVED*** from "../../lib/context/cartContext";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
-import { Image ***REMOVED*** from "react-native";
-import { Pressable ***REMOVED*** from "react-native";
-import { Entypo ***REMOVED*** from "@expo/vector-icons";
-import { ScrollView ***REMOVED*** from "react-native";
-import Button from "../../components/Button";
 import { createOrder ***REMOVED*** from "../../lib/firebase/food-order";
-import { Alert ***REMOVED*** from "react-native";
 
 const Cart = ({ navigation ***REMOVED***) => {
+  const { authDispatch ***REMOVED*** = React.useContext(AuthContext);
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState, cartDispatch ***REMOVED*** = value;
   const { authState ***REMOVED*** = React.useContext(AuthContext);
@@ -33,24 +38,42 @@ const Cart = ({ navigation ***REMOVED***) => {
 ***REMOVED***, [cartState]);
 
   const handleCreateOrder = async () => {
-    setDisabled(true);
-    const res = await createOrder({
-      id: authState.user.id,
-      name: authState.user.name,
-      hostel: authState.user.hostel,
-      room_no: authState.user.room_no,
-      mobile_no: authState.user.mobile_no,
-      total,
-      cart: cartItems,
-    ***REMOVED***
+  ***REMOVED***
+      setDisabled(true);
+      const res = await createOrder({
+        id: authState.user.id,
+        name: authState.user.name,
+        hostel: authState.user.hostel,
+        room_no: authState.user.room_no,
+        mobile_no: authState.user.mobile_no,
+        total,
+        cart: cartItems,
+      ***REMOVED***
+  ***REMOVED***
+        console.log(res);
+  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Order Created" ***REMOVED***
+        cartDispatch({ type: "EMPTY_CART" ***REMOVED***
+  ***REMOVED*** else {
+  ***REMOVED***
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create order",
+        ***REMOVED***
+  ***REMOVED***
+***REMOVED*** catch (err) {
 ***REMOVED***
-      Alert.alert("order created");
-      cartDispatch({ type: "EMPTY_CART" ***REMOVED***
+        type: "NOTIFICATION_TRUE",
+        payload: "Couldn't create order",
+      ***REMOVED***
+      console.log(err);
+***REMOVED*** finally {
+      setTimeout(() => {
+  ***REMOVED***
+          type: "NOTIFICATION_FALSE",
+        ***REMOVED***
+  ***REMOVED***, 3000);
+      setDisabled(false);
       navigation.navigate("Home");
-***REMOVED*** else {
-      Alert.alert("couldn't create order");
 ***REMOVED***
-    setDisabled(false);
 ***REMOVED***;
 
   return (

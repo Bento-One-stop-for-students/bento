@@ -16,7 +16,6 @@ import Navigator from "./navigation/Navigator";
 import { AuthContext ***REMOVED*** from "./lib/context/authContext";
 import { handleIsSignedIn ***REMOVED*** from "./lib/auth";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
-import { getStatus ***REMOVED*** from "./lib/firebase/user";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,13 +39,11 @@ export default function AppWrapper({ navigation ***REMOVED***) {
 
     prepare();
 ***REMOVED***, []);
-
   const onLayoutRootView = React.useCallback(async () => {
     if (appIsReady) {
       await SplashScreen.hideAsync();
 ***REMOVED***
 ***REMOVED***, [appIsReady]);
-
   if (!appIsReady) {
     return null;
 ***REMOVED***

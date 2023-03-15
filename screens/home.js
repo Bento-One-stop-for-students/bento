@@ -25,13 +25,13 @@ const Home = ({ navigation ***REMOVED***) => {
   const [barberBooking, setBarberBooking] = React.useState(false);
   const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
   const [snackmenStatus, setIsSnackmenOpen] = React.useState("CLOSED");
-  const [showBarberQueueModal, setShowBarberQueueModal] = React.useState(false);
 
   var size = Object.keys(cartState.cart).length;
 
   React.useEffect(() => {
     if (statusLoading == false) {
       setIsBarberOpen(status[0].status);
+      setIsSnackmenOpen(status[1].status);
 ***REMOVED***
 ***REMOVED***, [status, statusLoading]);
 
@@ -101,11 +101,7 @@ const Home = ({ navigation ***REMOVED***) => {
         barberStatus={barberStatus***REMOVED***
         barberBooking={barberBooking***REMOVED***
       />
-      <SnackMen snackmenStatus={snackmenStatus***REMOVED*** />
-      <BarberQueueModal
-        isOpen={showBarberQueueModal***REMOVED***
-        onClose={setShowBarberQueueModal***REMOVED***
-      />
+      <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
     </View>
   );
 ***REMOVED***
