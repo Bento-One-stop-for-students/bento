@@ -5,7 +5,7 @@ import { View, Animated } from "react-native";
 import TextBox from "../TextBox";
 import { Pressable } from "native-base";
 
-const ExpandableView = ({ expanded, cart, handleCancelOrder }) => {
+const ExpandableView = ({ expanded, item, handleCancelOrderModal }) => {
   const [height] = React.useState(new Animated.Value(0));
   React.useEffect(() => {
     Animated.timing(height, {
@@ -19,7 +19,7 @@ const ExpandableView = ({ expanded, cart, handleCancelOrder }) => {
       className="bg-[#353232] w-full"
       style={{ maxHeight: height }}
     >
-      {cart.map((item) => {
+      {item.cart.map((item) => {
         return (
           <Animated.View
             style={{ maxHeight: height }}
@@ -44,15 +44,15 @@ const ExpandableView = ({ expanded, cart, handleCancelOrder }) => {
           </Animated.View>
         );
       })}
-      <Animated.View style={{ maxHeight: height }}>
-        <Pressable onPress={handleCancelOrder}>
-          <View className="mt-2 bg-[#CCCCCC] rounded-2xl items-center justify-center">
-            <TextBox semibold classNames="py-4">
-              Cancel Order
-            </TextBox>
-          </View>
-        </Pressable>
-      </Animated.View>
+      {!item.is_delivered && (
+          <Pressable onPress={handleCancelOrderModal}>
+            <View className="mt-2 bg-[#CCCCCC] rounded-2xl items-center justify-center">
+              <TextBox semibold classNames="py-4">
+                Cancel Order
+              </TextBox>
+            </View>
+          </Pressable>
+      )}
     </Animated.View>
   );
 };
@@ -61,12 +61,12 @@ const OrderItem = ({
   item,
   setIsComponentOpen,
   isComponentOpen,
-  cancelOrder,
+  cancelOrderModal,
 }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const handleCancelOrder = () => {
-    cancelOrder(item.orderId);
+  const handleCancelOrderModal = async () => {
+    cancelOrderModal(item.orderId);
   };
 
   React.useEffect(() => {
@@ -89,7 +89,7 @@ const OrderItem = ({
             #{item.orderId}
           </TextBox>
           <TextBox semibold classNames="text-white">
-            {item.timeStamp.toDate().toDateString().slice(4)}
+            {item.timestamp.toDate().toDateString().slice(4)}
           </TextBox>
         </View>
         <View className="flex-row items-center justify-between w-full">
@@ -120,8 +120,8 @@ const OrderItem = ({
       </View>
       <ExpandableView
         expanded={isExpanded}
-        cart={item.cart}
-        handleCancelOrder={handleCancelOrder}
+        item={item}
+        handleCancelOrderModal={handleCancelOrderModal}
       />
     </Pressable>
   );

@@ -3,23 +3,22 @@ import { View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
-import Button from "../components/Button";
 import TextBox from "../components/TextBox";
 import { AuthContext } from "../lib/context/authContext";
-import { Image } from "react-native";
-import BarberQueueModal from "../components/barber/BarberQueueModal";
 import { Pressable } from "react-native";
 import { CartContext } from "../lib/context/cartContext";
 import { getStatus } from "../lib/firebase/user";
 import { getBarberBooking } from "../lib/firebase/barber";
 import Barber from "../components/home/Barber";
 import SnackMen from "../components/home/SnackMen";
+import { getUserOrders } from "../lib/firebase/food-order";
 
 const Home = ({ navigation }) => {
-  const { authState } = React.useContext(AuthContext);
+  const { authState, authDispatch } = React.useContext(AuthContext);
   const { value } = React.useContext(CartContext);
   const { cartState } = value;
   const { status, statusLoading } = getStatus();
+  const { booking, bookingLoading } = getBarberBooking(authState.user.id);
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
@@ -29,17 +28,23 @@ const Home = ({ navigation }) => {
   var size = Object.keys(cartState.cart).length;
 
   React.useEffect(() => {
-    if (statusLoading == false) {
+    if (!statusLoading) {
       setIsBarberOpen(status[0].status);
       setIsSnackmenOpen(status[1].status);
     }
   }, [status, statusLoading]);
 
   React.useEffect(() => {
+    if (!bookingLoading) {
+      setBarberBooking(booking);
+    }
+  }, [booking, bookingLoading]);
+
+  React.useEffect(() => {
     const getInfoFromFirebase = async () => {
       try {
-        const res = await getBarberBooking(authState.user.id);
-        setBarberBooking(res);
+        const orders = await getUserOrders(authState.user.id);
+        authDispatch({ type: "GET_ORDERS", payload: orders });
       } catch (err) {
         console.log(err);
       } finally {

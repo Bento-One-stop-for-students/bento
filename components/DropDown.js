@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const DropDown = (props) => {

@@ -15,7 +15,7 @@ const BarberQueueModal = (props) => {
   const handleBarberQueue = async () => {
     try {
       setDisabled(true);
-      const res = await bookBarber(authState.user);
+      const res = await bookBarber(authState.user.id);
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
     } catch (err) {
       authDispatch({
@@ -44,7 +44,9 @@ const BarberQueueModal = (props) => {
       <Modal.Content className="bg-[#AE78D3] rounded-3xl">
         <Modal.Body>
           <Modal.CloseButton />
-          <TextBox semibold classNames="text-[#1e1b1b] text-xl">Barber Queue</TextBox>
+          <TextBox semibold classNames="text-[#1e1b1b] text-xl">
+            Barber Queue
+          </TextBox>
           <TextBox semibold classNames="text-[#1e1b1b] text-xs">
             You can queue between 9:00am to 6:00pm.
           </TextBox>
@@ -67,7 +69,9 @@ const BarberQueueModal = (props) => {
             {disabled ? (
               <ActivityIndicator size="large" color="white" />
             ) : (
-              <TextBox semibold classNames="text-white">Agree & Queue</TextBox>
+              <TextBox semibold classNames="text-white">
+                Agree & Queue
+              </TextBox>
             )}
           </Button>
         </Modal.Body>

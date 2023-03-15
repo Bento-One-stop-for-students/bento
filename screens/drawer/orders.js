@@ -1,11 +1,9 @@
 import React from "react";
 
 import { View } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 import TextBox from "../../components/TextBox";
-import { getUserOrders } from "../../lib/firebase/food-order";
 import { AuthContext } from "../../lib/context/authContext";
 import { FlatList } from "native-base";
 import OrderItem from "../../components/foodOrder/OrderItem";
@@ -15,21 +13,9 @@ const Orders = ({ navigation }) => {
   const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
   const { authState } = React.useContext(AuthContext);
-  const [orders, setOrders] = React.useState([]);
-  useFocusEffect(
-    React.useCallback(() => {
-      setIsComponentOpen(false);
-      const getOrders = async () => {
-        try {
-          const res = await getUserOrders(authState.user.id);
-          setOrders(res);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      getOrders();
-    }, [])
-  );
+  React.useEffect(() => {
+    console.log(authState.orders);
+  }, [authState]);
   return (
     <View className="flex-1 items-center justify-start">
       <TextBox
@@ -55,21 +41,23 @@ const Orders = ({ navigation }) => {
           </>
         </TouchableHighlight>
       </View>
-      {orders == [] ? (
+      {authState.orders.length == 0 ? (
         <View>
-          <TextBox semibold>No Orders...</TextBox>
+          <TextBox semibold classNames="text-white pt-24">
+            No orders! Order now...
+          </TextBox>
         </View>
       ) : (
         <FlatList
           contentContainerStyle={{ paddingBottom: 150 }}
           className="w-full mt-10 px-5"
-          data={orders}
+          data={authState.orders}
           renderItem={({ item }) => (
             <OrderItem
               item={item}
               isComponentOpen={isComponentOpen}
               setIsComponentOpen={setIsComponentOpen}
-              cancelOrder={setOpenCancelOrderModal}
+              cancelOrderModal={setOpenCancelOrderModal}
             />
           )}
           keyExtractor={(item, index) => index}

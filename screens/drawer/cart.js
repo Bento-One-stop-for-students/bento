@@ -14,7 +14,7 @@ import Button from "../../components/Button";
 import TextBox from "../../components/TextBox";
 import { CartContext } from "../../lib/context/cartContext";
 import { AuthContext } from "../../lib/context/authContext";
-import { createOrder } from "../../lib/firebase/food-order";
+import { createUserOrder, getUserOrders } from "../../lib/firebase/food-order";
 
 const Cart = ({ navigation }) => {
   const { authDispatch } = React.useContext(AuthContext);
@@ -40,7 +40,7 @@ const Cart = ({ navigation }) => {
   const handleCreateOrder = async () => {
     try {
       setDisabled(true);
-      const res = await createOrder({
+      const res = await createUserOrder({
         id: authState.user.id,
         name: authState.user.name,
         hostel: authState.user.hostel,
@@ -49,7 +49,8 @@ const Cart = ({ navigation }) => {
         total,
         cart: cartItems,
       });
-      console.log(res);
+      const updatedOrders = await getUserOrders(authState.user.id);
+      authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
       cartDispatch({ type: "EMPTY_CART" });
     } catch (err) {
