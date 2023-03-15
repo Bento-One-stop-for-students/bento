@@ -1,20 +1,15 @@
 {
   "cli": {
-    "version": ">= 3.6.0"
+    "version": ">= 3.7.2"
   },
   "build": {
-    "development": {
-      "node":"14.18.1",
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
     "preview": {
       "android": {
         "buildType": "apk"
-      },
+      }
+    },
+    "development": {
+      "developmentClient": true,
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
