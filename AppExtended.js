@@ -19,6 +19,8 @@ import Navigator from "./navigation/Navigator";
 import { AuthContext } from "./lib/context/authContext";
 import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
+import NetInfo from "@react-native-community/netinfo";
+import NetworkErrorModal from "./components/NetworkErrorModal";
 
 SplashScreen.preventAutoHideAsync();
 Notifications.setNotificationHandler({
@@ -30,6 +32,8 @@ Notifications.setNotificationHandler({
 });
 
 export default function AppExtended({ navigation }) {
+  const [showNetworkErrorModal, setShowNetworkErrorModal] =
+    React.useState(false);
   const [appIsReady, setAppIsReady] = React.useState(false);
   const { authDispatch } = React.useContext(AuthContext);
   React.useEffect(() => {
@@ -48,6 +52,13 @@ export default function AppExtended({ navigation }) {
       }
     }
     prepare();
+
+    // Check Internet Connection
+    NetInfo.addEventListener((state) => {
+      if (!state.isConnected) {
+        setShowNetworkErrorModal(true);
+      }
+    });
 
     // Foreground notification subscription
 
@@ -79,6 +90,10 @@ export default function AppExtended({ navigation }) {
         <View className="flex-1 bg-[#131212]" onLayout={onLayoutRootView}>
           <Navigator />
           <OverLayNotificationModal />
+          <NetworkErrorModal
+            isOpen={showNetworkErrorModal}
+            onClose={setShowNetworkErrorModal}
+          />
         </View>
       </SafeAreaView>
     </NativeBaseProvider>

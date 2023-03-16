@@ -20,46 +20,19 @@ const Home = ({ navigation }) => {
   const { authState, authDispatch } = React.useContext(AuthContext);
   const { value } = React.useContext(CartContext);
   const { cartState } = value;
-  const { status, statusLoading } = getStatus();
-  const { booking, bookingLoading } = getBarberBooking(authState.user.id);
-  const { waitingQueueLength, waitingQueueLengthLoading } =
-    getWaitingQueueLength();
-
   const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
     React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [statusLoading, setStatusLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
-  const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
-  const [snackmenStatus, setIsSnackmenOpen] = React.useState("CLOSED");
-
+  const [barberStatus, setBarberStatus] = React.useState("CLOSED");
+  const [snackmenStatus, setSnackmenStatus] = React.useState("CLOSED");
   var size = Object.keys(cartState.cart).length;
 
-  // update status
-
   React.useEffect(() => {
-    if (!statusLoading) {
-      setIsBarberOpen(status[0].status);
-      setIsSnackmenOpen(status[1].status);
-    }
-  }, [status, statusLoading]);
-
-  // update barber booking
-
-  React.useEffect(() => {
-    if (!bookingLoading) {
-      setBarberBooking(booking);
-    }
-  }, [booking, bookingLoading]);
-
-  // update barber queue length
-
-  React.useEffect(() => {
-    if (!waitingQueueLengthLoading) {
-      setBarberWaitingQueueLength(waitingQueueLength[0].queue_length);
-    }
-  }, [waitingQueueLength, waitingQueueLengthLoading]);
-
-  React.useEffect(() => {
+    getWaitingQueueLength(setBarberWaitingQueueLength);
+    getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
+    getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
     const getInfoFromFirebase = async () => {
       try {
         setIsLoading(true);
@@ -117,7 +90,7 @@ const Home = ({ navigation }) => {
       </View>
       <View className="w-full ml-14">
         <TextBox semibold classNames={"text-white mt-12 text-3xl w-[80vw]"}>
-          Hi, {authState.user ? authState.user.name.split(" ")[0] : ""}👋
+          Hi, {authState.user.name && authState.user.name.split(" ")[0]}👋
         </TextBox>
       </View>
       <Barber

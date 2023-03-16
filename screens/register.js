@@ -9,6 +9,7 @@ import { AuthContext } from "../lib/context/authContext";
 
 const Register = ({ navigation, route }) => {
   const { authDispatch } = React.useContext(AuthContext);
+  const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [roomValue, setRoomValue] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -31,6 +32,7 @@ const Register = ({ navigation, route }) => {
   ]);
 
   const handleRegister = async () => {
+    setDisabled(true);
     if (roomValue == "" || hostelValue == "") {
       setIsInvalid(true);
     } else {
@@ -63,32 +65,45 @@ const Register = ({ navigation, route }) => {
           // roll_no: rollNoValue,
           mobile_no: parseInt(phoneNumber),
         };
-        await createUser(newUser, id);
-        const res = await getUser(id);
+        const msg = await createUser(id, data);
+        const user = await getUser(id);
+        authDispatch({ type: "NOTIFICATION_TRUE", payload: msg });
         authDispatch({
           type: "SIGN_IN",
           payload: {
-            user: res,
+            user,
           },
         });
       } catch (err) {
+        authDispatch({
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create user",
+        });
+        navigation.navigate("Login");
         console.log(err);
+      } finally {
+        setDisabled(false);
+        setTimeout(() => {
+          authDispatch({
+            type: "NOTIFICATION_FALSE",
+          });
+        }, 2000);
       }
     }
   };
 
   return (
     <View className="flex-1 m-10">
-      <TextBox semibold   classNames="text-white mt-10 text-4xl">
+      <TextBox semibold classNames="text-white mt-10 text-4xl">
         Register
       </TextBox>
       {isInvalid && (
-        <TextBox semibold   classNames="text-red-500 mt-5">
+        <TextBox semibold classNames="text-red-500 mt-5">
           Fields marked with * are necessary
         </TextBox>
       )}
       <View className="mt-10">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Hostel*
         </TextBox>
         <DropDown
@@ -102,7 +117,7 @@ const Register = ({ navigation, route }) => {
         />
       </View>
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
         <InputField placeholder="Enter Room No." onValueChange={setRoomValue} />
@@ -117,7 +132,7 @@ const Register = ({ navigation, route }) => {
         />
       </View> */}
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Phone No.
         </TextBox>
         <InputField
@@ -126,7 +141,7 @@ const Register = ({ navigation, route }) => {
         />
       </View>
       <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister}>
-        <TextBox semibold   classNames="text-xl">
+        <TextBox semibold classNames="text-xl">
           Let's Go
         </TextBox>
       </Button>

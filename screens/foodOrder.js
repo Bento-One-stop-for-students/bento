@@ -9,6 +9,7 @@ import { CartContext } from "../lib/context/cartContext";
 import { Pressable } from "native-base";
 import { FlatList } from "react-native";
 import FoodItem from "../components/foodOrder/FoodItem";
+import Button from "../components/Button";
 
 const FoodOrder = ({ navigation }) => {
   const { value } = React.useContext(CartContext);
@@ -32,7 +33,7 @@ const FoodOrder = ({ navigation }) => {
         BENTO
       </TextBox>
       <View className="w-full pt-16 flex-row items-center justify-around">
-        <TextBox semibold   classNames="text-white text-3xl">
+        <TextBox semibold classNames="text-white text-3xl">
           Food Order
         </TextBox>
         <Pressable
@@ -68,21 +69,22 @@ const FoodOrder = ({ navigation }) => {
         />
       ) : (
         <View>
-          <TextBox semibold   classNames="text-white mt-10">
+          <TextBox semibold classNames="text-white mt-10">
             Loading ...
           </TextBox>
         </View>
       )}
       {size > 0 && (
-        <View className="top-auto bottom-0 absolute items-center justify-center w-full">
-          <Pressable
-            className="bg-[#FFA410] py-3 none w-[90vw] rounded-3xl items-center "
+        <View className="top-auto bottom-0 absolute items-center justify-center w-full p-5">
+          <Button
             onPress={() => {
               navigation.navigate("Cart");
             }}
           >
-            <TextBox semibold classNames="text-black text-lg">Checkout</TextBox>
-          </Pressable>
+            <TextBox semibold classNames="text-black text-lg">
+              Checkout
+            </TextBox>
+          </Button>
         </View>
       )}
     </View>

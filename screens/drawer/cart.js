@@ -52,7 +52,6 @@ const Cart = ({ navigation }) => {
       const updatedOrders = await getUserOrders(authState.user.id);
       authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
-      cartDispatch({ type: "EMPTY_CART" });
     } catch (err) {
       authDispatch({
         type: "NOTIFICATION_TRUE",
@@ -60,6 +59,7 @@ const Cart = ({ navigation }) => {
       });
       console.log(err);
     } finally {
+      cartDispatch({ type: "EMPTY_CART" });
       setTimeout(() => {
         authDispatch({
           type: "NOTIFICATION_FALSE",
@@ -156,20 +156,21 @@ const Cart = ({ navigation }) => {
       {cartItems.length > 0 && (
         <View className="h-[35vh] w-full bg-[#353232] rounded-t-3xl top-auto bottom-0 px-10 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
-            <TextBox semibold classNames="text-white text-lg">
-              {authState.user.name}
+            <TextBox semibold classNames="text-white text-xl">
+              {/* {authState.user.name} */}
+              Devesh
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.hostel.toUpperCase()} {authState.user.room_no}
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.phone_no || "No phone no."}
             </TextBox>
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
             <View className="flex-row items-center">
-              <TextBox semibold classNames="text-white text-xl">
+              <TextBox classNames="text-white text-xl">
                 Total
               </TextBox>
               <TextBox semibold classNames="text-white mt-1 ml-1">
