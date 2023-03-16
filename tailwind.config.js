@@ -1,9 +1,14 @@
-// tailwind.config.js
-
+/** @type {import('tailwindcss').Config***REMOVED*** */
 module.exports = {
-    content: ["./App.{js,jsx,ts,tsx***REMOVED***","./src/**/*.{js,jsx,ts,tsx***REMOVED***"],
-    theme: {
-        extend: {***REMOVED***,
+  content: [
+    "./App.{js,jsx,ts,tsx***REMOVED***",
+    "./AppExtended.{js,jsx,ts,tsx***REMOVED***",
+    "./components/**/*.{js,jsx,ts,tsx***REMOVED***",
+    "./screens/**/*.{js,jsx,ts,tsx***REMOVED***",
+    "./navigation/**/*.{js,jsx,ts,tsx***REMOVED***",
+  ],
+  theme: {
+    extend: {***REMOVED***,
 ***REMOVED***,
-    plugins: [],
+  plugins: [],
 ***REMOVED***

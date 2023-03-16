@@ -1,0 +1,27 @@
+{
+  "cli": {
+    "version": ">= 3.7.2"
+***REMOVED***,
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+  ***REMOVED***
+***REMOVED***,
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m1-medium"
+  ***REMOVED***
+***REMOVED***,
+    "production": {
+      "ios": {
+        "resourceClass": "m1-medium"
+  ***REMOVED***
+***REMOVED***
+***REMOVED***,
+  "submit": {
+    "production": {***REMOVED***
+***REMOVED***
+***REMOVED***

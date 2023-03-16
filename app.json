@@ -1,15 +1,14 @@
 {
   "expo": {
-    "name": "bento",
+    "name": "Bento",
     "slug": "bento",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#131212"
 ***REMOVED***,
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,15 +22,17 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-  ***REMOVED***
+        "backgroundColor": "#131212"
+  ***REMOVED***,
+      "package": "com.devesh16.bento"
 ***REMOVED***,
     "web": {
       "favicon": "./assets/favicon.png"
 ***REMOVED***,
-    "androidNavigationBar": {
-     "barStyle": "dark-content",
-     "backgroundColor": "#ffffff"
- ***REMOVED***
+    "extra": {
+      "eas": {
+        "projectId": "c5edad82-8079-4d3b-a28c-011cb8163f5b"
+  ***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
