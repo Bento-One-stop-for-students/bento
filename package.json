@@ -42,7 +42,9 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "12.1.1",
     "react-native-web": "~0.18.11",
-    "tailwindcss": "^3.2.7"
+    "tailwindcss": "^3.2.7",
+    "expo-notifications": "~0.18.1",
+    "expo-device": "~5.2.1"
 ***REMOVED***,
   "devDependencies": {
     "@babel/core": "^7.20.0"
