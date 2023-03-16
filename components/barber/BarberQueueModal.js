@@ -7,6 +7,20 @@ import Button from "../Button";
 import TextBox from "../TextBox";
 import { bookBarber } from "../../lib/firebase/barber";
 import { AuthContext } from "../../lib/context/authContext";
+import messaging from "@react-native-firebase/messaging";
+
+// Notification permissions
+
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log("Authorization status:", authStatus);
+  }
+}
 
 const BarberQueueModal = (props) => {
   const { authState, authDispatch } = React.useContext(AuthContext);
@@ -15,8 +29,11 @@ const BarberQueueModal = (props) => {
   const handleBarberQueue = async () => {
     try {
       setDisabled(true);
-      const res = await bookBarber(authState.user.id);
-      authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
+      if (requestUserPermission()) {
+        const token = await messaging().getToken();
+        const res = await bookBarber(authState.user.id, { fcmToken: token });
+        authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
+      }
     } catch (err) {
       authDispatch({
         type: "NOTIFICATION_TRUE",
