@@ -52,7 +52,6 @@ const Cart = ({ navigation ***REMOVED***) => {
       const updatedOrders = await getUserOrders(authState.user.id);
 ***REMOVED*** type: "GET_ORDERS", payload: updatedOrders ***REMOVED***
 ***REMOVED*** type: "NOTIFICATION_TRUE", payload: res ***REMOVED***
-      cartDispatch({ type: "EMPTY_CART" ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
@@ -60,6 +59,7 @@ const Cart = ({ navigation ***REMOVED***) => {
       ***REMOVED***
       console.log(err);
 ***REMOVED*** finally {
+      cartDispatch({ type: "EMPTY_CART" ***REMOVED***
       setTimeout(() => {
   ***REMOVED***
           type: "NOTIFICATION_FALSE",
@@ -156,20 +156,21 @@ const Cart = ({ navigation ***REMOVED***) => {
       {cartItems.length > 0 && (
         <View className="h-[35vh] w-full bg-[#353232] rounded-t-3xl top-auto bottom-0 px-10 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
-            <TextBox semibold classNames="text-white text-lg">
-              {authState.user.name***REMOVED***
+            <TextBox semibold classNames="text-white text-xl">
+              {/* {authState.user.name***REMOVED*** */***REMOVED***
+              Devesh
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.hostel.toUpperCase()***REMOVED*** {authState.user.room_no***REMOVED***
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.phone_no || "No phone no."***REMOVED***
             </TextBox>
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
             <View className="flex-row items-center">
-              <TextBox semibold classNames="text-white text-xl">
+              <TextBox classNames="text-white text-xl">
                 Total
               </TextBox>
               <TextBox semibold classNames="text-white mt-1 ml-1">

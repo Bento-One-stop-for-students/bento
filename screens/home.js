@@ -20,46 +20,19 @@ const Home = ({ navigation ***REMOVED***) => {
   const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState ***REMOVED*** = value;
-  const { status, statusLoading ***REMOVED*** = getStatus();
-  const { booking, bookingLoading ***REMOVED*** = getBarberBooking(authState.user.id);
-  const { waitingQueueLength, waitingQueueLengthLoading ***REMOVED*** =
-    getWaitingQueueLength();
-
   const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
     React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [statusLoading, setStatusLoading] = React.useState(true);
   const [barberBooking, setBarberBooking] = React.useState(false);
-  const [barberStatus, setIsBarberOpen] = React.useState("CLOSED");
-  const [snackmenStatus, setIsSnackmenOpen] = React.useState("CLOSED");
-
+  const [barberStatus, setBarberStatus] = React.useState("CLOSED");
+  const [snackmenStatus, setSnackmenStatus] = React.useState("CLOSED");
   var size = Object.keys(cartState.cart).length;
 
-  // update status
-
   React.useEffect(() => {
-    if (!statusLoading) {
-      setIsBarberOpen(status[0].status);
-      setIsSnackmenOpen(status[1].status);
-***REMOVED***
-***REMOVED***, [status, statusLoading]);
-
-  // update barber booking
-
-  React.useEffect(() => {
-    if (!bookingLoading) {
-      setBarberBooking(booking);
-***REMOVED***
-***REMOVED***, [booking, bookingLoading]);
-
-  // update barber queue length
-
-  React.useEffect(() => {
-    if (!waitingQueueLengthLoading) {
-      setBarberWaitingQueueLength(waitingQueueLength[0].queue_length);
-***REMOVED***
-***REMOVED***, [waitingQueueLength, waitingQueueLengthLoading]);
-
-  React.useEffect(() => {
+    getWaitingQueueLength(setBarberWaitingQueueLength);
+    getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
+    getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
     const getInfoFromFirebase = async () => {
     ***REMOVED***
         setIsLoading(true);
@@ -117,7 +90,7 @@ const Home = ({ navigation ***REMOVED***) => {
       </View>
       <View className="w-full ml-14">
         <TextBox semibold classNames={"text-white mt-12 text-3xl w-[80vw]"***REMOVED***>
-          Hi, {authState.user ? authState.user.name.split(" ")[0] : ""***REMOVED***👋
+          Hi, {authState.user.name && authState.user.name.split(" ")[0]***REMOVED***👋
         </TextBox>
       </View>
       <Barber

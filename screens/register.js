@@ -9,6 +9,7 @@ import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 
 const Register = ({ navigation, route ***REMOVED***) => {
   const { authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [roomValue, setRoomValue] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -31,6 +32,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
   ]);
 
   const handleRegister = async () => {
+    setDisabled(true);
     if (roomValue == "" || hostelValue == "") {
       setIsInvalid(true);
 ***REMOVED*** else {
@@ -63,32 +65,45 @@ const Register = ({ navigation, route ***REMOVED***) => {
           // roll_no: rollNoValue,
           mobile_no: parseInt(phoneNumber),
     ***REMOVED***;
-        await createUser(newUser, id);
-    ***REMOVED***
+        const msg = await createUser(id, data);
+        const user = await getUser(id);
+  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: msg ***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-  ***REMOVED***
+            user,
       ***REMOVED***,
         ***REMOVED***
   ***REMOVED*** catch (err) {
+  ***REMOVED***
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create user",
+        ***REMOVED***
+        navigation.navigate("Login");
         console.log(err);
+  ***REMOVED*** finally {
+        setDisabled(false);
+        setTimeout(() => {
+    ***REMOVED***
+            type: "NOTIFICATION_FALSE",
+          ***REMOVED***
+    ***REMOVED***, 2000);
   ***REMOVED***
 ***REMOVED***
 ***REMOVED***;
 
   return (
     <View className="flex-1 m-10">
-      <TextBox semibold   classNames="text-white mt-10 text-4xl">
+      <TextBox semibold classNames="text-white mt-10 text-4xl">
         Register
       </TextBox>
       {isInvalid && (
-        <TextBox semibold   classNames="text-red-500 mt-5">
+        <TextBox semibold classNames="text-red-500 mt-5">
           Fields marked with * are necessary
         </TextBox>
       )***REMOVED***
       <View className="mt-10">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Hostel*
         </TextBox>
         <DropDown
@@ -102,7 +117,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
       </View>
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
         <InputField placeholder="Enter Room No." onValueChange={setRoomValue***REMOVED*** />
@@ -117,7 +132,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
       </View> */***REMOVED***
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Phone No.
         </TextBox>
         <InputField
@@ -126,7 +141,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
       </View>
       <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister***REMOVED***>
-        <TextBox semibold   classNames="text-xl">
+        <TextBox semibold classNames="text-xl">
           Let's Go
         </TextBox>
       </Button>
