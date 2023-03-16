@@ -4,6 +4,7 @@ import { View, Animated ***REMOVED*** from "react-native";
 
 import TextBox from "../TextBox";
 import { Pressable ***REMOVED*** from "native-base";
+import { Entypo ***REMOVED*** from "@expo/vector-icons";
 
 const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) => {
   const [height] = React.useState(new Animated.Value(0));
@@ -45,13 +46,13 @@ const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) 
         );
   ***REMOVED***)***REMOVED***
       {!item.is_delivered && (
-          <Pressable onPress={handleCancelOrderModal***REMOVED***>
-            <View className="mt-2 bg-[#CCCCCC] rounded-2xl items-center justify-center">
-              <TextBox semibold classNames="py-4">
-                Cancel Order
-              </TextBox>
-            </View>
-          </Pressable>
+        <Pressable onPress={handleCancelOrderModal***REMOVED***>
+          <View className="mt-2 bg-red-400 rounded-2xl items-center justify-center">
+            <TextBox semibold classNames="py-4">
+              Cancel Order
+            </TextBox>
+          </View>
+        </Pressable>
       )***REMOVED***
     </Animated.View>
   );
@@ -118,6 +119,14 @@ const OrderItem = ({
           </View>
         </View>
       </View>
+      {!isExpanded && (
+        <Entypo
+          name="chevron-thin-down"
+          size={15***REMOVED***
+          color="white"
+          style={{ marginBottom: -10 ***REMOVED******REMOVED***
+        />
+      )***REMOVED***
       <ExpandableView
         expanded={isExpanded***REMOVED***
         item={item***REMOVED***
