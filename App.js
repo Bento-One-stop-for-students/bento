@@ -1,18 +1,15 @@
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import Main from "./src";
-import { StatusBar } from "react-native";
+import "react-native-gesture-handler";
+
+import { AuthProvider } from "./lib/context/authContext";
+import { CartProvider } from "./lib/context/cartContext";
+import AppExtended from "./AppExtended";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <StatusBar
-        animated={true}
-        backgroundColor="#7345F6"
-        barStyle={"light-content"}
-        showHideTransition={"fade"}
-        hidden={false}
-      />
-      <Main />
-    </SafeAreaProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AppExtended />
+      </CartProvider>
+    </AuthProvider>
   );
 }
