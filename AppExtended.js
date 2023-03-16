@@ -19,7 +19,7 @@ import OverLayNotificationModal from "./components/OverLayNotificationModal";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function AppWrapper({ navigation }) {
+export default function AppExtended({ navigation }) {
   const [appIsReady, setAppIsReady] = React.useState(false);
   const { authDispatch } = React.useContext(AuthContext);
   React.useEffect(() => {

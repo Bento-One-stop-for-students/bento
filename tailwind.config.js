@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./App.{js,jsx,ts,tsx}",
-    "./AppWrapper.{js,jsx,ts,tsx}",
+    "./AppExtended.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
     "./screens/**/*.{js,jsx,ts,tsx}",
     "./navigation/**/*.{js,jsx,ts,tsx}",
