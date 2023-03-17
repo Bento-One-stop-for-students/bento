@@ -33,13 +33,17 @@ const Register = ({ navigation, route ***REMOVED***) => {
 
   const handleRegister = async () => {
     setDisabled(true);
-    if (roomValue == "" || hostelValue == "" || phoneNumber == "") {
+    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
+    if (
+      hostelValue == "" ||
+      roomValue.trim() == "" ||
+      phoneNumber.trim().length < 10
+    ) {
       setIsInvalid(true);
 ***REMOVED*** else {
     ***REMOVED***
         setIsInvalid(false);
         const { id, photo, email, givenName, familyName ***REMOVED*** = route.params.user;
-
         // get branch of user
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
@@ -63,7 +67,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber),
+          mobile_no: parseInt(phoneNumber.trim()),
     ***REMOVED***;
         const msg = await createUser(id, newUser);
         const user = await getUser(id);
@@ -79,7 +83,6 @@ const Register = ({ navigation, route ***REMOVED***) => {
           type: "NOTIFICATION_TRUE",
           payload: "Couldn't create user",
         ***REMOVED***
-        navigation.navigate("Login");
         console.log(err);
   ***REMOVED*** finally {
         setTimeout(() => {
@@ -120,7 +123,11 @@ const Register = ({ navigation, route ***REMOVED***) => {
         <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
-        <InputField placeholder="Enter Room No." onValueChange={setRoomValue***REMOVED*** />
+        <InputField
+          placeholder="Enter Room No."
+          onValueChange={setRoomValue***REMOVED***
+          numeric
+        />
       </View>
       {/*  For later don't delete */***REMOVED***
 
@@ -138,6 +145,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber***REMOVED***
+          numeric
         />
       </View>
       <Button

@@ -11,7 +11,9 @@ const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
   return (
     <View
       className={`${
-        snackmenStatus == "OPEN" && authState.user.hostel.includes("MBH")
+        snackmenStatus == "OPEN" &&
+        authState.user.hostel &&
+        authState.user.hostel.includes("MBH")
           ? "bg-primary-snackmen"
           : "bg-primary-closed"
   ***REMOVED*** w-[92vw] h-[34vh] rounded-3xl mt-3 p-5 flex-col justify-between`***REMOVED***
@@ -39,7 +41,7 @@ const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
           </TextBox>
         </View>
       </View>
-      {authState.user.hostel.includes("MBH") ? (
+      {authState.user.hostel && authState.user.hostel.includes("MBH") ? (
         <>
           <Pressable
             className="w-full h-16 border border-1 rounded-2xl items-center justify-center bg-primary-snackmen"

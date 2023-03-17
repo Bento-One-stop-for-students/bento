@@ -37,6 +37,17 @@ const EditUserModal = (props) => {
   const handleEdit = async () => {
   ***REMOVED***
       setDisabled(true);
+      if (toBeEditedValue == "Mobile No") {
+        {
+          if (newValue.length < 10) {
+      ***REMOVED***
+              type: "NOTIFICATION_TRUE",
+              payload: "Invalid Mobile No.",
+            ***REMOVED***
+            return;
+      ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
       const editedUser = {***REMOVED***
       editedUser[editedValueToSend] = newValue;
       await editUser(authState.user.id, editedUser);
@@ -96,7 +107,7 @@ const EditUserModal = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            classNames="bg-primary-black"
+            classNames={`bg-primary-black ${disabled && "opacity-50"***REMOVED***`***REMOVED***
             onPress={handleEdit***REMOVED***
             disabled={disabled***REMOVED***
           >
