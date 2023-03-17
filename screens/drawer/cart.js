@@ -106,8 +106,8 @@ const Cart = ({ navigation ***REMOVED***) => {
                 <Image
                   className=" w-14 h-14  rounded-lg"
                   source={
-                    item.imgUrl
-                      ? { uri: item.imgUrl ***REMOVED***
+                    item.img_url
+                      ? { uri: item.img_url ***REMOVED***
                       : require("../../assets/images/no_image.png")
               ***REMOVED***
                   resizeMode="contain"

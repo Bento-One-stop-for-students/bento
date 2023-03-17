@@ -4,7 +4,7 @@ import {
   DrawerItem,
   DrawerItemList,
 ***REMOVED*** from "@react-navigation/drawer";
-import { View, Image, TouchableHighlight, Linking ***REMOVED*** from "react-native";
+import { View, Image, Linking ***REMOVED*** from "react-native";
 
 import TextBox from "../components/TextBox";
 import { handleSignOut ***REMOVED*** from "../lib/auth";

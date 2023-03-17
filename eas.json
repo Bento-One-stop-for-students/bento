@@ -4,6 +4,9 @@
 ***REMOVED***,
   "build": {
     "preview": {
+      "env":{
+        "VAR_FIREBASE":"prod"
+  ***REMOVED***,
       "android": {
         "buildType": "apk"
   ***REMOVED***
