@@ -17,7 +17,7 @@ const Profile = ({ navigation ***REMOVED***) => {
       <View className="flex-center items-center">
         <TextBox
           semibold
-          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          classNames="text-primary-black text-[100px]  w-[110vw] text-center"
           style={{
             includeFontPadding: false,
             paddingTop: 100,
@@ -45,7 +45,7 @@ const Profile = ({ navigation ***REMOVED***) => {
       </View>
       <View className="w-full px-10">
         <View className="w-full items-center">
-          <View className="border border-[#CCC] rounded-full">
+          <View className="border border-primary-closed  rounded-full">
             <Image
               source={
                 authState.user.img
@@ -61,7 +61,7 @@ const Profile = ({ navigation ***REMOVED***) => {
           <TextBox semibold classNames="text-white">
             Name
           </TextBox>
-          <TextBox semibold classNames="text-[#CCC] text-lg">
+          <TextBox semibold classNames="text-primary-closed  text-lg">
             {authState.user.name && authState.user.name***REMOVED***
           </TextBox>
         </View>
@@ -70,7 +70,7 @@ const Profile = ({ navigation ***REMOVED***) => {
           <TextBox semibold   classNames="text-white">
             Branch
           </TextBox>
-          <TextBox semibold   classNames="text-[#CCC] text-lg">
+          <TextBox semibold   classNames="text-primary-closed  text-lg">
             {authState.user.branch.toUpperCase()***REMOVED***
           </TextBox>
         </View> */***REMOVED***
@@ -78,7 +78,7 @@ const Profile = ({ navigation ***REMOVED***) => {
           <TextBox semibold classNames="text-white">
             Email
           </TextBox>
-          <TextBox semibold classNames="text-[#CCC] text-lg">
+          <TextBox semibold classNames="text-primary-closed  text-lg">
             {authState.user.email && authState.user.email***REMOVED***
           </TextBox>
         </View>
@@ -88,7 +88,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               Hostel
             </TextBox>
             <Pressable
-              className="flex-row bg-[#CCC] rounded-xl p-1"
+              className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
                 setEditedValue({ Hostel: "hostel" ***REMOVED***
                 setOpenEditModal(true);
@@ -97,7 +97,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               <Feather name="edit-2" size={24***REMOVED*** color="black" />
             </Pressable>
           </View>
-          <TextBox semibold classNames="text-[#CCC] text-lg">
+          <TextBox semibold classNames="text-primary-closed  text-lg">
             {authState.user.hostel && authState.user.hostel.toUpperCase()***REMOVED***
           </TextBox>
         </View>
@@ -107,7 +107,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               Room No
             </TextBox>
             <Pressable
-              className="flex-row bg-[#CCC] rounded-xl p-1"
+              className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
                 setEditedValue({ "Room No": "room_no" ***REMOVED***
                 setOpenEditModal(true);
@@ -116,7 +116,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               <Feather name="edit-2" size={24***REMOVED*** color="black" />
             </Pressable>
           </View>
-          <TextBox semibold classNames="text-[#CCC] text-lg">
+          <TextBox semibold classNames="text-primary-closed  text-lg">
             {authState.user.room_no && authState.user.room_no***REMOVED***
           </TextBox>
         </View>
@@ -126,7 +126,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               Mobile No
             </TextBox>
             <Pressable
-              className="flex-row bg-[#CCC] rounded-xl p-1"
+              className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
                 setEditedValue({ "Mobile No": "mobile_no" ***REMOVED***
                 setOpenEditModal(true);
@@ -135,7 +135,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               <Feather name="edit-2" size={24***REMOVED*** color="black" />
             </Pressable>
           </View>
-          <TextBox semibold classNames="text-[#CCC] text-lg">
+          <TextBox semibold classNames="text-primary-closed  text-lg">
             {authState.user.mobile_no && authState.user.mobile_no***REMOVED***
           </TextBox>
         </View>

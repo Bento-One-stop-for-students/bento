@@ -12,7 +12,7 @@ const FoodItem = ({ item, index ***REMOVED***) => {
 
   return (
     <View
-      className="flex-row  items-center justify-between px-10 py-2 bg-[#353232] m-2 rounded-2xl"
+      className="flex-row  items-center justify-between px-10 py-2 bg-secondary-black m-2 rounded-2xl"
       key={index***REMOVED***
     >
       <View>
@@ -33,7 +33,7 @@ const FoodItem = ({ item, index ***REMOVED***) => {
         />
         {!cartState.cart[item.id] ? (
           <Pressable
-            className="absolute bg-[#FFA410] rounded-xl flex-row w-20 h-10 items-center justify-evenly"
+            className="absolute bg-primary-snackmen  rounded-xl flex-row w-20 h-10 items-center justify-evenly"
             onPress={() => cartDispatch({ type: "ADD_TO_CART", payload: item ***REMOVED***)***REMOVED***
           >
             <TextBox semibold bold class="text-black">
@@ -41,7 +41,7 @@ const FoodItem = ({ item, index ***REMOVED***) => {
             </TextBox>
           </Pressable>
         ) : (
-          <View className="absolute bg-[#FFA410] rounded-2xl flex-row w-28 h-12 items-center justify-evenly">
+          <View className="absolute bg-primary-snackmen  rounded-2xl flex-row w-28 h-12 items-center justify-evenly">
             <Pressable
               onPress={() =>
                 cartDispatch({ type: "REDUCE_FROM_CART", payload: item ***REMOVED***)

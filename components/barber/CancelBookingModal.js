@@ -14,7 +14,7 @@ const CancelBookingModal = (props) => {
   ***REMOVED***
       setDisabled(true);
       await deleteBarberBooking(authState.user.id);
-***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Booking Cancelled" ***REMOVED***
+***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Removed from queue" ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
@@ -44,7 +44,7 @@ const CancelBookingModal = (props) => {
           </TextBox>
         </Modal.Body>
         <Button
-          classNames="bg-[#1e1b1b] items-center justify-center"
+          classNames="bg-primary-black items-center justify-center"
           onPress={handleCancelBooking***REMOVED***
         >
           {disabled ? (

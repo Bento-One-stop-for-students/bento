@@ -4,7 +4,7 @@ import TextBox from "../TextBox";
 
 const BookingItem = ({ item ***REMOVED***) => {
   return (
-    <View className="border border-[#353232] rounded-2xl py-2 px-5 bg-purple-300">
+    <View className="border border-secondary-black  rounded-2xl py-2 px-5 bg-purple-300">
       <TextBox semibold classNames=" text-lg ">Token No : #{item.token_no***REMOVED***</TextBox>
       <View className="flex-row items-center">
         <TextBox semibold classNames="">Queue waiting : </TextBox>

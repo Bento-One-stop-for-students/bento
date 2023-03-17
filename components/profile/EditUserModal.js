@@ -4,7 +4,7 @@ import { Modal ***REMOVED*** from "native-base";
 
 import TextBox from "../TextBox";
 import InputField from "../InputField";
-import { editUser ***REMOVED*** from "../../lib/firebase/user";
+import { editUser, getUser ***REMOVED*** from "../../lib/firebase/user";
 import Button from "../Button";
 import DropDown from "../DropDown";
 import { ActivityIndicator ***REMOVED*** from "react-native";
@@ -39,12 +39,17 @@ const EditUserModal = (props) => {
       setDisabled(true);
       const editedUser = {***REMOVED***
       editedUser[editedValueToSend] = newValue;
-      const res = await editUser(editedUser, props.id);
+      await editUser(authState.user.id, editedUser);
+      const user = await getUser(authState.user.id);
 ***REMOVED***
         type: "UPDATE_USER",
-***REMOVED*** user: res, msg: `Updated ${toBeEditedValue***REMOVED***` ***REMOVED***,
+***REMOVED*** user, msg: `Updated ${toBeEditedValue***REMOVED***` ***REMOVED***,
       ***REMOVED***
 ***REMOVED*** catch (err) {
+***REMOVED***
+        type: "NOTIFICATION_TRUE",
+        payload: "Couldn't update user",
+      ***REMOVED***
       console.log(err);
 ***REMOVED*** finally {
       setDisabled(false);
@@ -64,7 +69,9 @@ const EditUserModal = (props) => {
     >
       <Modal.Content>
         <Modal.Header>
-          <TextBox semibold classNames="text-lg">Edit {toBeEditedValue***REMOVED***</TextBox>
+          <TextBox semibold classNames="text-lg">
+            Edit {toBeEditedValue***REMOVED***
+          </TextBox>
         </Modal.Header>
         <Modal.CloseButton />
         <Modal.Body>
@@ -89,14 +96,16 @@ const EditUserModal = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            classNames="bg-[#1E1B1B]"
+            classNames="bg-primary-black"
             onPress={handleEdit***REMOVED***
             disabled={disabled***REMOVED***
           >
             {disabled ? (
               <ActivityIndicator size="large" color="#353232" />
             ) : (
-              <TextBox semibold classNames="text-white">Save</TextBox>
+              <TextBox semibold classNames="text-white">
+                Save
+              </TextBox>
             )***REMOVED***
           </Button>
         </Modal.Footer>

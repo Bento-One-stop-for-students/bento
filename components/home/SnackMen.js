@@ -4,12 +4,16 @@ import { View, Image, Pressable ***REMOVED*** from "react-native";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
+import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
 
 const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
+  const { authState ***REMOVED*** = React.useContext(AuthContext);
   return (
     <View
       className={`${
-        snackmenStatus == "OPEN" ? "bg-[#FFA410]" : "bg-[#CCC]"
+        snackmenStatus == "OPEN" && authState.user.hostel.includes("MBH")
+          ? "bg-primary-snackmen"
+          : "bg-primary-closed"
   ***REMOVED*** w-[92vw] h-[34vh] rounded-3xl mt-3 p-5 flex-col justify-between`***REMOVED***
     >
       <Image
@@ -18,7 +22,7 @@ const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
         resizeMode="contain"
       />
       <View className="flex-row justify-between">
-        <TextBox semibold classNames="text-3xl">
+        <TextBox semibold classNames="text-3xl ">
           Snackmen
         </TextBox>
         <View
@@ -35,32 +39,45 @@ const SnackMen = ({ navigation, snackmenStatus ***REMOVED***) => {
           </TextBox>
         </View>
       </View>
-      <Pressable
-        className="w-full h-16 border border-1 rounded-2xl items-center justify-center bg-[#FFA410]"
-        onPress={() => {
-          navigation.navigate("Your Orders");
-    ***REMOVED******REMOVED***
-      >
-        <TextBox semibold classNames="text-[15px]">
-          View Orders
-        </TextBox>
-      </Pressable>
-      {snackmenStatus == "OPEN" ? (
-        <Button
-          classNames=" bg-[#1E1B1B]"
-          onPress={() => {
-            navigation.navigate("Food Order");
-      ***REMOVED******REMOVED***
-        >
-          <TextBox semibold classNames=" text-white">
-            Order Now
-          </TextBox>
-        </Button>
+      {authState.user.hostel.includes("MBH") ? (
+        <>
+          <Pressable
+            className="w-full h-16 border border-1 rounded-2xl items-center justify-center bg-primary-snackmen"
+            onPress={() => {
+              navigation.navigate("Your Orders");
+        ***REMOVED******REMOVED***
+          >
+            <TextBox semibold classNames="text-[15px]">
+              View Orders
+            </TextBox>
+          </Pressable>
+          {snackmenStatus == "OPEN" ? (
+            <Button
+              classNames=" bg-primary-black"
+              onPress={() => {
+                navigation.navigate("Food Order");
+          ***REMOVED******REMOVED***
+            >
+              <TextBox semibold classNames=" text-white">
+                Order Now
+              </TextBox>
+            </Button>
+          ) : (
+            <View className="w-full items-center justify-center border-[1px] rounded-2xl">
+              <TextBox
+                semibold
+                classNames="text-3xl"
+                style={{ lineHeight: 70 ***REMOVED******REMOVED***
+              >
+                Closed
+              </TextBox>
+            </View>
+          )***REMOVED***
+        </>
       ) : (
-        <View className="w-full items-center justify-center border-[1px] rounded-2xl">
-          <TextBox semibold classNames="text-3xl" style={{ lineHeight: 70 ***REMOVED******REMOVED***>
-            Closed
-          </TextBox>
+        <View className="w-full items-center justify-center border rounded-xl p-2">
+          <TextBox semibold>Snackmen is only availaible in MBH</TextBox>
+          <TextBox semibold>We are sorry for the inconvenience.</TextBox>
         </View>
       )***REMOVED***
     </View>

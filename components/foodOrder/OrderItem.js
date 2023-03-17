@@ -17,7 +17,7 @@ const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) 
 ***REMOVED***, [expanded, height]);
   return (
     <Animated.View
-      className="bg-[#353232] w-full"
+      className="bg-secondary-black w-full"
       style={{ maxHeight: height ***REMOVED******REMOVED***
     >
       {item.cart.map((item) => {
@@ -78,7 +78,7 @@ const OrderItem = ({
 
   return (
     <Pressable
-      className="bg-[#353232] my-2 rounded-2xl p-5 justify-between items-center"
+      className="bg-secondary-black  my-2 rounded-2xl p-5 justify-between items-center"
       onPress={() => {
         setIsExpanded(!isExpanded);
         setIsComponentOpen(item.orderId);
@@ -111,7 +111,7 @@ const OrderItem = ({
             <TextBox
               semibold
               classNames={`${
-                item.is_delivered ? "text-green-400" : " text-yellow-300"
+                item.is_delivered ? "text-green-400" : " text-primary-snackmen"
           ***REMOVED***`***REMOVED***
             >
               {item.is_delivered ? "Delivered" : "In Progress"***REMOVED***
