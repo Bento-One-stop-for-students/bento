@@ -8,6 +8,9 @@ import * as SplashScreen from "expo-splash-screen";
 import {
   Poppins_500Medium,
   Poppins_600SemiBold,
+  Poppins_900Black,
+  Poppins_800ExtraBold,
+  Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 import { StatusBar } from "expo-status-bar";
 import * as Notifications from "expo-notifications";
@@ -23,13 +26,6 @@ import NetInfo from "@react-native-community/netinfo";
 import NetworkErrorModal from "./components/NetworkErrorModal";
 
 SplashScreen.preventAutoHideAsync();
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
 
 export default function AppExtended({ navigation }) {
   const [showNetworkErrorModal, setShowNetworkErrorModal] =
@@ -43,6 +39,9 @@ export default function AppExtended({ navigation }) {
         await Font.loadAsync({
           Poppins_500Medium,
           Poppins_600SemiBold,
+          Poppins_900Black,
+          Poppins_800ExtraBold,
+          Poppins_700Bold,
         });
         await handleIsSignedIn(authDispatch);
       } catch (err) {

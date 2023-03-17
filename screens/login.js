@@ -51,7 +51,7 @@ const Login = ({ navigation }) => {
         >
           <View className="flex-row items-center justify-center">
             {disabled ? (
-              <ActivityIndicator size="large" color="#1E1B1B" />
+              <ActivityIndicator size="large" color="white" />
             ) : (
               <>
                 <TextBox semibold classNames="mr-3 text-white">

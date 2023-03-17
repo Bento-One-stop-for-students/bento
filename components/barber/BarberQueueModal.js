@@ -31,6 +31,7 @@ const BarberQueueModal = (props) => {
       setDisabled(true);
       if (requestUserPermission()) {
         const token = await messaging().getToken();
+        console.log(token);
         const res = await bookBarber(authState.user.id, { fcmToken: token });
         authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
       }
