@@ -1,12 +1,27 @@
 import messaging from "@react-native-firebase/messaging";
 import { registerRootComponent ***REMOVED*** from "expo";
-
+import * as Notifications from "expo-notifications";
 import App from "./App";
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+***REMOVED***),
+***REMOVED***
 
 // bacgkround notification handler
 
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   console.log(remoteMessage);
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: remoteMessage.notification.title,
+      body: remoteMessage.notification.body,
+      data: { data: "goes here" ***REMOVED***,
+***REMOVED***,
+    trigger: null,
+  ***REMOVED***
 ***REMOVED***
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

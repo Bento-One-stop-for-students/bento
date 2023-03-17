@@ -25,41 +25,50 @@ const FoodOrder = ({ navigation ***REMOVED***) => {
 ***REMOVED***, []);
   return (
     <View className="flex-1 items-center">
-      <TextBox
-        semibold
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
-      >
-        BENTO
-      </TextBox>
-      <View className="w-full pt-16 flex-row items-center justify-around">
-        <TextBox semibold classNames="text-white text-3xl">
-          Food Order
-        </TextBox>
-        <Pressable
-          className=" pl-4 pt-3 "
-          onPress={() => {
-            navigation.navigate("Cart");
+      <View className="flex-center items-center">
+        <TextBox
+          semibold
+          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          style={{
+            includeFontPadding: false,
+            paddingTop: 100,
+            fontFamily: "Poppins_700Bold",
       ***REMOVED******REMOVED***
         >
-          <Feather
-            name="shopping-cart"
-            style={{ transform: [{ rotateY: "180deg" ***REMOVED***] ***REMOVED******REMOVED***
-            size={35***REMOVED***
-            color="white"
-          />
+          BENTO
+        </TextBox>
+        <View className="flex-row items-center justify-around w-full h-full absolute">
           <TextBox
             semibold
-            classNames="text-[#FFA410] text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+            classNames="text-white text-3xl items-center justify-center"
           >
-            {size***REMOVED***
+            Food Order
           </TextBox>
-        </Pressable>
+          <Pressable
+            className=" pl-4 pt-3 pb-3 "
+            onPress={() => {
+              navigation.navigate("Cart");
+        ***REMOVED******REMOVED***
+          >
+            <Feather
+              name="shopping-cart"
+              style={{ transform: [{ rotateY: "180deg" ***REMOVED***] ***REMOVED******REMOVED***
+              size={35***REMOVED***
+              color="white"
+            />
+            <TextBox
+              semibold
+              classNames="text-[#FFA410] text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+            >
+              {size***REMOVED***
+            </TextBox>
+          </Pressable>
+        </View>
       </View>
 
       {data && data.length ? (
         <FlatList
-          className="w-full mt-9"
+          className="w-full"
           contentContainerStyle={{ paddingBottom: 200 ***REMOVED******REMOVED***
           data={data***REMOVED***
           renderItem={({ item, index ***REMOVED***) => (

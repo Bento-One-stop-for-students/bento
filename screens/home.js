@@ -49,47 +49,53 @@ const Home = ({ navigation ***REMOVED***) => {
 
   return (
     <View className="flex-1 items-center justify-start">
-      <TextBox
-        semibold
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
-      >
-        BENTO
-      </TextBox>
-      <View className="flex-row items-center justify-end w-full mt-16 mr-10">
-        <Pressable
-          className=" pl-4 pt-3 mr-5"
-          onPress={() => {
-            navigation.navigate("Cart");
+      <View className="flex-center items-center">
+        <TextBox
+          semibold
+          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          style={{
+            includeFontPadding: false,
+            paddingTop: 100,
+            fontFamily: "Poppins_700Bold",
       ***REMOVED******REMOVED***
         >
-          <Feather
-            name="shopping-cart"
-            style={{ transform: [{ rotateY: "180deg" ***REMOVED***] ***REMOVED******REMOVED***
-            size={35***REMOVED***
-            color="white"
-          />
-          <TextBox
-            semibold
-            classNames="text-[#FFA410] text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+          BENTO
+        </TextBox>
+        <View className="flex-row items-center justify-end w-full h-full pr-10 absolute">
+          <Pressable
+            className=" pl-3 pt-3 mr-5 pb-3"
+            onPress={() => {
+              navigation.navigate("Cart");
+        ***REMOVED******REMOVED***
           >
-            {size***REMOVED***
-          </TextBox>
-        </Pressable>
-        <TouchableHighlight
-          onPress={() => {
-            navigation.openDrawer();
-      ***REMOVED******REMOVED***
-        >
-          <>
-            <View className="w-10 h-2 m-1 bg-white" />
-            <View className="w-10 h-2 m-1 bg-white" />
-            <View className="w-10 h-2 m-1 bg-white" />
-          </>
-        </TouchableHighlight>
+            <Feather
+              name="shopping-cart"
+              style={{ transform: [{ rotateY: "180deg" ***REMOVED***] ***REMOVED******REMOVED***
+              size={35***REMOVED***
+              color="white"
+            />
+            <TextBox
+              semibold
+              classNames="text-[#FFA410] text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+            >
+              {size***REMOVED***
+            </TextBox>
+          </Pressable>
+          <TouchableHighlight
+            onPress={() => {
+              navigation.openDrawer();
+        ***REMOVED******REMOVED***
+          >
+            <>
+              <View className="w-10 h-2 m-1 bg-white" />
+              <View className="w-10 h-2 m-1 bg-white" />
+              <View className="w-10 h-2 m-1 bg-white" />
+            </>
+          </TouchableHighlight>
+        </View>
       </View>
-      <View className="w-full ml-14">
-        <TextBox semibold classNames={"text-white mt-12 text-3xl w-[80vw]"***REMOVED***>
+      <View className="w-full mt-2 ml-14">
+        <TextBox semibold classNames={"text-white text-3xl w-[80vw]"***REMOVED***>
           Hi, {authState.user.name && authState.user.name.split(" ")[0]***REMOVED***👋
         </TextBox>
       </View>

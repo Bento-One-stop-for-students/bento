@@ -72,28 +72,23 @@ const Cart = ({ navigation ***REMOVED***) => {
 
   return (
     <View className="flex-1 items-center flex-col">
-      <TextBox
-        semibold
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
-      >
-        BENTO
-      </TextBox>
-      <View className="w-full pt-16 flex-row pl-10">
-        <TouchableHighlight
-          className="bg-[#CCCCCC] items-center justify-center w-10 h-10 rounded-2xl mr-7"
+      <View className="flex-center items-center">
+        <TextBox
           semibold
-          onPress={() => {
-            navigation.navigate("Home");
+          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          style={{
+            includeFontPadding: false,
+            paddingTop: 100,
+            fontFamily: "Poppins_700Bold",
       ***REMOVED******REMOVED***
         >
-          <TextBox semibold classNames="text-black text-3xl">
-            {"<"***REMOVED***
-          </TextBox>
-        </TouchableHighlight>
-        <TextBox semibold classNames="text-white text-3xl">
-          Cart
+          BENTO
         </TextBox>
+        <View className="flex-row items-center w-full h-full absolute">
+          <TextBox semibold classNames="text-white text-3xl ml-10">
+            Cart
+          </TextBox>
+        </View>
       </View>
       {cartItems.length < 1 && (
         <TextBox semibold classNames="text-white mt-44">
