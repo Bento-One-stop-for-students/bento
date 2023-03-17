@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
           Use institute email
         </TextBox>
         <Button
-          classNames=" bg-[#0181ef] "
+          classNames=" bg-[#0181ef] mt-2"
           onPress={handleLogin}
           disabled={disabled}
         >
@@ -54,10 +54,10 @@ const Login = ({ navigation }) => {
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (
               <>
-                <TextBox semibold classNames="mr-3">
+                <TextBox semibold classNames="mr-3 text-white">
                   Login with google
                 </TextBox>
-                <AntDesign name="google" size={40} color="black" />
+                <AntDesign name="google" size={40} color="white" />
               </>
             )}
           </View>

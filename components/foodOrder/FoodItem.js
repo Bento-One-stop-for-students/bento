@@ -24,10 +24,12 @@ const FoodItem = ({ item, index }) => {
       <View className="items-center justify-end flex-col pt-2 px-3">
         <Image
           className=" w-28 h-28  rounded-lg mb-4"
-          source={{
-            uri: `${item.imgUrl}`,
-          }}
-          resizeMode="cover"
+          source={
+            item.imgUrl
+              ? { uri: item.imgUrl }
+              : require("../../assets/images/no_image.png")
+          }
+          resizeMode="contain"
         />
         {!cartState.cart[item.id] ? (
           <Pressable

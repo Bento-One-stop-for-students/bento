@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import React from "react";
 import TextBox from "../components/TextBox";
 import InputField from "../components/InputField";
@@ -33,7 +33,7 @@ const Register = ({ navigation, route }) => {
 
   const handleRegister = async () => {
     setDisabled(true);
-    if (roomValue == "" || hostelValue == "") {
+    if (roomValue == "" || hostelValue == "" || phoneNumber == "") {
       setIsInvalid(true);
     } else {
       try {
@@ -65,7 +65,7 @@ const Register = ({ navigation, route }) => {
           // roll_no: rollNoValue,
           mobile_no: parseInt(phoneNumber),
         };
-        const msg = await createUser(id, data);
+        const msg = await createUser(id, newUser);
         const user = await getUser(id);
         authDispatch({ type: "NOTIFICATION_TRUE", payload: msg });
         authDispatch({
@@ -82,7 +82,6 @@ const Register = ({ navigation, route }) => {
         navigation.navigate("Login");
         console.log(err);
       } finally {
-        setDisabled(false);
         setTimeout(() => {
           authDispatch({
             type: "NOTIFICATION_FALSE",
@@ -90,6 +89,7 @@ const Register = ({ navigation, route }) => {
         }, 2000);
       }
     }
+    setDisabled(false);
   };
 
   return (
@@ -133,17 +133,25 @@ const Register = ({ navigation, route }) => {
       </View> */}
       <View className="mt-5">
         <TextBox semibold classNames=" text-white">
-          Phone No.
+          Phone No.*
         </TextBox>
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber}
         />
       </View>
-      <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister}>
-        <TextBox semibold classNames="text-xl">
-          Let's Go
-        </TextBox>
+      <Button
+        classNames="mt-10 bg-[#0181ef]"
+        onPress={handleRegister}
+        disabled={disabled}
+      >
+        {disabled ? (
+          <ActivityIndicator size="large" color="white" />
+        ) : (
+          <TextBox semibold classNames="text-white text-xl">
+            Let's Go
+          </TextBox>
+        )}
       </Button>
     </View>
   );
