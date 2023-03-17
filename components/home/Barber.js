@@ -33,22 +33,14 @@ const Barber = ({
           MBH Barber
         </TextBox>
         <View
-          className={`w-24 h-12 rounded-2xl items-center justify-center ${
+          className={`w-8 h-8 rounded-full items-center justify-center border ${
             barberStatus == "OPEN"
               ? barberStatus == "BREAK"
                 ? "bg-orange-500"
                 : "bg-green-500"
               : "bg-red-600"
           }`}
-        >
-          {statusLoading ? (
-            <ActivityIndicator color="white" size="small" />
-          ) : (
-            <TextBox semibold classNames="text-white">
-              {barberStatus}
-            </TextBox>
-          )}
-        </View>
+        ></View>
       </View>
       {isLoading ? (
         <ActivityIndicator size="large" color="black" />
@@ -107,7 +99,7 @@ const Barber = ({
         )
       ) : (
         <>
-          <TextBox classNames="text-center">
+          <TextBox classNames="text-center p-2 border rounded-xl bg-primary-barber">
             {"Shop is closed for today.\nSee you tomorrow!"}
           </TextBox>
           <View className="w-full items-center justify-center border-[1px] rounded-2xl">

@@ -3,6 +3,7 @@ import "expo-dev-client";
 
 import * as Font from "expo-font";
 import { View } from "react-native";
+import Constants from "expo-constants";
 import { NativeBaseProvider } from "native-base";
 import * as SplashScreen from "expo-splash-screen";
 import {

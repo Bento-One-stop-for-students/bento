@@ -4,6 +4,9 @@
   },
   "build": {
     "preview": {
+      "env":{
+        "VAR_FIREBASE":"prod"
+      },
       "android": {
         "buildType": "apk"
       }

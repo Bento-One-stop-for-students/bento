@@ -4,7 +4,7 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { View, Image, TouchableHighlight, Linking } from "react-native";
+import { View, Image, Linking } from "react-native";
 
 import TextBox from "../components/TextBox";
 import { handleSignOut } from "../lib/auth";

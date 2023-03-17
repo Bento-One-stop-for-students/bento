@@ -25,8 +25,8 @@ const FoodItem = ({ item, index }) => {
         <Image
           className=" w-28 h-28  rounded-lg mb-4"
           source={
-            item.imgUrl
-              ? { uri: item.imgUrl }
+            item.img_url
+              ? { uri: item.img_url }
               : require("../../assets/images/no_image.png")
           }
           resizeMode="contain"

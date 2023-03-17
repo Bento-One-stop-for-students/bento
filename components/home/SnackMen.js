@@ -28,18 +28,14 @@ const SnackMen = ({ navigation, snackmenStatus }) => {
           Snackmen
         </TextBox>
         <View
-          className={`w-24 h-12 rounded-2xl items-center justify-center ${
+          className={`w-8 h-8 rounded-full border items-center justify-center ${
             snackmenStatus == "OPEN"
               ? snackmenStatus == "BREAK"
                 ? "bg-orange-500"
                 : "bg-green-500"
               : "bg-red-600"
           }`}
-        >
-          <TextBox semibold classNames="text-white">
-            {snackmenStatus}
-          </TextBox>
-        </View>
+        ></View>
       </View>
       {authState.user.hostel && authState.user.hostel.includes("MBH") ? (
         <>
