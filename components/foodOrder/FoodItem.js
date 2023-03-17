@@ -24,10 +24,12 @@ const FoodItem = ({ item, index ***REMOVED***) => {
       <View className="items-center justify-end flex-col pt-2 px-3">
         <Image
           className=" w-28 h-28  rounded-lg mb-4"
-          source={{
-            uri: `${item.imgUrl***REMOVED***`,
-      ***REMOVED******REMOVED***
-          resizeMode="cover"
+          source={
+            item.imgUrl
+              ? { uri: item.imgUrl ***REMOVED***
+              : require("../../assets/images/no_image.png")
+      ***REMOVED***
+          resizeMode="contain"
         />
         {!cartState.cart[item.id] ? (
           <Pressable

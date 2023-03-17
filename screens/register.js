@@ -1,4 +1,4 @@
-import { View, Text ***REMOVED*** from "react-native";
+import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
 import TextBox from "../components/TextBox";
 import InputField from "../components/InputField";
@@ -33,7 +33,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
 
   const handleRegister = async () => {
     setDisabled(true);
-    if (roomValue == "" || hostelValue == "") {
+    if (roomValue == "" || hostelValue == "" || phoneNumber == "") {
       setIsInvalid(true);
 ***REMOVED*** else {
     ***REMOVED***
@@ -65,7 +65,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
           // roll_no: rollNoValue,
           mobile_no: parseInt(phoneNumber),
     ***REMOVED***;
-        const msg = await createUser(id, data);
+        const msg = await createUser(id, newUser);
         const user = await getUser(id);
   ***REMOVED*** type: "NOTIFICATION_TRUE", payload: msg ***REMOVED***
   ***REMOVED***
@@ -82,7 +82,6 @@ const Register = ({ navigation, route ***REMOVED***) => {
         navigation.navigate("Login");
         console.log(err);
   ***REMOVED*** finally {
-        setDisabled(false);
         setTimeout(() => {
     ***REMOVED***
             type: "NOTIFICATION_FALSE",
@@ -90,6 +89,7 @@ const Register = ({ navigation, route ***REMOVED***) => {
     ***REMOVED***, 2000);
   ***REMOVED***
 ***REMOVED***
+    setDisabled(false);
 ***REMOVED***;
 
   return (
@@ -133,17 +133,25 @@ const Register = ({ navigation, route ***REMOVED***) => {
       </View> */***REMOVED***
       <View className="mt-5">
         <TextBox semibold classNames=" text-white">
-          Phone No.
+          Phone No.*
         </TextBox>
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber***REMOVED***
         />
       </View>
-      <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister***REMOVED***>
-        <TextBox semibold classNames="text-xl">
-          Let's Go
-        </TextBox>
+      <Button
+        classNames="mt-10 bg-[#0181ef]"
+        onPress={handleRegister***REMOVED***
+        disabled={disabled***REMOVED***
+      >
+        {disabled ? (
+          <ActivityIndicator size="large" color="white" />
+        ) : (
+          <TextBox semibold classNames="text-white text-xl">
+            Let's Go
+          </TextBox>
+        )***REMOVED***
       </Button>
     </View>
   );

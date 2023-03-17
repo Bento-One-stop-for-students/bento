@@ -110,9 +110,11 @@ const Cart = ({ navigation ***REMOVED***) => {
               <View className="flex-row items-center ">
                 <Image
                   className=" w-14 h-14  rounded-lg"
-                  source={{
-                    uri: `${item.imgUrl***REMOVED***`,
-              ***REMOVED******REMOVED***
+                  source={
+                    item.imgUrl
+                      ? { uri: item.imgUrl ***REMOVED***
+                      : require("../../assets/images/no_image.png")
+              ***REMOVED***
                   resizeMode="contain"
                 />
                 <View>
@@ -170,9 +172,7 @@ const Cart = ({ navigation ***REMOVED***) => {
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
             <View className="flex-row items-center">
-              <TextBox classNames="text-white text-xl">
-                Total
-              </TextBox>
+              <TextBox classNames="text-white text-xl">Total</TextBox>
               <TextBox semibold classNames="text-white mt-1 ml-1">
                 (₹5 Delivery)
               </TextBox>
