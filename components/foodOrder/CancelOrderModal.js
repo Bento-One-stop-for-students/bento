@@ -46,7 +46,9 @@ const CancelOrderModal = (props) => {
           </TextBox>
         </Modal.Body>
         <Button
-          classNames="bg-primary-black items-center justify-center"
+          classNames={`bg-primary-black items-center justify-center ${
+            disabled && "opacity-50"
+          }`}
           onPress={handleCancelOrder}
           disabled={disabled}
         >

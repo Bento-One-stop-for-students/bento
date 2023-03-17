@@ -33,13 +33,17 @@ const Register = ({ navigation, route }) => {
 
   const handleRegister = async () => {
     setDisabled(true);
-    if (roomValue == "" || hostelValue == "" || phoneNumber == "") {
+    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
+    if (
+      hostelValue == "" ||
+      roomValue.trim() == "" ||
+      phoneNumber.trim().length < 10
+    ) {
       setIsInvalid(true);
     } else {
       try {
         setIsInvalid(false);
         const { id, photo, email, givenName, familyName } = route.params.user;
-
         // get branch of user
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
@@ -63,7 +67,7 @@ const Register = ({ navigation, route }) => {
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber),
+          mobile_no: parseInt(phoneNumber.trim()),
         };
         const msg = await createUser(id, newUser);
         const user = await getUser(id);
@@ -79,7 +83,6 @@ const Register = ({ navigation, route }) => {
           type: "NOTIFICATION_TRUE",
           payload: "Couldn't create user",
         });
-        navigation.navigate("Login");
         console.log(err);
       } finally {
         setTimeout(() => {
@@ -120,7 +123,11 @@ const Register = ({ navigation, route }) => {
         <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
-        <InputField placeholder="Enter Room No." onValueChange={setRoomValue} />
+        <InputField
+          placeholder="Enter Room No."
+          onValueChange={setRoomValue}
+          numeric
+        />
       </View>
       {/*  For later don't delete */}
 
@@ -138,6 +145,7 @@ const Register = ({ navigation, route }) => {
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber}
+          numeric
         />
       </View>
       <Button

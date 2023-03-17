@@ -176,7 +176,11 @@ const Cart = ({ navigation }) => {
               ₹ {total}
             </TextBox>
           </View>
-          <Button disabled={disabled} onPress={handleCreateOrder}>
+          <Button
+            disabled={disabled}
+            onPress={handleCreateOrder}
+            classNames={`${disabled && "opacity-50"}`}
+          >
             {disabled ? (
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (
