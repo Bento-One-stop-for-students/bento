@@ -75,7 +75,7 @@ const Cart = ({ navigation }) => {
       <View className="flex-center items-center">
         <TextBox
           semibold
-          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          classNames="text-primary-black text-[100px] w-[110vw] text-center"
           style={{
             includeFontPadding: false,
             paddingTop: 100,
@@ -95,11 +95,11 @@ const Cart = ({ navigation }) => {
           Nothing to see here!
         </TextBox>
       )}
-      <ScrollView className="mt-14 w-full px-5">
+      <ScrollView className=" w-full px-5">
         {cartItems.map((item) => {
           return (
             <View
-              className="flex-row justify-between items-center w-full my-2 bg-[#353232] p-2 rounded-2xl"
+              className="flex-row justify-between items-center w-full my-2 bg-secondary-black  p-2 rounded-2xl"
               key={item.id}
             >
               <View className="flex-row items-center ">
@@ -151,7 +151,7 @@ const Cart = ({ navigation }) => {
         })}
       </ScrollView>
       {cartItems.length > 0 && (
-        <View className="h-[35vh] w-full bg-[#353232] rounded-t-3xl top-auto bottom-0 px-10 pt-2 pb-5 justify-evenly">
+        <View className="h-[35vh] w-full bg-secondary-black  rounded-t-3xl top-auto bottom-0 px-5 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
             <TextBox semibold classNames="text-white text-xl">
               {/* {authState.user.name} */}

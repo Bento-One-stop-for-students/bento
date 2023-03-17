@@ -8,7 +8,15 @@ module.exports = {
     "./navigation/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "primary-barber": "#AE78D3",
+        "primary-snackmen": "#77d2d1",
+        "primary-closed": "#CCCCCC",
+        "primary-black": "#1E1B1B",
+        "secondary-black": "#353232",
+      },
+    },
   },
   plugins: [],
 };

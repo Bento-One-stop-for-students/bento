@@ -5,6 +5,7 @@ import BookingItem from "../barber/BookingItem";
 import BarberQueueModal from "../barber/BarberQueueModal";
 import Button from "../Button";
 import CancelBookingModal from "../barber/CancelBookingModal";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Barber = ({
   isLoading,
@@ -19,7 +20,7 @@ const Barber = ({
   return (
     <View
       className={`${
-        barberStatus == "OPEN" ? "bg-[#AE78D3]" : "bg-[#CCC]"
+        barberStatus == "OPEN" ? "bg-primary-barber" : "bg-primary-closed"
       } w-[92vw] h-[34vh] rounded-3xl mt-3 p-5 flex-col justify-between`}
     >
       <Image
@@ -54,14 +55,27 @@ const Barber = ({
       ) : barberStatus == "OPEN" || barberStatus == "BREAK" ? (
         !barberBooking ? (
           <>
-            <TextBox
-              semibold
-              classNames="text-white text-[12px] p-2 py-4 bg-[#353232] rounded-2xl text-center"
-            >
-              {barberWaitingQueueLength} people in queue right now
-            </TextBox>
+            <View className=" px-2 py-4 flex-row bg- rounded-xl items-center justify-center">
+              <View className="items-center justify-center flex-row bg-primary-closed p-1 rounded-tl-md rounded-bl-md">
+                <MaterialCommunityIcons
+                  name="human-queue"
+                  size={26}
+                  color="black"
+                  style={{ transform: [{ rotateY: "180deg" }] }}
+                />
+                <TextBox classNames="ml-2 text-secondary-black">
+                  {"Current Waiting : "}
+                </TextBox>
+              </View>
+              <TextBox
+                classNames="text-white bg-secondary-black px-2 rounded-tr-md rounded-br-md"
+                style={{ paddingTop: 10, fontSize: 20 }}
+              >
+                {barberWaitingQueueLength}1
+              </TextBox>
+            </View>
             <Button
-              classNames={`bg-[#1E1B1B] ${
+              classNames={`bg-primary-black ${
                 barberStatus == "BREAK" && "opacity-50"
               }`}
               onPress={(e) => {
@@ -78,7 +92,7 @@ const Barber = ({
           <>
             <BookingItem item={barberBooking} />
             <Button
-              classNames="bg-[#1e1b1b]"
+              classNames="bg-primary-black"
               onPress={() => {
                 setShowBarberCancelModal(true);
               }}

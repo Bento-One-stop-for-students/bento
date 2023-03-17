@@ -28,7 +28,7 @@ const FoodOrder = ({ navigation }) => {
       <View className="flex-center items-center">
         <TextBox
           semibold
-          classNames="text-[#1E1B1B] text-[110px] w-[110vw] text-center"
+          classNames="text-primary-black text-[100px]  w-[110vw] text-center"
           style={{
             includeFontPadding: false,
             paddingTop: 100,
@@ -58,7 +58,7 @@ const FoodOrder = ({ navigation }) => {
             />
             <TextBox
               semibold
-              classNames="text-[#FFA410] text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+              classNames="text-primary-snackmen  text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
             >
               {size}
             </TextBox>

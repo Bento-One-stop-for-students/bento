@@ -30,7 +30,7 @@ const Bookings = ({ navigation }) => {
   return (
     <View className="flex-1 items-center justify-start">
       <TextBox semibold   
-        classNames="text-[#1E1B1B] text-[110px] w-[200vw] text-center absolute"
+        classNames="text-primary-black text-[100px]  w-[200vw] text-center absolute"
         style={{ includeFontPadding: false, lineHeight: 150 }}
       >
         BENTO
