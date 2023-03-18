@@ -3,9 +3,17 @@
     "version": ">= 3.7.2"
 ***REMOVED***,
   "build": {
-    "preview": {
+    "preview-development":{
       "env":{
-        "VAR_FIREBASE":"prod"
+        "FIREBASE_ENV":"dev"
+  ***REMOVED***,
+      "android": {
+        "buildType": "apk"
+  ***REMOVED***
+***REMOVED***,
+    "preview-production": {
+      "env":{
+        "FIREBASE_ENV":"prod"
   ***REMOVED***,
       "android": {
         "buildType": "apk"
