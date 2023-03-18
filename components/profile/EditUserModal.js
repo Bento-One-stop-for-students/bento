@@ -4,7 +4,7 @@ import { Modal } from "native-base";
 
 import TextBox from "../TextBox";
 import InputField from "../InputField";
-import { editUser } from "../../lib/firebase/user";
+import { editUser, getUser } from "../../lib/firebase/user";
 import Button from "../Button";
 import DropDown from "../DropDown";
 import { ActivityIndicator } from "react-native";
@@ -37,14 +37,30 @@ const EditUserModal = (props) => {
   const handleEdit = async () => {
     try {
       setDisabled(true);
+      if (toBeEditedValue == "Mobile No") {
+        {
+          if (newValue.length < 10) {
+            authDispatch({
+              type: "NOTIFICATION_TRUE",
+              payload: "Invalid Mobile No.",
+            });
+            return;
+          }
+        }
+      }
       const editedUser = {};
       editedUser[editedValueToSend] = newValue;
-      const res = await editUser(editedUser, props.id);
+      await editUser(authState.user.id, editedUser);
+      const user = await getUser(authState.user.id);
       authDispatch({
         type: "UPDATE_USER",
-        payload: { user: res, msg: `Updated ${toBeEditedValue}` },
+        payload: { user, msg: `Updated ${toBeEditedValue}` },
       });
     } catch (err) {
+      authDispatch({
+        type: "NOTIFICATION_TRUE",
+        payload: "Couldn't update user",
+      });
       console.log(err);
     } finally {
       setDisabled(false);
@@ -64,7 +80,9 @@ const EditUserModal = (props) => {
     >
       <Modal.Content>
         <Modal.Header>
-          <TextBox semibold classNames="text-lg">Edit {toBeEditedValue}</TextBox>
+          <TextBox semibold classNames="text-lg">
+            Edit {toBeEditedValue}
+          </TextBox>
         </Modal.Header>
         <Modal.CloseButton />
         <Modal.Body>
@@ -89,14 +107,16 @@ const EditUserModal = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            classNames="bg-[#1E1B1B]"
+            classNames={`bg-primary-black ${disabled && "opacity-50"}`}
             onPress={handleEdit}
             disabled={disabled}
           >
             {disabled ? (
               <ActivityIndicator size="large" color="#353232" />
             ) : (
-              <TextBox semibold classNames="text-white">Save</TextBox>
+              <TextBox semibold classNames="text-white">
+                Save
+              </TextBox>
             )}
           </Button>
         </Modal.Footer>

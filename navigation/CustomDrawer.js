@@ -4,7 +4,7 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { View, Image, TouchableHighlight, Linking } from "react-native";
+import { View, Image, Linking } from "react-native";
 
 import TextBox from "../components/TextBox";
 import { handleSignOut } from "../lib/auth";
@@ -18,18 +18,18 @@ const CustomDrawer = (props) => {
       <View className="flex-col w-full items-start ml-5 mb-2 justify-around">
         <Image
           source={
-            authState.user.img !== ""
+            authState.user.img
               ? { uri: authState.user.img }
-              : require("../assets/images/hair_brush.png")
+              : require("../assets/images/user.png")
           }
           className="h-20 w-20 rounded-full"
-          resizeMode="cover"
+          resizeMode="contain"
         />
         <View className="w-[70vw]">
-          <TextBox semibold   classNames="text-white text-sm">
+          <TextBox semibold classNames="text-white text-sm">
             {authState.user && authState.user.name}
           </TextBox>
-          <TextBox semibold   classNames="text-white text-xs w-full">
+          <TextBox semibold classNames="text-white text-xs w-full">
             {authState.user && authState.user.email}
           </TextBox>
         </View>

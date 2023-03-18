@@ -3,7 +3,18 @@
     "version": ">= 3.7.2"
   },
   "build": {
-    "preview": {
+    "preview-development":{
+      "env":{
+        "FIREBASE_ENV":"dev"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview-production": {
+      "env":{
+        "FIREBASE_ENV":"prod"
+      },
       "android": {
         "buildType": "apk"
       }

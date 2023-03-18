@@ -52,7 +52,6 @@ const Cart = ({ navigation }) => {
       const updatedOrders = await getUserOrders(authState.user.id);
       authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
-      cartDispatch({ type: "EMPTY_CART" });
     } catch (err) {
       authDispatch({
         type: "NOTIFICATION_TRUE",
@@ -60,6 +59,7 @@ const Cart = ({ navigation }) => {
       });
       console.log(err);
     } finally {
+      cartDispatch({ type: "EMPTY_CART" });
       setTimeout(() => {
         authDispatch({
           type: "NOTIFICATION_FALSE",
@@ -72,47 +72,44 @@ const Cart = ({ navigation }) => {
 
   return (
     <View className="flex-1 items-center flex-col">
-      <TextBox
-        semibold
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 }}
-      >
-        BENTO
-      </TextBox>
-      <View className="w-full pt-16 flex-row pl-10">
-        <TouchableHighlight
-          className="bg-[#CCCCCC] items-center justify-center w-10 h-10 rounded-2xl mr-7"
+      <View className="flex-center items-center">
+        <TextBox
           semibold
-          onPress={() => {
-            navigation.navigate("Home");
+          classNames="text-primary-black text-[100px] w-[110vw] text-center"
+          style={{
+            includeFontPadding: false,
+            paddingTop: 100,
+            fontFamily: "Poppins_700Bold",
           }}
         >
-          <TextBox semibold classNames="text-black text-3xl">
-            {"<"}
-          </TextBox>
-        </TouchableHighlight>
-        <TextBox semibold classNames="text-white text-3xl">
-          Cart
+          BENTO
         </TextBox>
+        <View className="flex-row items-center w-full h-full absolute">
+          <TextBox semibold classNames="text-white text-3xl ml-10">
+            Cart
+          </TextBox>
+        </View>
       </View>
       {cartItems.length < 1 && (
         <TextBox semibold classNames="text-white mt-44">
           Nothing to see here!
         </TextBox>
       )}
-      <ScrollView className="mt-14 w-full px-5">
+      <ScrollView className=" w-full px-5">
         {cartItems.map((item) => {
           return (
             <View
-              className="flex-row justify-between items-center w-full my-2 bg-[#353232] p-2 rounded-2xl"
+              className="flex-row justify-between items-center w-full my-2 bg-secondary-black  p-2 rounded-2xl"
               key={item.id}
             >
               <View className="flex-row items-center ">
                 <Image
                   className=" w-14 h-14  rounded-lg"
-                  source={{
-                    uri: `${item.imgUrl}`,
-                  }}
+                  source={
+                    item.img_url
+                      ? { uri: item.img_url }
+                      : require("../../assets/images/no_image.png")
+                  }
                   resizeMode="contain"
                 />
                 <View>
@@ -154,24 +151,23 @@ const Cart = ({ navigation }) => {
         })}
       </ScrollView>
       {cartItems.length > 0 && (
-        <View className="h-[35vh] w-full bg-[#353232] rounded-t-3xl top-auto bottom-0 px-10 pt-2 pb-5 justify-evenly">
+        <View className="h-[35vh] w-full bg-secondary-black  rounded-t-3xl top-auto bottom-0 px-5 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
-            <TextBox semibold classNames="text-white text-lg">
-              {authState.user.name}
+            <TextBox semibold classNames="text-white text-xl">
+              {/* {authState.user.name} */}
+              Devesh
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.hostel.toUpperCase()} {authState.user.room_no}
             </TextBox>
-            <TextBox semibold classNames="text-white text-lg">
+            <TextBox classNames="text-white">
               {authState.user.phone_no || "No phone no."}
             </TextBox>
           </View>
           <View className="h-[1px] w-full bg-white" />
           <View className="w-full justify-between flex-row">
             <View className="flex-row items-center">
-              <TextBox semibold classNames="text-white text-xl">
-                Total
-              </TextBox>
+              <TextBox classNames="text-white text-xl">Total</TextBox>
               <TextBox semibold classNames="text-white mt-1 ml-1">
                 (₹5 Delivery)
               </TextBox>
@@ -180,7 +176,11 @@ const Cart = ({ navigation }) => {
               ₹ {total}
             </TextBox>
           </View>
-          <Button disabled={disabled} onPress={handleCreateOrder}>
+          <Button
+            disabled={disabled}
+            onPress={handleCreateOrder}
+            classNames={`${disabled && "opacity-50"}`}
+          >
             {disabled ? (
               <ActivityIndicator size="large" color="#1E1B1B" />
             ) : (

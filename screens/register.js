@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import React from "react";
 import TextBox from "../components/TextBox";
 import InputField from "../components/InputField";
@@ -9,6 +9,7 @@ import { AuthContext } from "../lib/context/authContext";
 
 const Register = ({ navigation, route }) => {
   const { authDispatch } = React.useContext(AuthContext);
+  const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [roomValue, setRoomValue] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -31,13 +32,18 @@ const Register = ({ navigation, route }) => {
   ]);
 
   const handleRegister = async () => {
-    if (roomValue == "" || hostelValue == "") {
+    setDisabled(true);
+    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
+    if (
+      hostelValue == "" ||
+      roomValue.trim() == "" ||
+      phoneNumber.trim().length < 10
+    ) {
       setIsInvalid(true);
     } else {
       try {
         setIsInvalid(false);
         const { id, photo, email, givenName, familyName } = route.params.user;
-
         // get branch of user
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
@@ -61,34 +67,46 @@ const Register = ({ navigation, route }) => {
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber),
+          mobile_no: parseInt(phoneNumber.trim()),
         };
-        await createUser(newUser, id);
-        const res = await getUser(id);
+        const msg = await createUser(id, newUser);
+        const user = await getUser(id);
+        authDispatch({ type: "NOTIFICATION_TRUE", payload: msg });
         authDispatch({
           type: "SIGN_IN",
           payload: {
-            user: res,
+            user,
           },
         });
       } catch (err) {
+        authDispatch({
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create user",
+        });
         console.log(err);
+      } finally {
+        setTimeout(() => {
+          authDispatch({
+            type: "NOTIFICATION_FALSE",
+          });
+        }, 2000);
       }
     }
+    setDisabled(false);
   };
 
   return (
     <View className="flex-1 m-10">
-      <TextBox semibold   classNames="text-white mt-10 text-4xl">
+      <TextBox semibold classNames="text-white mt-10 text-4xl">
         Register
       </TextBox>
       {isInvalid && (
-        <TextBox semibold   classNames="text-red-500 mt-5">
+        <TextBox semibold classNames="text-red-500 mt-5">
           Fields marked with * are necessary
         </TextBox>
       )}
       <View className="mt-10">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Hostel*
         </TextBox>
         <DropDown
@@ -102,10 +120,14 @@ const Register = ({ navigation, route }) => {
         />
       </View>
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
-        <InputField placeholder="Enter Room No." onValueChange={setRoomValue} />
+        <InputField
+          placeholder="Enter Room No."
+          onValueChange={setRoomValue}
+          numeric
+        />
       </View>
       {/*  For later don't delete */}
 
@@ -117,18 +139,27 @@ const Register = ({ navigation, route }) => {
         />
       </View> */}
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
-          Phone No.
+        <TextBox semibold classNames=" text-white">
+          Phone No.*
         </TextBox>
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber}
+          numeric
         />
       </View>
-      <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister}>
-        <TextBox semibold   classNames="text-xl">
-          Let's Go
-        </TextBox>
+      <Button
+        classNames="mt-10 bg-[#0181ef]"
+        onPress={handleRegister}
+        disabled={disabled}
+      >
+        {disabled ? (
+          <ActivityIndicator size="large" color="white" />
+        ) : (
+          <TextBox semibold classNames="text-white text-xl">
+            Let's Go
+          </TextBox>
+        )}
       </Button>
     </View>
   );
