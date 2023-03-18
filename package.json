@@ -9,7 +9,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "expo start --dev-client",
+    "start:development": "SET FIREBASE_ENV=dev&&expo start --dev-client",
+    "start:production": "set FIREBASE_ENV=prod&&expo start --dev-client",
+    "build:dev-client": "eas build --profile development --platform android",
+    "build:development":"SET FIREBASE_ENV=dev&&eas build --profile preview-development --platform android ",
+    "build:production":"SET FIREBASE_ENV=prod&&eas build --profile preview-production --platform android",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
@@ -18,22 +22,31 @@
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
     "@react-native-community/netinfo": "9.3.7",
+    "@react-native-firebase/app": "^17.3.2",
+    "@react-native-firebase/auth": "^17.3.2",
+    "@react-native-firebase/crashlytics": "^17.3.2",
+    "@react-native-firebase/firestore": "^17.3.2",
+    "@react-native-firebase/in-app-messaging": "^17.3.2",
+    "@react-native-firebase/messaging": "^17.3.2",
+    "@react-native-firebase/perf": "^17.3.2",
     "@react-native-google-signin/google-signin": "^9.0.2",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "axios": "^1.3.4",
+    "dotenv": "^16.0.3",
     "expo": "~48.0.6",
+    "expo-constants": "~14.2.1",
     "expo-dev-client": "~2.1.5",
+    "expo-device": "~5.2.1",
     "expo-font": "~11.1.1",
+    "expo-notifications": "~0.18.1",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",
-    "firebase": "^9.17.2",
     "native-base": "3.4.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-firebase-hooks": "^5.1.1",
     "react-native": "0.71.3",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-gesture-handler": "~2.9.0",
@@ -42,17 +55,16 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "12.1.1",
     "react-native-web": "~0.18.11",
-    "tailwindcss": "^3.2.7",
-    "expo-notifications": "~0.18.1",
-    "expo-device": "~5.2.1"
+    "tailwindcss": "^3.2.7"
 ***REMOVED***,
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.8"
 ***REMOVED***,
   "bugs": {
     "url": "https://github.com/GeekyAnts/nativebase-templates/issues"
 ***REMOVED***,
   "homepage": "https://github.com/GeekyAnts/nativebase-templates#readme",
-  "author": "Aditya Jamuar",
+  "author": "Devesh Meena",
   "private": true
 ***REMOVED***

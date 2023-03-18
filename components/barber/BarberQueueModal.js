@@ -1,12 +1,26 @@
 import React from "react";
 
 import { Modal ***REMOVED*** from "native-base";
-import { ActivityIndicator ***REMOVED*** from "react-native";
+import { View, ActivityIndicator ***REMOVED*** from "react-native";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
 import { bookBarber ***REMOVED*** from "../../lib/firebase/barber";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
+import messaging from "@react-native-firebase/messaging";
+
+// Notification permissions
+
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log("Authorization status:", authStatus);
+***REMOVED***
+***REMOVED***
 
 const BarberQueueModal = (props) => {
   const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
@@ -15,8 +29,12 @@ const BarberQueueModal = (props) => {
   const handleBarberQueue = async () => {
   ***REMOVED***
       setDisabled(true);
-      const res = await bookBarber(authState.user.id);
-***REMOVED*** type: "NOTIFICATION_TRUE", payload: res ***REMOVED***
+      if (requestUserPermission()) {
+        const token = await messaging().getToken();
+        console.log(token);
+        await bookBarber(authState.user.id, { fcmToken: token ***REMOVED***
+  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Added to queue" ***REMOVED***
+  ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
@@ -44,23 +62,19 @@ const BarberQueueModal = (props) => {
       <Modal.Content className="bg-[#AE78D3] rounded-3xl">
         <Modal.Body>
           <Modal.CloseButton />
-          <TextBox semibold classNames="text-[#1e1b1b] text-xl">
+          <TextBox semibold classNames="text-primary-black text-xl">
             Barber Queue
           </TextBox>
-          <TextBox semibold classNames="text-[#1e1b1b] text-xs">
-            You can queue between 9:00am to 6:00pm.
-          </TextBox>
-          <TextBox semibold classNames="text-[#1e1b1b] text-xs mt-2">
-            The app is still in testing phase, problems are rare but can occur.
-          </TextBox>
-          <TextBox semibold classNames="text-[#1e1b1b] text-xs mt-2">
-            Your token number is not your queue number.
-          </TextBox>
-          <TextBox semibold classNames="text-[#1e1b1b] text-xs mt-2">
-            You will recieve notifications when 4,3 & 2 people are above you.
-          </TextBox>
+          <View className="border  rounded-xl p-2 mt-1">
+            <TextBox semibold classNames="text-primary-black">
+              You will recieve notifications when you are up in the queue.
+            </TextBox>
+            <TextBox semibold classNames="text-primary-black mt-2">
+              Your token number is not queue number.
+            </TextBox>
+          </View>
           <Button
-            classNames={`rounded-2xl bg-[#1e1b1b] items-center justify-center mt-3 ${
+            classNames={`rounded-2xl bg-primary-black items-center justify-center mt-3 ${
               disabled && "opacity-50"
         ***REMOVED***`***REMOVED***
             onPress={handleBarberQueue***REMOVED***

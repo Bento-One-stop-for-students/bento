@@ -45,19 +45,19 @@ const Login = ({ navigation ***REMOVED***) => {
           Use institute email
         </TextBox>
         <Button
-          classNames=" bg-[#0181ef] "
+          classNames=" bg-[#0181ef] mt-2"
           onPress={handleLogin***REMOVED***
           disabled={disabled***REMOVED***
         >
           <View className="flex-row items-center justify-center">
             {disabled ? (
-              <ActivityIndicator size="large" color="#1E1B1B" />
+              <ActivityIndicator size="large" color="white" />
             ) : (
               <>
-                <TextBox semibold classNames="mr-3">
+                <TextBox semibold classNames="mr-3 text-white">
                   Login with google
                 </TextBox>
-                <AntDesign name="google" size={40***REMOVED*** color="black" />
+                <AntDesign name="google" size={40***REMOVED*** color="white" />
               </>
             )***REMOVED***
           </View>

@@ -13,32 +13,37 @@ const Orders = ({ navigation ***REMOVED***) => {
   const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
   const { authState ***REMOVED*** = React.useContext(AuthContext);
-  React.useEffect(() => {
-***REMOVED***, [authState]);
+  React.useEffect(() => {***REMOVED***, [authState]);
   return (
     <View className="flex-1 items-center justify-start">
-      <TextBox
-        semibold
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
-      >
-        BENTO
-      </TextBox>
-      <View className="flex-row items-center justify-between w-full mt-16 px-10">
-        <TextBox semibold classNames="text-white text-3xl">
-          Orders
-        </TextBox>
-        <TouchableHighlight
-          onPress={() => {
-            navigation.openDrawer();
+      <View className="flex-center items-center">
+        <TextBox
+          semibold
+          classNames="text-primary-black text-[100px]  w-[110vw] text-center"
+          style={{
+            includeFontPadding: false,
+            paddingTop: 100,
+            fontFamily: "Poppins_700Bold",
       ***REMOVED******REMOVED***
         >
-          <>
-            <View className="w-10 h-2 m-1 bg-white" />
-            <View className="w-10 h-2 m-1 bg-white" />
-            <View className="w-10 h-2 m-1 bg-white" />
-          </>
-        </TouchableHighlight>
+          BENTO
+        </TextBox>
+        <View className="flex-row items-center justify-around w-full h-full absolute">
+          <TextBox semibold classNames="text-white text-3xl mr-10">
+            Orders
+          </TextBox>
+          <TouchableHighlight
+            onPress={() => {
+              navigation.openDrawer();
+        ***REMOVED******REMOVED***
+          >
+            <>
+              <View className="w-10 h-2 m-1 bg-white" />
+              <View className="w-10 h-2 m-1 bg-white" />
+              <View className="w-10 h-2 m-1 bg-white" />
+            </>
+          </TouchableHighlight>
+        </View>
       </View>
       {authState.orders.length == 0 ? (
         <View>
@@ -49,7 +54,7 @@ const Orders = ({ navigation ***REMOVED***) => {
       ) : (
         <FlatList
           contentContainerStyle={{ paddingBottom: 150 ***REMOVED******REMOVED***
-          className="w-full mt-10 px-5"
+          className="w-full px-5"
           data={authState.orders***REMOVED***
           renderItem={({ item ***REMOVED***) => (
             <OrderItem

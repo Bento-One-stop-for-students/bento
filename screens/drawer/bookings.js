@@ -12,31 +12,22 @@ import { getBarberBooking ***REMOVED*** from "../../lib/firebase/barber";
 const Bookings = ({ navigation ***REMOVED***) => {
   const { authState ***REMOVED*** = React.useContext(AuthContext);
   const [booking, setBooking] = React.useState([]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      const getBooking = async () => {
-      ***REMOVED***
-          const res = await getBarberBooking(authState.user.id);
-          setBooking(res);
-    ***REMOVED*** catch (err) {
-          console.log(err);
-    ***REMOVED***
-  ***REMOVED***;
-      getBooking();
-***REMOVED***, [])
-  );
+  const res = getBarberBooking(authState.user.id);
+  setBooking(res);
 
   return (
     <View className="flex-1 items-center justify-start">
-      <TextBox semibold   
-        classNames="text-[#353232] text-[110px] w-[200vw] text-center absolute"
+      <TextBox
+        semibold
+        classNames="text-primary-black text-[100px]  w-[200vw] text-center absolute"
         style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
       >
         BENTO
       </TextBox>
       <View className="flex-row items-center justify-between w-full mt-16 px-10">
-        <TextBox semibold    classNames="text-white text-3xl">Bookings</TextBox>
+        <TextBox semibold classNames="text-white text-3xl">
+          Bookings
+        </TextBox>
         <TouchableHighlight
           onPress={() => {
             navigation.openDrawer();

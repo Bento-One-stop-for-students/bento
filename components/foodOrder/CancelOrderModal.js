@@ -38,7 +38,7 @@ const CancelOrderModal = (props) => {
   ***REMOVED******REMOVED***
       animationPreset="slide"
     >
-      <Modal.Content className="bg-[#FFA410] rounded-3xl p-2">
+      <Modal.Content className="bg-primary-snackmen  rounded-3xl p-5">
         <Modal.CloseButton />
         <Modal.Body>
           <TextBox semibold classNames="text-black text-lg">
@@ -46,7 +46,9 @@ const CancelOrderModal = (props) => {
           </TextBox>
         </Modal.Body>
         <Button
-          classNames="bg-[#1e1b1b] items-center justify-center"
+          classNames={`bg-primary-black items-center justify-center ${
+            disabled && "opacity-50"
+      ***REMOVED***`***REMOVED***
           onPress={handleCancelOrder***REMOVED***
           disabled={disabled***REMOVED***
         >

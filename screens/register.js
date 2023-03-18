@@ -1,4 +1,4 @@
-import { View, Text ***REMOVED*** from "react-native";
+import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
 import TextBox from "../components/TextBox";
 import InputField from "../components/InputField";
@@ -9,6 +9,7 @@ import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 
 const Register = ({ navigation, route ***REMOVED***) => {
   const { authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [roomValue, setRoomValue] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -31,13 +32,18 @@ const Register = ({ navigation, route ***REMOVED***) => {
   ]);
 
   const handleRegister = async () => {
-    if (roomValue == "" || hostelValue == "") {
+    setDisabled(true);
+    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
+    if (
+      hostelValue == "" ||
+      roomValue.trim() == "" ||
+      phoneNumber.trim().length < 10
+    ) {
       setIsInvalid(true);
 ***REMOVED*** else {
     ***REMOVED***
         setIsInvalid(false);
         const { id, photo, email, givenName, familyName ***REMOVED*** = route.params.user;
-
         // get branch of user
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
@@ -61,34 +67,46 @@ const Register = ({ navigation, route ***REMOVED***) => {
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber),
+          mobile_no: parseInt(phoneNumber.trim()),
     ***REMOVED***;
-        await createUser(newUser, id);
-    ***REMOVED***
+        const msg = await createUser(id, newUser);
+        const user = await getUser(id);
+  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: msg ***REMOVED***
   ***REMOVED***
   ***REMOVED***
   ***REMOVED***
-  ***REMOVED***
+            user,
       ***REMOVED***,
         ***REMOVED***
   ***REMOVED*** catch (err) {
+  ***REMOVED***
+          type: "NOTIFICATION_TRUE",
+          payload: "Couldn't create user",
+        ***REMOVED***
         console.log(err);
+  ***REMOVED*** finally {
+        setTimeout(() => {
+    ***REMOVED***
+            type: "NOTIFICATION_FALSE",
+          ***REMOVED***
+    ***REMOVED***, 2000);
   ***REMOVED***
 ***REMOVED***
+    setDisabled(false);
 ***REMOVED***;
 
   return (
     <View className="flex-1 m-10">
-      <TextBox semibold   classNames="text-white mt-10 text-4xl">
+      <TextBox semibold classNames="text-white mt-10 text-4xl">
         Register
       </TextBox>
       {isInvalid && (
-        <TextBox semibold   classNames="text-red-500 mt-5">
+        <TextBox semibold classNames="text-red-500 mt-5">
           Fields marked with * are necessary
         </TextBox>
       )***REMOVED***
       <View className="mt-10">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Hostel*
         </TextBox>
         <DropDown
@@ -102,10 +120,14 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
       </View>
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
+        <TextBox semibold classNames=" text-white">
           Room No.*
         </TextBox>
-        <InputField placeholder="Enter Room No." onValueChange={setRoomValue***REMOVED*** />
+        <InputField
+          placeholder="Enter Room No."
+          onValueChange={setRoomValue***REMOVED***
+          numeric
+        />
       </View>
       {/*  For later don't delete */***REMOVED***
 
@@ -117,18 +139,27 @@ const Register = ({ navigation, route ***REMOVED***) => {
         />
       </View> */***REMOVED***
       <View className="mt-5">
-        <TextBox semibold   classNames=" text-white">
-          Phone No.
+        <TextBox semibold classNames=" text-white">
+          Phone No.*
         </TextBox>
         <InputField
           placeholder="Enter Phone No."
           onValueChange={setPhoneNumber***REMOVED***
+          numeric
         />
       </View>
-      <Button classNames="mt-10 bg-[#0181ef]" onPress={handleRegister***REMOVED***>
-        <TextBox semibold   classNames="text-xl">
-          Let's Go
-        </TextBox>
+      <Button
+        classNames="mt-10 bg-[#0181ef]"
+        onPress={handleRegister***REMOVED***
+        disabled={disabled***REMOVED***
+      >
+        {disabled ? (
+          <ActivityIndicator size="large" color="white" />
+        ) : (
+          <TextBox semibold classNames="text-white text-xl">
+            Let's Go
+          </TextBox>
+        )***REMOVED***
       </Button>
     </View>
   );
