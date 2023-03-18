@@ -3,7 +3,6 @@ import "expo-dev-client";
 
 import * as Font from "expo-font";
 import { View } from "react-native";
-import Constants from "expo-constants";
 import { NativeBaseProvider } from "native-base";
 import * as SplashScreen from "expo-splash-screen";
 import {
@@ -25,6 +24,7 @@ import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
 import NetInfo from "@react-native-community/netinfo";
 import NetworkErrorModal from "./components/NetworkErrorModal";
+
 
 SplashScreen.preventAutoHideAsync();
 
