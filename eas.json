@@ -3,33 +3,31 @@
     "version": ">= 3.7.2"
 ***REMOVED***,
   "build": {
-    "preview-development":{
-      "env":{
-        "FIREBASE_ENV":"dev"
-  ***REMOVED***,
-      "android": {
-        "buildType": "apk"
-  ***REMOVED***
-***REMOVED***,
-    "preview-production": {
-      "env":{
-        "FIREBASE_ENV":"prod"
-  ***REMOVED***,
-      "android": {
-        "buildType": "apk"
-  ***REMOVED***
-***REMOVED***,
     "development": {
+      "env": {
+        "FIREBASE_ENV": "dev"
+  ***REMOVED***,
+      "android": {
+        "buildType": "apk"
+  ***REMOVED***,
+      "channel": "development"
+***REMOVED***,
+    "production": {
+      "env": {
+        "FIREBASE_ENV": "prod"
+  ***REMOVED***,
+      "android": {
+        "buildType": "apk"
+  ***REMOVED***,
+      "channel": "production"
+***REMOVED***,
+    "development-client": {
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
-  ***REMOVED***
-***REMOVED***,
-    "production": {
-      "ios": {
-        "resourceClass": "m1-medium"
-  ***REMOVED***
+  ***REMOVED***,
+      "channel": "development"
 ***REMOVED***
 ***REMOVED***,
   "submit": {
