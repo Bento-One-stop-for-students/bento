@@ -35,11 +35,20 @@ export default () => ({
         projectId: "c5edad82-8079-4d3b-a28c-011cb8163f5b",
       },
     },
+    runtimeVersion: {
+      policy: "sdkVersion",
+    },
     plugins: [
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
       "@react-native-firebase/perf",
       "@react-native-firebase/crashlytics",
+      [
+        "expo-updates",
+        {
+          username: "devesh16",
+        },
+      ],
     ],
   },
 });

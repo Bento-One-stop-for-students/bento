@@ -35,6 +35,7 @@ const BarberQueueModal = (props) => {
       await bookBarber(authState.user.id, { fcm_token: token });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: "Added to queue" });
     } catch (err) {
+      console.log(err);
       authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Network Error. Try again later",
