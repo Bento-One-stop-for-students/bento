@@ -29,12 +29,11 @@ const BarberQueueModal = (props) => {
   const handleBarberQueue = async () => {
   ***REMOVED***
       setDisabled(true);
-      if (requestUserPermission()) {
-        const token = await messaging().getToken();
-        console.log(token);
-        await bookBarber(authState.user.id, { fcmToken: token ***REMOVED***
-  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Added to queue" ***REMOVED***
-  ***REMOVED***
+      await requestUserPermission();
+      const token = await messaging().getToken();
+      console.log(token);
+      await bookBarber(authState.user.id, { fcm_token: token ***REMOVED***
+***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Added to queue" ***REMOVED***
 ***REMOVED*** catch (err) {
 ***REMOVED***
         type: "NOTIFICATION_TRUE",

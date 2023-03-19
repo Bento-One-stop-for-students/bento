@@ -12,9 +12,21 @@ import {
 
 import Button from "../../components/Button";
 import TextBox from "../../components/TextBox";
+import messaging from "@react-native-firebase/messaging";
 import { CartContext ***REMOVED*** from "../../lib/context/cartContext";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
 import { createUserOrder, getUserOrders ***REMOVED*** from "../../lib/firebase/food-order";
+
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log("Authorization status:", authStatus);
+***REMOVED***
+***REMOVED***
 
 const Cart = ({ navigation ***REMOVED***) => {
   const { authDispatch ***REMOVED*** = React.useContext(AuthContext);
@@ -40,12 +52,16 @@ const Cart = ({ navigation ***REMOVED***) => {
   const handleCreateOrder = async () => {
   ***REMOVED***
       setDisabled(true);
+      await requestUserPermission();
+      const token = await messaging().getToken();
+      console.log(token);
       const res = await createUserOrder({
         id: authState.user.id,
         name: authState.user.name,
         hostel: authState.user.hostel,
         room_no: authState.user.room_no,
         mobile_no: authState.user.mobile_no,
+        fcm_token: token,
         total,
         cart: cartItems,
       ***REMOVED***

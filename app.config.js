@@ -12,6 +12,7 @@ export default () => ({
 ***REMOVED***,
     updates: {
       fallbackToCacheTimeout: 0,
+      url: "https://u.expo.dev/c5edad82-8079-4d3b-a28c-011cb8163f5b",
 ***REMOVED***,
     assetBundlePatterns: ["**/*"],
     ios: {
