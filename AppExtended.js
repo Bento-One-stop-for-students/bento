@@ -25,7 +25,6 @@ import OverLayNotificationModal from "./components/OverLayNotificationModal";
 import NetInfo from "@react-native-community/netinfo";
 import NetworkErrorModal from "./components/NetworkErrorModal";
 
-
 SplashScreen.preventAutoHideAsync();
 
 export default function AppExtended({ navigation ***REMOVED***) {
@@ -62,7 +61,7 @@ export default function AppExtended({ navigation ***REMOVED***) {
 
     // Foreground notification subscription
 
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+    messaging().onMessage(async (remoteMessage) => {
       await Notifications.scheduleNotificationAsync({
         content: {
           title: remoteMessage.notification.title,
@@ -72,7 +71,6 @@ export default function AppExtended({ navigation ***REMOVED***) {
         trigger: null,
       ***REMOVED***
     ***REMOVED***
-    return unsubscribe;
 ***REMOVED***, []);
   const onLayoutRootView = React.useCallback(async () => {
     if (appIsReady) {
