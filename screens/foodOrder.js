@@ -15,7 +15,6 @@ const FoodOrder = ({ navigation }) => {
   const { value } = React.useContext(CartContext);
   const { cartState } = value;
   var size = Object.keys(cartState.cart).length;
-
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {

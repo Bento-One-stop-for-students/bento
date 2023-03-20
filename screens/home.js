@@ -33,18 +33,6 @@ const Home = ({ navigation }) => {
     getWaitingQueueLength(setBarberWaitingQueueLength);
     getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
     getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
-    const getInfoFromFirebase = async () => {
-      try {
-        setIsLoading(true);
-        const orders = await getUserOrders(authState.user.id);
-        authDispatch({ type: "GET_ORDERS", payload: orders });
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getInfoFromFirebase();
   }, []);
 
   return (
@@ -107,9 +95,7 @@ const Home = ({ navigation }) => {
         barberWaitingQueueLength={barberWaitingQueueLength}
       />
       <SnackMen navigation={navigation} snackmenStatus={snackmenStatus} />
-      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
-        v1.0.0
-      </TextBox>
+      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">v1.0.0</TextBox>
     </View>
   );
 };

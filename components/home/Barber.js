@@ -9,7 +9,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Barber = ({
   isLoading,
-  statusLoading,
   barberStatus,
   barberBooking,
   barberWaitingQueueLength,
@@ -47,7 +46,7 @@ const Barber = ({
       ) : barberStatus == "OPEN" || barberStatus == "BREAK" ? (
         !barberBooking ? (
           <>
-            <View className=" px-2 py-4 flex-row bg- rounded-xl items-center justify-center">
+            <View className="bg- rounded-xl items-center justify-center">
               <View className="items-center justify-center flex-row bg-primary-barber border rounded-md">
                 <MaterialCommunityIcons
                   name="human-queue"

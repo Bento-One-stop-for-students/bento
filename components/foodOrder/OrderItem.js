@@ -2,29 +2,23 @@ import React from "react";
 
 import { Pressable } from "native-base";
 import { Entypo } from "@expo/vector-icons";
-import { View, Animated } from "react-native";
+import { View, LayoutAnimation, UIManager } from "react-native";
 
 import TextBox from "../TextBox";
 
+UIManager.setLayoutAnimationEnabledExperimental;
+
 const ExpandableView = ({ expanded, item, handleCancelOrderModal }) => {
-  const [height] = React.useState(new Animated.Value(0));
-  React.useEffect(() => {
-    Animated.timing(height, {
-      toValue: expanded ? 2000 : 0,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
-  }, [expanded, height]);
   return (
-    <Animated.View
-      className="bg-secondary-black w-full"
-      style={{ maxHeight: height }}
+    <View
+      className={`${
+        expanded !== item.orderId ? "h-0 overflow-hidden" : "overflow-hidden"
+      } `}
     >
       {item.cart.map((item) => {
         return (
-          <Animated.View
-            style={{ maxHeight: height }}
-            className="flex-row justify-between items-center w-full bg-neutral-700 my-2 rounded-2xl"
+          <View
+            className={` flex-row justify-between items-center w-full bg-neutral-700 my-2 rounded-2xl`}
             key={item.id}
           >
             <View className="w-full flex-row justify-between items-center px-5 py-2 rounded-2xl">
@@ -42,7 +36,7 @@ const ExpandableView = ({ expanded, item, handleCancelOrderModal }) => {
                 {item.qty}
               </TextBox>
             </View>
-          </Animated.View>
+          </View>
         );
       })}
       {!item.is_delivered && (
@@ -54,7 +48,7 @@ const ExpandableView = ({ expanded, item, handleCancelOrderModal }) => {
           </View>
         </Pressable>
       )}
-    </Animated.View>
+    </View>
   );
 };
 
@@ -64,24 +58,21 @@ const OrderItem = ({
   isComponentOpen,
   cancelOrderModal,
 }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
   const handleCancelOrderModal = async () => {
     cancelOrderModal(item.orderId);
   };
-
-  React.useEffect(() => {
-    if (isComponentOpen !== item.orderId) {
-      setIsExpanded(false);
-    }
-  }, [isComponentOpen]);
 
   return (
     <Pressable
       className="bg-secondary-black  my-2 rounded-2xl p-5 justify-between items-center"
       onPress={() => {
-        setIsExpanded(!isExpanded);
-        setIsComponentOpen(item.orderId);
+        LayoutAnimation.configureNext({
+          ...LayoutAnimation.Presets.easeInEaseOut,
+          duration: 100,
+        });
+        setIsComponentOpen(
+          item.orderId !== isComponentOpen ? item.orderId : false
+        );
       }}
     >
       <View className="flex-col w-full justify-between items-center">
@@ -119,7 +110,7 @@ const OrderItem = ({
           </View>
         </View>
       </View>
-      {!isExpanded && (
+      {!isComponentOpen && (
         <Entypo
           name="chevron-thin-down"
           size={15}
@@ -128,7 +119,7 @@ const OrderItem = ({
         />
       )}
       <ExpandableView
-        expanded={isExpanded}
+        expanded={isComponentOpen}
         item={item}
         handleCancelOrderModal={handleCancelOrderModal}
       />
