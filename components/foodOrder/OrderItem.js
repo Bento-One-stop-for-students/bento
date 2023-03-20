@@ -1,10 +1,10 @@
 import React from "react";
 
+import { Pressable ***REMOVED*** from "native-base";
+import { Entypo ***REMOVED*** from "@expo/vector-icons";
 import { View, Animated ***REMOVED*** from "react-native";
 
 import TextBox from "../TextBox";
-import { Pressable ***REMOVED*** from "native-base";
-import { Entypo ***REMOVED*** from "@expo/vector-icons";
 
 const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) => {
   const [height] = React.useState(new Animated.Value(0));
@@ -124,7 +124,7 @@ const OrderItem = ({
           name="chevron-thin-down"
           size={15***REMOVED***
           color="white"
-          style={{ marginBottom: -10 ***REMOVED******REMOVED***
+          style={{ marginBottom: -12 ***REMOVED******REMOVED***
         />
       )***REMOVED***
       <ExpandableView
