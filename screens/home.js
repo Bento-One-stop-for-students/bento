@@ -107,6 +107,9 @@ const Home = ({ navigation ***REMOVED***) => {
         barberWaitingQueueLength={barberWaitingQueueLength***REMOVED***
       />
       <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
+      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
+        v1.0.0
+      </TextBox>
     </View>
   );
 ***REMOVED***
