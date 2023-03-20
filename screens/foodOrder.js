@@ -57,24 +57,28 @@ const FoodOrder = ({ navigation }) => {
             />
             <TextBox
               semibold
-              classNames="text-primary-snackmen  text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
+              classNames="text-primary-snackmen text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
             >
               {size}
             </TextBox>
           </Pressable>
         </View>
       </View>
-
       {data && data.length ? (
-        <FlatList
-          className="w-full"
-          contentContainerStyle={{ paddingBottom: 200 }}
-          data={data}
-          renderItem={({ item, index }) => (
-            <FoodItem item={item} key={index} index={index} />
-          )}
-          keyExtractor={(item) => item.id}
-        />
+        <>
+          <TextBox classNames="text-primary-closed text-[9px]">
+            All availaible quantities are realtime
+          </TextBox>
+          <FlatList
+            className="w-full"
+            contentContainerStyle={{ paddingBottom: 200 }}
+            data={data}
+            renderItem={({ item, index }) => (
+              <FoodItem item={item} key={index} index={index} />
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </>
       ) : (
         <View>
           <TextBox semibold classNames="text-white mt-10">

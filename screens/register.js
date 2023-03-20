@@ -33,7 +33,6 @@ const Register = ({ navigation, route }) => {
 
   const handleRegister = async () => {
     setDisabled(true);
-    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
     if (
       hostelValue == "" ||
       roomValue.trim() == "" ||

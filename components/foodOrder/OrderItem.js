@@ -110,14 +110,15 @@ const OrderItem = ({
           </View>
         </View>
       </View>
-      {!isComponentOpen && (
-        <Entypo
-          name="chevron-thin-down"
-          size={15}
-          color="white"
-          style={{ marginBottom: -12 }}
-        />
-      )}
+      <Entypo
+        name="chevron-thin-down"
+        size={15}
+        color="white"
+        style={{
+          marginBottom: -12,
+          opacity: isComponentOpen !== item.orderId ? 100 : 0,
+        }}
+      />
       <ExpandableView
         expanded={isComponentOpen}
         item={item}

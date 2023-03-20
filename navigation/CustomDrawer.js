@@ -62,8 +62,22 @@ const CustomDrawer = (props) => {
         onPress={async () => {
           try {
             await handleSignOut(authDispatch);
+            authDispatch({
+              type: "NOTIFICATION_TRUE",
+              payload: "Successfully signed out",
+            });
           } catch (err) {
             console.log(err);
+            authDispatch({
+              type: "NOTIFICATION_TRUE",
+              payload: "Couldn't sign out",
+            });
+          } finally {
+            setTimeout(() => {
+              authDispatch({
+                type: "NOTIFICATION_FALSE",
+              });
+            }, 2000);
           }
         }}
       />

@@ -13,7 +13,6 @@ Notifications.setNotificationHandler({
 // bacgkround notification handler
 
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-  console.log(remoteMessage);
   await Notifications.scheduleNotificationAsync({
     content: {
       title: remoteMessage.notification.title,
