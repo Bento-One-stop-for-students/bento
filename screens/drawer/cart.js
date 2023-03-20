@@ -22,10 +22,6 @@ async function requestUserPermission() {
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-  if (enabled) {
-    console.log("Authorization status:", authStatus);
-***REMOVED***
 ***REMOVED***
 
 const Cart = ({ navigation ***REMOVED***) => {
@@ -54,7 +50,6 @@ const Cart = ({ navigation ***REMOVED***) => {
       setDisabled(true);
       await requestUserPermission();
       const token = await messaging().getToken();
-      console.log(token);
       const res = await createUserOrder({
         id: authState.user.id,
         name: authState.user.name,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image ***REMOVED*** from "react-native";
 import { Entypo ***REMOVED*** from "@expo/vector-icons";
-import { View, StyleSheet ***REMOVED*** from "react-native";
+import { View ***REMOVED*** from "react-native";
 import { CartContext ***REMOVED*** from "../../lib/context/cartContext";
 import TextBox from "../TextBox";
 import { Pressable ***REMOVED*** from "react-native";
@@ -9,10 +9,9 @@ import { Pressable ***REMOVED*** from "react-native";
 const FoodItem = ({ item, index ***REMOVED***) => {
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState, cartDispatch ***REMOVED*** = value;
-
   return (
     <View
-      className="flex-row  items-center justify-between px-10 py-2 bg-secondary-black m-2 rounded-2xl"
+      className="flex-row  items-center justify-between p-8 py-5 bg-secondary-black m-2 rounded-2xl"
       key={index***REMOVED***
     >
       <View>
@@ -20,8 +19,14 @@ const FoodItem = ({ item, index ***REMOVED***) => {
           {item.name.charAt(0).toUpperCase() + item.name.slice(1)***REMOVED***
         </TextBox>
         <TextBox classNames="text-white">₹ {item.price***REMOVED***</TextBox>
+        <View className="flex-row bg-primary-black rounded-xl mt-2 items-center justify-center">
+          <TextBox classNames="text-white p-2 text-xs">Availaible Qty : </TextBox>
+          <TextBox classNames="bg-primary-closed py-2 px-3 rounded-tr-xl rounded-br-xl">
+            {item.qty***REMOVED***
+          </TextBox>
+        </View>
       </View>
-      <View className="items-center justify-end flex-col pt-2 px-3">
+      <View className="items-center justify-end flex-col px-3">
         <Image
           className=" w-28 h-28  rounded-lg mb-4"
           source={

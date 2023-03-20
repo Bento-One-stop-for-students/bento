@@ -16,10 +16,6 @@ async function requestUserPermission() {
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-  if (enabled) {
-    console.log("Authorization status:", authStatus);
-***REMOVED***
 ***REMOVED***
 
 const BarberQueueModal = (props) => {
@@ -31,7 +27,6 @@ const BarberQueueModal = (props) => {
       setDisabled(true);
       await requestUserPermission();
       const token = await messaging().getToken();
-      console.log(token);
       await bookBarber(authState.user.id, { fcm_token: token ***REMOVED***
 ***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Added to queue" ***REMOVED***
 ***REMOVED*** catch (err) {

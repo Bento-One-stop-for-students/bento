@@ -25,7 +25,26 @@ import OverLayNotificationModal from "./components/OverLayNotificationModal";
 import NetInfo from "@react-native-community/netinfo";
 import NetworkErrorModal from "./components/NetworkErrorModal";
 
-SplashScreen.preventAutoHideAsync();
+// import SpInAppUpdates, { IAUUpdateKind ***REMOVED*** from "sp-react-native-in-app-updates";
+
+// SplashScreen.preventAutoHideAsync();
+
+// const inAppUpdates = new SpInAppUpdates(
+//   false // isDebug
+// );
+// // curVersion is optional if you don't provide it will automatically take from the app using react-native-device-info
+// inAppUpdates.checkNeedsUpdate({ curVersion: "0.0.8" ***REMOVED***).then((result) => {
+//   if (result.shouldUpdate) {
+//     let updateOptions = {***REMOVED***
+//     if (Platform.OS === "android") {
+//       // android only, on iOS the user will be promped to go to your app store page
+//       updateOptions = {
+//         updateType: IAUUpdateKind.FLEXIBLE,
+//   ***REMOVED***;
+// ***REMOVED***
+//     inAppUpdates.startUpdate(updateOptions); // https://github.com/SudoPlz/sp-react-native-in-app-updates/blob/master/src/types.ts#L78
+// ***REMOVED***
+// ***REMOVED***
 
 export default function AppExtended({ navigation ***REMOVED***) {
   const [showNetworkErrorModal, setShowNetworkErrorModal] =
