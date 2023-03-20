@@ -48,7 +48,7 @@ const Barber = ({
         !barberBooking ? (
           <>
             <View className=" px-2 py-4 flex-row bg- rounded-xl items-center justify-center">
-              <View className="items-center justify-center flex-row bg-primary-barber border p-1 rounded-tl-md rounded-bl-md">
+              <View className="items-center justify-center flex-row bg-primary-barber border rounded-md">
                 <MaterialCommunityIcons
                   name="human-queue"
                   size={26}
@@ -58,13 +58,13 @@ const Barber = ({
                 <TextBox classNames="ml-2 text-secondary-black">
                   {"Current Waiting : "}
                 </TextBox>
+                <TextBox
+                  classNames="text-white bg-secondary-black px-2 rounded-tr-md rounded-br-md"
+                  style={{ paddingTop: 10, fontSize: 20 }}
+                >
+                  {barberWaitingQueueLength}
+                </TextBox>
               </View>
-              <TextBox
-                classNames="text-white bg-secondary-black px-2 rounded-tr-md rounded-br-md"
-                style={{ paddingTop: 10, fontSize: 20 }}
-              >
-                {barberWaitingQueueLength}
-              </TextBox>
             </View>
             <Button
               classNames={`bg-primary-black ${
