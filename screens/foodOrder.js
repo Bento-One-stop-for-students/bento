@@ -15,7 +15,6 @@ const FoodOrder = ({ navigation ***REMOVED***) => {
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState ***REMOVED*** = value;
   var size = Object.keys(cartState.cart).length;
-
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {

@@ -33,18 +33,6 @@ const Home = ({ navigation ***REMOVED***) => {
     getWaitingQueueLength(setBarberWaitingQueueLength);
     getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
     getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
-    const getInfoFromFirebase = async () => {
-    ***REMOVED***
-        setIsLoading(true);
-        const orders = await getUserOrders(authState.user.id);
-  ***REMOVED*** type: "GET_ORDERS", payload: orders ***REMOVED***
-  ***REMOVED*** catch (err) {
-        console.log(err);
-  ***REMOVED*** finally {
-        setIsLoading(false);
-  ***REMOVED***
-***REMOVED***;
-    getInfoFromFirebase();
 ***REMOVED***, []);
 
   return (
@@ -107,9 +95,7 @@ const Home = ({ navigation ***REMOVED***) => {
         barberWaitingQueueLength={barberWaitingQueueLength***REMOVED***
       />
       <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
-      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
-        v1.0.0
-      </TextBox>
+      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">v1.0.0</TextBox>
     </View>
   );
 ***REMOVED***

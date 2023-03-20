@@ -8,12 +8,32 @@ import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
 import { FlatList ***REMOVED*** from "native-base";
 import OrderItem from "../../components/foodOrder/OrderItem";
 import CancelOrderModal from "../../components/foodOrder/CancelOrderModal";
+import { useFocusEffect ***REMOVED*** from "@react-navigation/native";
+import { getUserOrders ***REMOVED*** from "../../lib/firebase/food-order";
 
 const Orders = ({ navigation ***REMOVED***) => {
-  const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
+  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
-  React.useEffect(() => {***REMOVED***, [authState]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const getInfoFromFirebase = async () => {
+      ***REMOVED***
+          setIsLoading(true);
+          const orders = await getUserOrders(authState.user.id);
+    ***REMOVED*** type: "GET_ORDERS", payload: orders ***REMOVED***
+    ***REMOVED*** catch (err) {
+          console.log(err);
+    ***REMOVED*** finally {
+          setIsLoading(false);
+    ***REMOVED***
+  ***REMOVED***;
+      getInfoFromFirebase();
+***REMOVED***, [])
+  );
+
   return (
     <View className="flex-1 items-center justify-start">
       <View className="flex-center items-center">
@@ -45,27 +65,35 @@ const Orders = ({ navigation ***REMOVED***) => {
           </TouchableHighlight>
         </View>
       </View>
-      {authState.orders.length == 0 ? (
+      {!isLoading ? (
+        authState.orders.length == 0 ? (
+          <View>
+            <TextBox semibold classNames="text-white pt-24">
+              No orders! Order now...
+            </TextBox>
+          </View>
+        ) : (
+          <FlatList
+            contentContainerStyle={{ paddingBottom: 150 ***REMOVED******REMOVED***
+            className="w-full px-5"
+            data={authState.orders***REMOVED***
+            renderItem={({ item ***REMOVED***) => (
+              <OrderItem
+                item={item***REMOVED***
+                isComponentOpen={isComponentOpen***REMOVED***
+                setIsComponentOpen={setIsComponentOpen***REMOVED***
+                cancelOrderModal={setOpenCancelOrderModal***REMOVED***
+              />
+            )***REMOVED***
+            keyExtractor={(item, index) => index***REMOVED***
+          />
+        )
+      ) : (
         <View>
           <TextBox semibold classNames="text-white pt-24">
-            No orders! Order now...
+            Loading Orders...
           </TextBox>
         </View>
-      ) : (
-        <FlatList
-          contentContainerStyle={{ paddingBottom: 150 ***REMOVED******REMOVED***
-          className="w-full px-5"
-          data={authState.orders***REMOVED***
-          renderItem={({ item ***REMOVED***) => (
-            <OrderItem
-              item={item***REMOVED***
-              isComponentOpen={isComponentOpen***REMOVED***
-              setIsComponentOpen={setIsComponentOpen***REMOVED***
-              cancelOrderModal={setOpenCancelOrderModal***REMOVED***
-            />
-          )***REMOVED***
-          keyExtractor={(item, index) => index***REMOVED***
-        />
       )***REMOVED***
       <CancelOrderModal
         isOpen={openCancelOrderModal***REMOVED***
