@@ -59,7 +59,7 @@ const Barber = ({
                   {"Current Waiting : "***REMOVED***
                 </TextBox>
                 <TextBox
-                  classNames="text-white bg-secondary-black px-2 rounded-tr-md rounded-br-md"
+                  classNames="text-white bg-secondary-black px-2 rounded-tr-sm rounded-br-sm"
                   style={{ paddingTop: 10, fontSize: 20 ***REMOVED******REMOVED***
                 >
                   {barberWaitingQueueLength***REMOVED***
