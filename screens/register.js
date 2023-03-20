@@ -37,7 +37,7 @@ const Register = ({ navigation, route }) => {
     if (
       hostelValue == "" ||
       roomValue.trim() == "" ||
-      phoneNumber.trim().length < 10
+      phoneNumber.trim().length !== 10
     ) {
       setIsInvalid(true);
     } else {

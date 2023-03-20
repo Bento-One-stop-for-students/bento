@@ -38,14 +38,12 @@ const EditUserModal = (props) => {
     try {
       setDisabled(true);
       if (toBeEditedValue == "Mobile No") {
-        {
-          if (newValue.length < 10) {
-            authDispatch({
-              type: "NOTIFICATION_TRUE",
-              payload: "Invalid Mobile No.",
-            });
-            return;
-          }
+        if (newValue.length !== 10) {
+          authDispatch({
+            type: "NOTIFICATION_TRUE",
+            payload: "Invalid Mobile No.",
+          });
+          return;
         }
       }
       const editedUser = {};
