@@ -53,13 +53,18 @@ const Cart = ({ navigation }) => {
         cart: cartItems,
       });
       const updatedOrders = await getUserOrders(authState.user.id);
-      authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
+      authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
     } catch (err) {
       authDispatch({
         type: "NOTIFICATION_TRUE",
-        payload: "Couldn't create order",
+        payload: `${
+          err.response.status == 400
+            ? "Items out of stock"
+            : "Couldn't create order"
+        }`,
       });
+
       console.log(err);
     } finally {
       cartDispatch({ type: "EMPTY_CART" });
@@ -157,8 +162,7 @@ const Cart = ({ navigation }) => {
         <View className="h-[35vh] w-full bg-secondary-black  rounded-t-3xl top-auto bottom-0 px-5 pt-2 pb-5 justify-evenly">
           <View className="w-full justify-around">
             <TextBox semibold classNames="text-white text-xl">
-              {/* {authState.user.name} */}
-              Devesh
+              {authState.user.name}
             </TextBox>
             <TextBox classNames="text-white">
               {authState.user.hostel.toUpperCase()} {authState.user.room_no}
