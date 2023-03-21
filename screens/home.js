@@ -1,23 +1,26 @@
 import React from "react";
-import { View } from "react-native";
+
 import { Feather } from "@expo/vector-icons";
+import { View, Pressable } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 import TextBox from "../components/TextBox";
-import { AuthContext } from "../lib/context/authContext";
-import { Pressable } from "react-native";
-import { CartContext } from "../lib/context/cartContext";
+import Barber from "../components/home/Barber";
 import { getStatus } from "../lib/firebase/user";
+import SnackMen from "../components/home/SnackMen";
+import { AuthContext } from "../lib/context/authContext";
+import { CartContext } from "../lib/context/cartContext";
 import {
   getBarberBooking,
   getWaitingQueueLength,
 } from "../lib/firebase/barber";
-import Barber from "../components/home/Barber";
-import SnackMen from "../components/home/SnackMen";
-import { getUserOrders } from "../lib/firebase/food-order";
+
+SplashScreen.preventAutoHideAsync();
 
 const Home = ({ navigation }) => {
-  const { authState, authDispatch } = React.useContext(AuthContext);
+  const [appIsReady, setAppIsReady] = React.useState(false);
+  const { authState } = React.useContext(AuthContext);
   const { value } = React.useContext(CartContext);
   const { cartState } = value;
   const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
@@ -33,10 +36,23 @@ const Home = ({ navigation }) => {
     getWaitingQueueLength(setBarberWaitingQueueLength);
     getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
     getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
+    setAppIsReady(true);
   }, []);
 
+  const onLayoutRootView = React.useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <View className="flex-1 items-center justify-start">
+    <View
+      className="flex-1 items-center justify-start"
+      onLayout={onLayoutRootView}
+    >
       <View className="flex-center items-center w-full pt-2">
         <TextBox
           semibold
@@ -95,7 +111,9 @@ const Home = ({ navigation }) => {
         barberWaitingQueueLength={barberWaitingQueueLength}
       />
       <SnackMen navigation={navigation} snackmenStatus={snackmenStatus} />
-      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">v1.0.0</TextBox>
+      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
+        v1.0.0
+      </TextBox>
     </View>
   );
 };

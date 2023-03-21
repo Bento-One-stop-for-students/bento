@@ -14,20 +14,20 @@ import {
 } from "@expo-google-fonts/poppins";
 import { StatusBar } from "expo-status-bar";
 import * as Notifications from "expo-notifications";
+import NetInfo from "@react-native-community/netinfo";
 import messaging from "@react-native-firebase/messaging";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { handleIsSignedIn } from "./lib/auth";
 import Navigator from "./navigation/Navigator";
 import { AuthContext } from "./lib/context/authContext";
+import NetworkErrorModal from "./components/NetworkErrorModal";
 import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
-import NetInfo from "@react-native-community/netinfo";
-import NetworkErrorModal from "./components/NetworkErrorModal";
 
 // import SpInAppUpdates, { IAUUpdateKind } from "sp-react-native-in-app-updates";
 
-// SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 
 // const inAppUpdates = new SpInAppUpdates(
 //   false // isDebug

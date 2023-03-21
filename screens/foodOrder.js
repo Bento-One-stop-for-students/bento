@@ -18,9 +18,7 @@ const FoodOrder = ({ navigation }) => {
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    getAllFoodItems()
-      .then((res) => setData(res))
-      .catch((err) => console.log(err));
+    getAllFoodItems(setData);
   }, []);
   return (
     <View className="flex-1 items-center">
