@@ -18,9 +18,7 @@ const FoodOrder = ({ navigation ***REMOVED***) => {
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    getAllFoodItems()
-      .then((res) => setData(res))
-      .catch((err) => console.log(err));
+    getAllFoodItems(setData);
 ***REMOVED***, []);
   return (
     <View className="flex-1 items-center">

@@ -1,23 +1,26 @@
 import React from "react";
-import { View ***REMOVED*** from "react-native";
+
 import { Feather ***REMOVED*** from "@expo/vector-icons";
+import { View, Pressable ***REMOVED*** from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
 
 import TextBox from "../components/TextBox";
-import { AuthContext ***REMOVED*** from "../lib/context/authContext";
-import { Pressable ***REMOVED*** from "react-native";
-import { CartContext ***REMOVED*** from "../lib/context/cartContext";
+import Barber from "../components/home/Barber";
 import { getStatus ***REMOVED*** from "../lib/firebase/user";
+import SnackMen from "../components/home/SnackMen";
+import { AuthContext ***REMOVED*** from "../lib/context/authContext";
+import { CartContext ***REMOVED*** from "../lib/context/cartContext";
 import {
   getBarberBooking,
   getWaitingQueueLength,
 ***REMOVED*** from "../lib/firebase/barber";
-import Barber from "../components/home/Barber";
-import SnackMen from "../components/home/SnackMen";
-import { getUserOrders ***REMOVED*** from "../lib/firebase/food-order";
+
+SplashScreen.preventAutoHideAsync();
 
 const Home = ({ navigation ***REMOVED***) => {
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const [appIsReady, setAppIsReady] = React.useState(false);
+  const { authState ***REMOVED*** = React.useContext(AuthContext);
   const { value ***REMOVED*** = React.useContext(CartContext);
   const { cartState ***REMOVED*** = value;
   const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
@@ -33,10 +36,23 @@ const Home = ({ navigation ***REMOVED***) => {
     getWaitingQueueLength(setBarberWaitingQueueLength);
     getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
     getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
+    setAppIsReady(true);
 ***REMOVED***, []);
 
+  const onLayoutRootView = React.useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+***REMOVED***
+***REMOVED***, [appIsReady]);
+  if (!appIsReady) {
+    return null;
+***REMOVED***
+
   return (
-    <View className="flex-1 items-center justify-start">
+    <View
+      className="flex-1 items-center justify-start"
+      onLayout={onLayoutRootView***REMOVED***
+    >
       <View className="flex-center items-center w-full pt-2">
         <TextBox
           semibold
@@ -95,7 +111,9 @@ const Home = ({ navigation ***REMOVED***) => {
         barberWaitingQueueLength={barberWaitingQueueLength***REMOVED***
       />
       <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
-      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">v1.0.0</TextBox>
+      <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
+        v1.0.0
+      </TextBox>
     </View>
   );
 ***REMOVED***

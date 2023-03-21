@@ -20,8 +20,13 @@ const FoodItem = ({ item, index ***REMOVED***) => {
         </TextBox>
         <TextBox classNames="text-white">₹ {item.price***REMOVED***</TextBox>
         <View className="flex-row bg-primary-black rounded-xl mt-2 items-center justify-center">
-          <TextBox classNames="text-white p-2 text-xs">Availaible Qty : </TextBox>
-          <TextBox classNames="bg-primary-closed py-2 px-3 rounded-tr-xl rounded-br-xl">
+          <TextBox classNames="text-white p-2 text-xs">
+            Availaible Qty :{" "***REMOVED***
+          </TextBox>
+          <TextBox
+            semibold
+            classNames="bg-primary-closed py-2 px-3 rounded-tr-xl rounded-br-xl"
+          >
             {item.qty***REMOVED***
           </TextBox>
         </View>
