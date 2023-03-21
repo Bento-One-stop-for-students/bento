@@ -1,5 +1,6 @@
-import { Text } from "native-base";
 import React from "react";
+
+import { Text } from "native-base";
 
 const TextBox = ({ children, semibold, classNames, style }) => {
   return (

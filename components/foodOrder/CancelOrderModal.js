@@ -1,8 +1,10 @@
-import { View, Text, ActivityIndicator } from "react-native";
 import React from "react";
+
 import { Modal } from "native-base";
-import TextBox from "../TextBox";
+import { ActivityIndicator } from "react-native";
+
 import Button from "../Button";
+import TextBox from "../TextBox";
 import { AuthContext } from "../../lib/context/authContext";
 import { cancelUserOrder, getUserOrders } from "../../lib/firebase/food-order";
 

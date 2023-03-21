@@ -1,13 +1,11 @@
 import React from "react";
 
-import { View } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { View, TouchableHighlight } from "react-native";
 
 import TextBox from "../../components/TextBox";
 import { AuthContext } from "../../lib/context/authContext";
-import BookingItem from "../../components/barber/BookingItem";
 import { getBarberBooking } from "../../lib/firebase/barber";
+import BookingItem from "../../components/barber/BookingItem";
 
 const Bookings = ({ navigation }) => {
   const { authState } = React.useContext(AuthContext);

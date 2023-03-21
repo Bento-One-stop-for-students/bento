@@ -3,13 +3,13 @@ import React from "react";
 import { View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-import TextBox from "../components/TextBox";
-import { getAllFoodItems } from "../lib/firebase/food-order";
-import { CartContext } from "../lib/context/cartContext";
-import { Pressable } from "native-base";
 import { FlatList } from "react-native";
-import FoodItem from "../components/foodOrder/FoodItem";
+import { Pressable } from "native-base";
 import Button from "../components/Button";
+import TextBox from "../components/TextBox";
+import FoodItem from "../components/foodOrder/FoodItem";
+import { CartContext } from "../lib/context/cartContext";
+import { getAllFoodItems } from "../lib/firebase/food-order";
 
 const FoodOrder = ({ navigation }) => {
   const { value } = React.useContext(CartContext);

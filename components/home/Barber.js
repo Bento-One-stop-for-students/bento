@@ -1,11 +1,13 @@
-import { View, ActivityIndicator, Image } from "react-native";
 import React from "react";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, ActivityIndicator, Image } from "react-native";
+
+import Button from "../Button";
 import TextBox from "../TextBox";
 import BookingItem from "../barber/BookingItem";
 import BarberQueueModal from "../barber/BarberQueueModal";
-import Button from "../Button";
 import CancelBookingModal from "../barber/CancelBookingModal";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Barber = ({
   isLoading,

@@ -1,10 +1,10 @@
 import React from "react";
-import { Image } from "react-native";
+
 import { Entypo } from "@expo/vector-icons";
-import { View } from "react-native";
-import { CartContext } from "../../lib/context/cartContext";
+import { View, Image, Pressable } from "react-native";
+
 import TextBox from "../TextBox";
-import { Pressable } from "react-native";
+import { CartContext } from "../../lib/context/cartContext";
 
 const FoodItem = ({ item, index }) => {
   const { value } = React.useContext(CartContext);

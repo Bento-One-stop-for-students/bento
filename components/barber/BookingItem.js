@@ -1,5 +1,7 @@
-import { View } from "react-native";
 import React from "react";
+
+import { View } from "react-native";
+
 import TextBox from "../TextBox";
 
 const BookingItem = ({ item }) => {

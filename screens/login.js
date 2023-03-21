@@ -1,7 +1,6 @@
 import React from "react";
 
-import { ActivityIndicator, View } from "react-native";
-import { Image } from "react-native";
+import { ActivityIndicator, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import Button from "../components/Button";

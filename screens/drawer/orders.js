@@ -1,15 +1,14 @@
 import React from "react";
 
-import { View } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { FlatList } from "native-base";
+import { View, Pressable } from "react-native";
 
 import TextBox from "../../components/TextBox";
-import { AuthContext } from "../../lib/context/authContext";
-import { FlatList } from "native-base";
-import OrderItem from "../../components/foodOrder/OrderItem";
-import CancelOrderModal from "../../components/foodOrder/CancelOrderModal";
 import { useFocusEffect } from "@react-navigation/native";
+import { AuthContext } from "../../lib/context/authContext";
+import OrderItem from "../../components/foodOrder/OrderItem";
 import { getUserOrders } from "../../lib/firebase/food-order";
+import CancelOrderModal from "../../components/foodOrder/CancelOrderModal";
 
 const Orders = ({ navigation }) => {
   const { authState, authDispatch } = React.useContext(AuthContext);
@@ -52,7 +51,7 @@ const Orders = ({ navigation }) => {
           <TextBox semibold classNames="text-white text-3xl mr-10">
             Orders
           </TextBox>
-          <TouchableHighlight
+          <Pressable
             onPress={() => {
               navigation.openDrawer();
             }}
@@ -62,7 +61,7 @@ const Orders = ({ navigation }) => {
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
             </>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
       {!isLoading ? (

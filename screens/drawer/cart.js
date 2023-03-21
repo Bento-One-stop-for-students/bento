@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Entypo } from "@expo/vector-icons";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import {
   ActivityIndicator,
   View,
@@ -16,13 +15,6 @@ import messaging from "@react-native-firebase/messaging";
 import { CartContext } from "../../lib/context/cartContext";
 import { AuthContext } from "../../lib/context/authContext";
 import { createUserOrder, getUserOrders } from "../../lib/firebase/food-order";
-
-async function requestUserPermission() {
-  const authStatus = await messaging().requestPermission();
-  const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-}
 
 const Cart = ({ navigation }) => {
   const { authDispatch } = React.useContext(AuthContext);
@@ -46,9 +38,9 @@ const Cart = ({ navigation }) => {
   }, [cartState]);
 
   const handleCreateOrder = async () => {
+    await messaging().requestPermission();
     try {
       setDisabled(true);
-      await requestUserPermission();
       const token = await messaging().getToken();
       const res = await createUserOrder({
         id: authState.user.id,
