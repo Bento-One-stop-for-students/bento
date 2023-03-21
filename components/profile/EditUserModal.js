@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Modal ***REMOVED*** from "native-base";
-
-import TextBox from "../TextBox";
-import InputField from "../InputField";
-import { editUser, getUser ***REMOVED*** from "../../lib/firebase/user";
-import Button from "../Button";
-import DropDown from "../DropDown";
 import { ActivityIndicator ***REMOVED*** from "react-native";
+
+import Button from "../Button";
+import TextBox from "../TextBox";
+import DropDown from "../DropDown";
+import InputField from "../InputField";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
+import { editUser, getUser ***REMOVED*** from "../../lib/firebase/user";
 import OverLayNotificationModal from "../OverLayNotificationModal";
 
 const EditUserModal = (props) => {

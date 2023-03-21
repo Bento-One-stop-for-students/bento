@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Feather ***REMOVED*** from "@expo/vector-icons";
-import { View, Image, TouchableHighlight, Pressable ***REMOVED*** from "react-native";
+import { View, Image, Pressable ***REMOVED*** from "react-native";
 
 import TextBox from "../../components/TextBox";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
@@ -30,7 +30,7 @@ const Profile = ({ navigation ***REMOVED***) => {
           <TextBox semibold classNames="text-white text-3xl mr-10">
             Profile
           </TextBox>
-          <TouchableHighlight
+          <Pressable
             onPress={() => {
               navigation.openDrawer();
         ***REMOVED******REMOVED***
@@ -40,7 +40,7 @@ const Profile = ({ navigation ***REMOVED***) => {
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
             </>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
       <View className="w-full px-10">

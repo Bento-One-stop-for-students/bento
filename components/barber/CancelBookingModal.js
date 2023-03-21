@@ -1,8 +1,10 @@
-import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
+
 import { Modal ***REMOVED*** from "native-base";
-import TextBox from "../TextBox";
+import { ActivityIndicator ***REMOVED*** from "react-native";
+
 import Button from "../Button";
+import TextBox from "../TextBox";
 import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
 import { deleteBarberBooking ***REMOVED*** from "../../lib/firebase/barber";
 

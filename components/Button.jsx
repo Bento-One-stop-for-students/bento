@@ -1,5 +1,6 @@
-import { Pressable ***REMOVED*** from "react-native";
 import React from "react";
+
+import { Pressable ***REMOVED*** from "react-native";
 
 const Button = (props) => {
   return (

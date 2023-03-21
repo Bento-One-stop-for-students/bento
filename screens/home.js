@@ -3,7 +3,6 @@ import React from "react";
 import { Feather ***REMOVED*** from "@expo/vector-icons";
 import { View, Pressable ***REMOVED*** from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
 
 import TextBox from "../components/TextBox";
 import Barber from "../components/home/Barber";
@@ -85,7 +84,7 @@ const Home = ({ navigation ***REMOVED***) => {
               {size***REMOVED***
             </TextBox>
           </Pressable>
-          <TouchableHighlight
+          <Pressable
             onPress={() => {
               navigation.openDrawer();
         ***REMOVED******REMOVED***
@@ -95,7 +94,7 @@ const Home = ({ navigation ***REMOVED***) => {
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
             </>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
       <View className="w-full mt-2 ml-14">

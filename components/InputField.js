@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Input ***REMOVED*** from "native-base";
 
 const InputField = (props) => {

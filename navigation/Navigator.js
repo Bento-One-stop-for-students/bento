@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   createStackNavigator,
   TransitionPresets,
@@ -9,14 +10,13 @@ import { createDrawerNavigator ***REMOVED*** from "@react-navigation/drawer";
 
 import Home from "../screens/home";
 import Login from "../screens/login";
+import Cart from "../screens/drawer/cart";
 import CustomDrawer from "./CustomDrawer";
 import Register from "../screens/register";
-import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 import FoodOrder from "../screens/foodOrder";
-import Cart from "../screens/drawer/cart";
 import Orders from "../screens/drawer/orders";
-import Bookings from "../screens/drawer/bookings";
 import Profile from "../screens/drawer/profile";
+import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 
 const Drawer = createDrawerNavigator();
 

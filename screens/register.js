@@ -1,11 +1,13 @@
-import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
-import TextBox from "../components/TextBox";
-import InputField from "../components/InputField";
-import DropDown from "../components/DropDown";
+
+import { View, ActivityIndicator ***REMOVED*** from "react-native";
+
 import Button from "../components/Button";
-import { createUser, getUser ***REMOVED*** from "../lib/firebase/user";
+import TextBox from "../components/TextBox";
+import DropDown from "../components/DropDown";
+import InputField from "../components/InputField";
 import { AuthContext ***REMOVED*** from "../lib/context/authContext";
+import { createUser, getUser ***REMOVED*** from "../lib/firebase/user";
 
 const Register = ({ navigation, route ***REMOVED***) => {
   const { authDispatch ***REMOVED*** = React.useContext(AuthContext);

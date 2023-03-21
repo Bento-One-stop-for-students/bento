@@ -1,5 +1,7 @@
-import { View, Text ***REMOVED*** from "react-native";
 import React from "react";
+
+import { View***REMOVED*** from "react-native";
+
 import TextBox from "./TextBox";
 import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 

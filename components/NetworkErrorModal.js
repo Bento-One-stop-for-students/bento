@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Modal ***REMOVED*** from "native-base";
+
 import TextBox from "./TextBox";
 
 const NetworkErrorModal = (props) => {
