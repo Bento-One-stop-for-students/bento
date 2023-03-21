@@ -35,7 +35,7 @@ const Register = ({ navigation, route }) => {
     setDisabled(true);
     if (
       hostelValue == "" ||
-      roomValue.trim() == "" ||
+      roomValue.trim().length !== 3 ||
       phoneNumber.trim().length !== 10
     ) {
       setIsInvalid(true);
@@ -43,10 +43,8 @@ const Register = ({ navigation, route }) => {
       try {
         setIsInvalid(false);
         const { id, photo, email, givenName, familyName } = route.params.user;
-        // get branch of user
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
-
         const newUser = {
           id: id,
           name:
@@ -66,7 +64,7 @@ const Register = ({ navigation, route }) => {
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber.trim()),
+          mobile_no: parseInt(phoneNumber),
         };
         const msg = await createUser(id, newUser);
         const user = await getUser(id);
