@@ -38,10 +38,18 @@ const EditUserModal = (props) => {
   ***REMOVED***
       setDisabled(true);
       if (toBeEditedValue == "Mobile No") {
-        if (newValue.length !== 10) {
+        if (newValue.trim().length !== 10) {
     ***REMOVED***
             type: "NOTIFICATION_TRUE",
             payload: "Invalid Mobile No.",
+          ***REMOVED***
+          return;
+    ***REMOVED***
+  ***REMOVED*** else if (toBeEditedValue == "Room No") {
+        if (newValue.trim().length !== 3) {
+    ***REMOVED***
+            type: "NOTIFICATION_TRUE",
+            payload: "Invalid Room No",
           ***REMOVED***
           return;
     ***REMOVED***
