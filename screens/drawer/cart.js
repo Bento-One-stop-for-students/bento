@@ -56,6 +56,7 @@ const Cart = ({ navigation ***REMOVED***) => {
 ***REMOVED*** type: "NOTIFICATION_TRUE", payload: res ***REMOVED***
 ***REMOVED*** type: "GET_ORDERS", payload: updatedOrders ***REMOVED***
 ***REMOVED*** catch (err) {
+      console.log(err);
 ***REMOVED***
         type: "NOTIFICATION_TRUE",
         payload: `${
@@ -64,8 +65,6 @@ const Cart = ({ navigation ***REMOVED***) => {
             : "Couldn't create order"
     ***REMOVED***`,
       ***REMOVED***
-
-      console.log(err);
 ***REMOVED*** finally {
       cartDispatch({ type: "EMPTY_CART" ***REMOVED***
       setTimeout(() => {
