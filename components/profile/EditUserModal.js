@@ -29,6 +29,7 @@ const EditUserModal = (props) => {
     { label: "BH-5", value: "BH-5" },
     { label: "BH-6", value: "BH-6" },
     { label: "BH-7", value: "BH-7" },
+    // ***** DO NOT DELETE *****
     // { label: "GH-1", value: "GH-1" },
     // { label: "GH-2", value: "GH-2" },
     // { label: "MGH", value: "MGH" },
