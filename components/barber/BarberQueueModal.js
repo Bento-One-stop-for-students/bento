@@ -1,49 +1,49 @@
 import React from "react";
 
-import { Modal ***REMOVED*** from "native-base";
-import { View, ActivityIndicator ***REMOVED*** from "react-native";
+import { Modal } from "native-base";
+import { View, ActivityIndicator } from "react-native";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
-import { bookBarber ***REMOVED*** from "../../lib/firebase/barber";
+import { bookBarber } from "../../lib/firebase/barber";
 import messaging from "@react-native-firebase/messaging";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
+import { AuthContext } from "../../lib/context/authContext";
 
 const BarberQueueModal = (props) => {
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const { authState, authDispatch } = React.useContext(AuthContext);
   const [disabled, setDisabled] = React.useState(false);
 
   const handleBarberQueue = async () => {
     await messaging().requestPermission();
-  ***REMOVED***
+    try {
       setDisabled(true);
       const token = await messaging().getToken();
-      await bookBarber(authState.user.id, { fcm_token: token ***REMOVED***
-***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Added to queue" ***REMOVED***
-***REMOVED*** catch (err) {
+      await bookBarber(authState.user.id, { fcm_token: token });
+      authDispatch({ type: "NOTIFICATION_TRUE", payload: "Added to queue" });
+    } catch (err) {
       console.log(err);
-***REMOVED***
+      authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Network Error. Try again later",
-      ***REMOVED***
-***REMOVED*** finally {
+      });
+    } finally {
       setTimeout(() => {
-  ***REMOVED*** type: "NOTIFICATION_FALSE" ***REMOVED***
-  ***REMOVED***, 2000);
+        authDispatch({ type: "NOTIFICATION_FALSE" });
+      }, 2000);
       setDisabled(false);
       props.onClose(false);
-***REMOVED***
-***REMOVED***;
+    }
+  };
 
   return (
     <Modal
-      isOpen={props.isOpen***REMOVED***
+      isOpen={props.isOpen}
       onClose={() => {
         props.onClose(false);
-  ***REMOVED******REMOVED***
+      }}
       size="lg"
       animationPreset="slide"
-      closeOnOverlayClick={true***REMOVED***
+      closeOnOverlayClick={true}
     >
       <Modal.Content className="bg-[#AE78D3] rounded-3xl">
         <Modal.Body>
@@ -62,9 +62,9 @@ const BarberQueueModal = (props) => {
           <Button
             classNames={`rounded-2xl bg-primary-black items-center justify-center mt-3 ${
               disabled && "opacity-50"
-        ***REMOVED***`***REMOVED***
-            onPress={handleBarberQueue***REMOVED***
-            disabled={disabled***REMOVED***
+            }`}
+            onPress={handleBarberQueue}
+            disabled={disabled}
           >
             {disabled ? (
               <ActivityIndicator size="large" color="white" />
@@ -72,12 +72,12 @@ const BarberQueueModal = (props) => {
               <TextBox semibold classNames="text-white">
                 Agree & Queue
               </TextBox>
-            )***REMOVED***
+            )}
           </Button>
         </Modal.Body>
       </Modal.Content>
     </Modal>
   );
-***REMOVED***
+};
 
 export default BarberQueueModal;

@@ -1,43 +1,43 @@
 import React from "react";
 
-import { Modal ***REMOVED*** from "native-base";
-import { ActivityIndicator ***REMOVED*** from "react-native";
+import { Modal } from "native-base";
+import { ActivityIndicator } from "react-native";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { cancelUserOrder, getUserOrders ***REMOVED*** from "../../lib/firebase/food-order";
+import { AuthContext } from "../../lib/context/authContext";
+import { cancelUserOrder, getUserOrders } from "../../lib/firebase/food-order";
 
 const CancelOrderModal = (props) => {
   const [disabled, setDisabled] = React.useState(false);
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const { authState, authDispatch } = React.useContext(AuthContext);
 
   const handleCancelOrder = async () => {
-  ***REMOVED***
+    try {
       setDisabled(true);
       await cancelUserOrder(authState.user.id, props.isOpen);
       const updatedOrders = await getUserOrders(authState.user.id);
-***REMOVED*** type: "GET_ORDERS", payload: updatedOrders ***REMOVED***
-***REMOVED*** type: "NOTIFICATION_TRUE", payload: "Order Cancelled" ***REMOVED***
-***REMOVED*** catch (err) {
-***REMOVED***
+      authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
+      authDispatch({ type: "NOTIFICATION_TRUE", payload: "Order Cancelled" });
+    } catch (err) {
+      authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Network Error. Try again later",
-      ***REMOVED***
-***REMOVED*** finally {
+      });
+    } finally {
       setTimeout(() => {
-  ***REMOVED*** type: "NOTIFICATION_FALSE" ***REMOVED***
-  ***REMOVED***, 2000);
+        authDispatch({ type: "NOTIFICATION_FALSE" });
+      }, 2000);
       setDisabled(false);
       props.onClose(false);
-***REMOVED***
-***REMOVED***;
+    }
+  };
   return (
     <Modal
-      isOpen={props.isOpen ? true : false***REMOVED***
+      isOpen={props.isOpen ? true : false}
       onClose={() => {
         props.onClose(false);
-  ***REMOVED******REMOVED***
+      }}
       animationPreset="slide"
     >
       <Modal.Content className="bg-primary-snackmen  rounded-3xl p-5">
@@ -50,9 +50,9 @@ const CancelOrderModal = (props) => {
         <Button
           classNames={`bg-primary-black items-center justify-center ${
             disabled && "opacity-50"
-      ***REMOVED***`***REMOVED***
-          onPress={handleCancelOrder***REMOVED***
-          disabled={disabled***REMOVED***
+          }`}
+          onPress={handleCancelOrder}
+          disabled={disabled}
         >
           {disabled ? (
             <ActivityIndicator size="large" color="white" />
@@ -60,11 +60,11 @@ const CancelOrderModal = (props) => {
             <TextBox semibold classNames="text-white">
               Cancel Order
             </TextBox>
-          )***REMOVED***
+          )}
         </Button>
       </Modal.Content>
     </Modal>
   );
-***REMOVED***
+};
 
 export default CancelOrderModal;

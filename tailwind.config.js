@@ -1,11 +1,11 @@
-/** @type {import('tailwindcss').Config***REMOVED*** */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./App.{js,jsx,ts,tsx***REMOVED***",
-    "./AppExtended.{js,jsx,ts,tsx***REMOVED***",
-    "./components/**/*.{js,jsx,ts,tsx***REMOVED***",
-    "./screens/**/*.{js,jsx,ts,tsx***REMOVED***",
-    "./navigation/**/*.{js,jsx,ts,tsx***REMOVED***",
+    "./App.{js,jsx,ts,tsx}",
+    "./AppExtended.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./screens/**/*.{js,jsx,ts,tsx}",
+    "./navigation/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -15,8 +15,8 @@ module.exports = {
         "primary-closed": "#CCCCCC",
         "primary-black": "#1E1B1B",
         "secondary-black": "#353232",
-  ***REMOVED***,
-***REMOVED***,
-***REMOVED***,
+      },
+    },
+  },
   plugins: [],
-***REMOVED***
+};

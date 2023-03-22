@@ -1,121 +1,121 @@
 import React from "react";
 
-import { Modal ***REMOVED*** from "native-base";
-import { ActivityIndicator ***REMOVED*** from "react-native";
+import { Modal } from "native-base";
+import { ActivityIndicator } from "react-native";
 
 import Button from "../Button";
 import TextBox from "../TextBox";
 import DropDown from "../DropDown";
 import InputField from "../InputField";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { editUser, getUser ***REMOVED*** from "../../lib/firebase/user";
+import { AuthContext } from "../../lib/context/authContext";
+import { editUser, getUser } from "../../lib/firebase/user";
 import OverLayNotificationModal from "../OverLayNotificationModal";
 
 const EditUserModal = (props) => {
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const { authState, authDispatch } = React.useContext(AuthContext);
   const toBeEditedValue = Object.keys(props.editedValue)[0];
   const editedValueToSend = props.editedValue[toBeEditedValue];
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
   const [newValue, setNewValue] = React.useState("");
   const [hostelItems, setHostelItems] = React.useState([
-    { label: "MBH-A", value: "MBH-A" ***REMOVED***,
-    { label: "MBH-B", value: "MBH-B" ***REMOVED***,
-    { label: "MBH-F", value: "MBH-F" ***REMOVED***,
-    { label: "BH-1", value: "BH-1" ***REMOVED***,
-    { label: "BH-2", value: "BH-2" ***REMOVED***,
-    { label: "BH-3", value: "BH-3" ***REMOVED***,
-    { label: "BH-4", value: "BH-4" ***REMOVED***,
-    { label: "BH-5", value: "BH-5" ***REMOVED***,
-    { label: "BH-6", value: "BH-6" ***REMOVED***,
-    { label: "BH-7", value: "BH-7" ***REMOVED***,
-    // { label: "GH-1", value: "GH-1" ***REMOVED***,
-    // { label: "GH-2", value: "GH-2" ***REMOVED***,
-    // { label: "MGH", value: "MGH" ***REMOVED***,
+    { label: "MBH-A", value: "MBH-A" },
+    { label: "MBH-B", value: "MBH-B" },
+    { label: "MBH-F", value: "MBH-F" },
+    { label: "BH-1", value: "BH-1" },
+    { label: "BH-2", value: "BH-2" },
+    { label: "BH-3", value: "BH-3" },
+    { label: "BH-4", value: "BH-4" },
+    { label: "BH-5", value: "BH-5" },
+    { label: "BH-6", value: "BH-6" },
+    { label: "BH-7", value: "BH-7" },
+    // { label: "GH-1", value: "GH-1" },
+    // { label: "GH-2", value: "GH-2" },
+    // { label: "MGH", value: "MGH" },
   ]);
 
   const handleEdit = async () => {
-  ***REMOVED***
+    try {
       setDisabled(true);
       if (toBeEditedValue == "Mobile No") {
         if (newValue.trim().length !== 10) {
-    ***REMOVED***
+          authDispatch({
             type: "NOTIFICATION_TRUE",
             payload: "Invalid Mobile No.",
-          ***REMOVED***
+          });
           return;
-    ***REMOVED***
-  ***REMOVED*** else if (toBeEditedValue == "Room No") {
+        }
+      } else if (toBeEditedValue == "Room No") {
         if (newValue.trim().length !== 3) {
-    ***REMOVED***
+          authDispatch({
             type: "NOTIFICATION_TRUE",
             payload: "Invalid Room No",
-          ***REMOVED***
+          });
           return;
-    ***REMOVED***
-  ***REMOVED***
-      const editedUser = {***REMOVED***
+        }
+      }
+      const editedUser = {};
       editedUser[editedValueToSend] = newValue;
       await editUser(authState.user.id, editedUser);
       const user = await getUser(authState.user.id);
-***REMOVED***
+      authDispatch({
         type: "UPDATE_USER",
-***REMOVED*** user, msg: `Updated ${toBeEditedValue***REMOVED***` ***REMOVED***,
-      ***REMOVED***
-***REMOVED*** catch (err) {
-***REMOVED***
+        payload: { user, msg: `Updated ${toBeEditedValue}` },
+      });
+    } catch (err) {
+      authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Couldn't update user",
-      ***REMOVED***
+      });
       console.log(err);
-***REMOVED*** finally {
+    } finally {
       setDisabled(false);
       setTimeout(() => {
-  ***REMOVED*** type: "NOTIFICATION_FALSE" ***REMOVED***
-  ***REMOVED***, 2000);
+        authDispatch({ type: "NOTIFICATION_FALSE" });
+      }, 2000);
       props.onClose(false);
-***REMOVED***
-***REMOVED***;
+    }
+  };
   return (
     <Modal
-      isOpen={props.isOpen***REMOVED***
-      onClose={() => props.onClose(false)***REMOVED***
+      isOpen={props.isOpen}
+      onClose={() => props.onClose(false)}
       size="lg"
-      overlayVisible={false***REMOVED***
+      overlayVisible={false}
       animationPreset="slide"
     >
       <Modal.Content>
         <Modal.Header>
           <TextBox semibold classNames="text-lg">
-            Edit {toBeEditedValue***REMOVED***
+            Edit {toBeEditedValue}
           </TextBox>
         </Modal.Header>
         <Modal.CloseButton />
         <Modal.Body>
-          <TextBox>{toBeEditedValue***REMOVED***</TextBox>
+          <TextBox>{toBeEditedValue}</TextBox>
           {toBeEditedValue == "Hostel" ? (
             <DropDown
-              open={open***REMOVED***
-              setOpen={setOpen***REMOVED***
-              value={newValue***REMOVED***
-              items={hostelItems***REMOVED***
-              setValue={setNewValue***REMOVED***
-              setItems={setHostelItems***REMOVED***
-              placeholder={"Select Hostel"***REMOVED***
+              open={open}
+              setOpen={setOpen}
+              value={newValue}
+              items={hostelItems}
+              setValue={setNewValue}
+              setItems={setHostelItems}
+              placeholder={"Select Hostel"}
             />
           ) : (
             <InputField
               numeric
-              placeholder={`Enter ${toBeEditedValue***REMOVED***`***REMOVED***
-              onValueChange={setNewValue***REMOVED***
+              placeholder={`Enter ${toBeEditedValue}`}
+              onValueChange={setNewValue}
             />
-          )***REMOVED***
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button
-            classNames={`bg-primary-black ${disabled && "opacity-50"***REMOVED***`***REMOVED***
-            onPress={handleEdit***REMOVED***
-            disabled={disabled***REMOVED***
+            classNames={`bg-primary-black ${disabled && "opacity-50"}`}
+            onPress={handleEdit}
+            disabled={disabled}
           >
             {disabled ? (
               <ActivityIndicator size="large" color="#353232" />
@@ -123,13 +123,13 @@ const EditUserModal = (props) => {
               <TextBox semibold classNames="text-white">
                 Save
               </TextBox>
-            )***REMOVED***
+            )}
           </Button>
         </Modal.Footer>
       </Modal.Content>
       <OverLayNotificationModal />
     </Modal>
   );
-***REMOVED***
+};
 
 export default EditUserModal;

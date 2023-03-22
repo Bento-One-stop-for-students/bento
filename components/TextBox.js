@@ -1,19 +1,19 @@
 import React from "react";
 
-import { Text ***REMOVED*** from "native-base";
+import { Text } from "native-base";
 
-const TextBox = ({ children, semibold, classNames, style ***REMOVED***) => {
+const TextBox = ({ children, semibold, classNames, style }) => {
   return (
     <Text
       style={{
         fontFamily: semibold ? "Poppins_600SemiBold" : "Poppins_500Medium",
         ...style,
-  ***REMOVED******REMOVED***
-      className={`${classNames***REMOVED***`***REMOVED***
+      }}
+      className={`${classNames}`}
     >
-      {children***REMOVED***
+      {children}
     </Text>
   );
-***REMOVED***
+};
 
 export default TextBox;

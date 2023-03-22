@@ -1,36 +1,36 @@
 {
   "cli": {
     "version": ">= 3.7.2"
-***REMOVED***,
+  },
   "build": {
     "development": {
       "env": {
         "FIREBASE_ENV": "dev"
-  ***REMOVED***,
+      },
       "android": {
         "buildType": "apk"
-  ***REMOVED***,
+      },
       "channel": "development"
-***REMOVED***,
+    },
     "production": {
       "env": {
         "FIREBASE_ENV": "prod"
-  ***REMOVED***,
+      },
       "android": {
         "buildType": "apk"
-  ***REMOVED***,
+      },
       "channel": "production"
-***REMOVED***,
+    },
     "development-client": {
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
-  ***REMOVED***,
+      },
       "channel": "development"
-***REMOVED***
-***REMOVED***,
+    }
+  },
   "submit": {
-    "production": {***REMOVED***
-***REMOVED***
-***REMOVED***
+    "production": {}
+  }
+}

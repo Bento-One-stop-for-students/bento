@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Modal ***REMOVED*** from "native-base";
+import { Modal } from "native-base";
 
 import TextBox from "./TextBox";
 
 const NetworkErrorModal = (props) => {
   return (
     <Modal
-      isOpen={props.isOpen ? true : false***REMOVED***
+      isOpen={props.isOpen ? true : false}
       onClose={() => {
         props.onClose(false);
-  ***REMOVED******REMOVED***
+      }}
       animationPreset="slide"
     >
       <Modal.Content className="rounded-3xl p-5">
@@ -23,6 +23,6 @@ const NetworkErrorModal = (props) => {
       </Modal.Content>
     </Modal>
   );
-***REMOVED***
+};
 
 export default NetworkErrorModal;

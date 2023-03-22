@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Feather ***REMOVED*** from "@expo/vector-icons";
-import { View, Image, Pressable ***REMOVED*** from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { View, Image, Pressable } from "react-native";
 
 import TextBox from "../../components/TextBox";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
+import { AuthContext } from "../../lib/context/authContext";
 import EditUserModal from "../../components/profile/EditUserModal";
 
-const Profile = ({ navigation ***REMOVED***) => {
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
+const Profile = ({ navigation }) => {
+  const { authState } = React.useContext(AuthContext);
   const [editedValue, setEditedValue] = React.useState("");
   const [openEditModal, setOpenEditModal] = React.useState(false);
 
@@ -22,7 +22,7 @@ const Profile = ({ navigation ***REMOVED***) => {
             includeFontPadding: false,
             paddingTop: 100,
             fontFamily: "Poppins_700Bold",
-      ***REMOVED******REMOVED***
+          }}
         >
           BENTO
         </TextBox>
@@ -33,7 +33,7 @@ const Profile = ({ navigation ***REMOVED***) => {
           <Pressable
             onPress={() => {
               navigation.openDrawer();
-        ***REMOVED******REMOVED***
+            }}
           >
             <>
               <View className="w-10 h-2 m-1 bg-white" />
@@ -49,9 +49,9 @@ const Profile = ({ navigation ***REMOVED***) => {
             <Image
               source={
                 authState.user.img
-                  ? { uri: authState.user.img ***REMOVED***
+                  ? { uri: authState.user.img }
                   : require("../../assets/images/user.png")
-          ***REMOVED***
+              }
               className="h-32 w-32 rounded-[200px]"
               resizeMode="contain"
             />
@@ -62,24 +62,24 @@ const Profile = ({ navigation ***REMOVED***) => {
             Name
           </TextBox>
           <TextBox semibold classNames="text-primary-closed  text-lg">
-            {authState.user.name && authState.user.name***REMOVED***
+            {authState.user.name && authState.user.name}
           </TextBox>
         </View>
-        {/* Do not remove , for later purpose */***REMOVED***
+        {/* Do not remove , for later purpose */}
         {/* <View className="w-full mt-2">
           <TextBox semibold   classNames="text-white">
             Branch
           </TextBox>
           <TextBox semibold   classNames="text-primary-closed  text-lg">
-            {authState.user.branch.toUpperCase()***REMOVED***
+            {authState.user.branch.toUpperCase()}
           </TextBox>
-        </View> */***REMOVED***
+        </View> */}
         <View className="w-full mt-2">
           <TextBox semibold classNames="text-white">
             Email
           </TextBox>
           <TextBox semibold classNames="text-primary-closed  text-lg">
-            {authState.user.email && authState.user.email***REMOVED***
+            {authState.user.email && authState.user.email}
           </TextBox>
         </View>
         <View className="w-full mt-2">
@@ -90,15 +90,15 @@ const Profile = ({ navigation ***REMOVED***) => {
             <Pressable
               className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
-                setEditedValue({ Hostel: "hostel" ***REMOVED***
+                setEditedValue({ Hostel: "hostel" });
                 setOpenEditModal(true);
-          ***REMOVED******REMOVED***
+              }}
             >
-              <Feather name="edit-2" size={24***REMOVED*** color="black" />
+              <Feather name="edit-2" size={24} color="black" />
             </Pressable>
           </View>
           <TextBox semibold classNames="text-primary-closed  text-lg">
-            {authState.user.hostel && authState.user.hostel.toUpperCase()***REMOVED***
+            {authState.user.hostel && authState.user.hostel.toUpperCase()}
           </TextBox>
         </View>
         <View className="w-full mt-2">
@@ -109,15 +109,15 @@ const Profile = ({ navigation ***REMOVED***) => {
             <Pressable
               className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
-                setEditedValue({ "Room No": "room_no" ***REMOVED***
+                setEditedValue({ "Room No": "room_no" });
                 setOpenEditModal(true);
-          ***REMOVED******REMOVED***
+              }}
             >
-              <Feather name="edit-2" size={24***REMOVED*** color="black" />
+              <Feather name="edit-2" size={24} color="black" />
             </Pressable>
           </View>
           <TextBox semibold classNames="text-primary-closed  text-lg">
-            {authState.user.room_no && authState.user.room_no***REMOVED***
+            {authState.user.room_no && authState.user.room_no}
           </TextBox>
         </View>
         <View className="w-full mt-2">
@@ -128,15 +128,15 @@ const Profile = ({ navigation ***REMOVED***) => {
             <Pressable
               className="flex-row bg-primary-closed  rounded-xl p-1"
               onPress={() => {
-                setEditedValue({ "Mobile No": "mobile_no" ***REMOVED***
+                setEditedValue({ "Mobile No": "mobile_no" });
                 setOpenEditModal(true);
-          ***REMOVED******REMOVED***
+              }}
             >
-              <Feather name="edit-2" size={24***REMOVED*** color="black" />
+              <Feather name="edit-2" size={24} color="black" />
             </Pressable>
           </View>
           <TextBox semibold classNames="text-primary-closed  text-lg">
-            {authState.user.mobile_no && authState.user.mobile_no***REMOVED***
+            {authState.user.mobile_no && authState.user.mobile_no}
           </TextBox>
         </View>
         <View className="w-full items-center justify-center">
@@ -146,13 +146,13 @@ const Profile = ({ navigation ***REMOVED***) => {
         </View>
       </View>
       <EditUserModal
-        isOpen={openEditModal***REMOVED***
-        onClose={setOpenEditModal***REMOVED***
-        editedValue={editedValue***REMOVED***
-        id={authState.user.id***REMOVED***
+        isOpen={openEditModal}
+        onClose={setOpenEditModal}
+        editedValue={editedValue}
+        id={authState.user.id}
       />
     </View>
   );
-***REMOVED***
+};
 
 export default Profile;
