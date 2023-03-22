@@ -56,6 +56,7 @@ const Cart = ({ navigation }) => {
       authDispatch({ type: "NOTIFICATION_TRUE", payload: res });
       authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
     } catch (err) {
+      console.log(err);
       authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: `${
@@ -64,8 +65,6 @@ const Cart = ({ navigation }) => {
             : "Couldn't create order"
         }`,
       });
-
-      console.log(err);
     } finally {
       cartDispatch({ type: "EMPTY_CART" });
       setTimeout(() => {
