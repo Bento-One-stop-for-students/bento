@@ -1,110 +1,101 @@
 import React from "react";
 
-import { Pressable ***REMOVED*** from "native-base";
-import { Entypo ***REMOVED*** from "@expo/vector-icons";
-import { View, Animated ***REMOVED*** from "react-native";
+import { Pressable } from "native-base";
+import { Entypo } from "@expo/vector-icons";
+import { View, LayoutAnimation, UIManager } from "react-native";
 
 import TextBox from "../TextBox";
 
-const ExpandableView = ({ expanded, item, handleCancelOrderModal ***REMOVED***) => {
-  const [height] = React.useState(new Animated.Value(0));
-  React.useEffect(() => {
-    Animated.timing(height, {
-      toValue: expanded ? 2000 : 0,
-      duration: 300,
-      useNativeDriver: false,
-***REMOVED***).start();
-***REMOVED***, [expanded, height]);
+UIManager.setLayoutAnimationEnabledExperimental;
+
+const ExpandableView = ({ expanded, item, handleCancelOrderModal }) => {
   return (
-    <Animated.View
-      className="bg-secondary-black w-full"
-      style={{ maxHeight: height ***REMOVED******REMOVED***
+    <View
+      className={`${
+        expanded !== item.orderId ? "h-0 overflow-hidden" : "overflow-hidden"
+      } `}
     >
       {item.cart.map((item) => {
         return (
-          <Animated.View
-            style={{ maxHeight: height ***REMOVED******REMOVED***
-            className="flex-row justify-between items-center w-full bg-neutral-700 my-2 rounded-2xl"
-            key={item.id***REMOVED***
+          <View
+            className={` flex-row justify-between items-center w-full bg-neutral-700 my-2 rounded-2xl`}
+            key={item.id}
           >
             <View className="w-full flex-row justify-between items-center px-5 py-2 rounded-2xl">
               <View className="flex-row items-center ">
                 <View className="ml-5">
                   <TextBox semibold classNames="text-white">
-                    {item.name***REMOVED***
+                    {item.name}
                   </TextBox>
                   <TextBox semibold classNames="text-white text-sm">
-                    ₹ {item.price***REMOVED***
+                    ₹ {item.price}
                   </TextBox>
                 </View>
               </View>
               <TextBox semibold classNames="text-white">
-                {item.qty***REMOVED***
+                {item.qty}
               </TextBox>
             </View>
-          </Animated.View>
+          </View>
         );
-  ***REMOVED***)***REMOVED***
+      })}
       {!item.is_delivered && (
-        <Pressable onPress={handleCancelOrderModal***REMOVED***>
+        <Pressable onPress={handleCancelOrderModal}>
           <View className="mt-2 bg-red-400 rounded-2xl items-center justify-center">
             <TextBox semibold classNames="py-4">
               Cancel Order
             </TextBox>
           </View>
         </Pressable>
-      )***REMOVED***
-    </Animated.View>
+      )}
+    </View>
   );
-***REMOVED***
+};
 
 const OrderItem = ({
   item,
   setIsComponentOpen,
   isComponentOpen,
   cancelOrderModal,
-***REMOVED***) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
+}) => {
   const handleCancelOrderModal = async () => {
     cancelOrderModal(item.orderId);
-***REMOVED***;
-
-  React.useEffect(() => {
-    if (isComponentOpen !== item.orderId) {
-      setIsExpanded(false);
-***REMOVED***
-***REMOVED***, [isComponentOpen]);
+  };
 
   return (
     <Pressable
       className="bg-secondary-black  my-2 rounded-2xl p-5 justify-between items-center"
       onPress={() => {
-        setIsExpanded(!isExpanded);
-        setIsComponentOpen(item.orderId);
-  ***REMOVED******REMOVED***
+        LayoutAnimation.configureNext({
+          ...LayoutAnimation.Presets.easeInEaseOut,
+          duration: 100,
+        });
+        setIsComponentOpen(
+          item.orderId !== isComponentOpen ? item.orderId : false
+        );
+      }}
     >
       <View className="flex-col w-full justify-between items-center">
         <View className="flex-row w-full justify-between">
           <TextBox semibold classNames="text-[10px] text-[#CCCCCC]">
-            #{item.orderId***REMOVED***
+            #{item.orderId}
           </TextBox>
           <TextBox semibold classNames="text-white">
-            {item.timestamp.toDate().toDateString().slice(4)***REMOVED***
+            {item.timestamp.toDate().toDateString().slice(4)}
           </TextBox>
         </View>
         <View className="flex-row items-center justify-between w-full">
           <View>
             <View className="flex-row">
               <TextBox semibold classNames="text-white mr-5">
-                {item.hostel.toUpperCase()***REMOVED***
+                {item.hostel.toUpperCase()}
               </TextBox>
               <TextBox semibold classNames="text-white">
-                {item.room_no***REMOVED***
+                {item.room_no}
               </TextBox>
             </View>
             <TextBox semibold classNames="text-white">
-              ₹{item.total***REMOVED***
+              ₹{item.total}
             </TextBox>
           </View>
           <View className="items-center justify-center">
@@ -112,28 +103,29 @@ const OrderItem = ({
               semibold
               classNames={`${
                 item.is_delivered ? "text-green-400" : " text-primary-snackmen"
-          ***REMOVED***`***REMOVED***
+              }`}
             >
-              {item.is_delivered ? "Delivered" : "In Progress"***REMOVED***
+              {item.is_delivered ? "Delivered" : "In Progress"}
             </TextBox>
           </View>
         </View>
       </View>
-      {!isExpanded && (
-        <Entypo
-          name="chevron-thin-down"
-          size={15***REMOVED***
-          color="white"
-          style={{ marginBottom: -12 ***REMOVED******REMOVED***
-        />
-      )***REMOVED***
+      <Entypo
+        name="chevron-thin-down"
+        size={15}
+        color="white"
+        style={{
+          marginBottom: -12,
+          opacity: isComponentOpen !== item.orderId ? 100 : 0,
+        }}
+      />
       <ExpandableView
-        expanded={isExpanded***REMOVED***
-        item={item***REMOVED***
-        handleCancelOrderModal={handleCancelOrderModal***REMOVED***
+        expanded={isComponentOpen}
+        item={item}
+        handleCancelOrderModal={handleCancelOrderModal}
       />
     </Pressable>
   );
-***REMOVED***
+};
 
 export default OrderItem;

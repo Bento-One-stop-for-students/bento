@@ -1,5 +1,6 @@
 import React from "react";
-import { Input ***REMOVED*** from "native-base";
+
+import { Input } from "native-base";
 
 const InputField = (props) => {
   const handleChange = (text) => props.onValueChange(text.trim());
@@ -8,22 +9,22 @@ const InputField = (props) => {
       size="lg"
       w="100%"
       fontFamily="Poppins_500Medium"
-      placeholder={props.placeholder***REMOVED***
-      borderRadius={15***REMOVED***
-      isInvalid={props.isInvalid***REMOVED***
-      value={props.value***REMOVED***
-      onChangeText={handleChange***REMOVED***
+      placeholder={props.placeholder}
+      borderRadius={15}
+      isInvalid={props.isInvalid}
+      value={props.value}
+      onChangeText={handleChange}
       autoCapitalize="none"
-      keyboardType={props.numeric ? "numeric" : "name-phone-pad"***REMOVED***
-      type={props.password ? "password" : "text"***REMOVED***
-      backgroundColor={"white"***REMOVED***
+      keyboardType={props.numeric ? "numeric" : "name-phone-pad"}
+      type={props.password ? "password" : "text"}
+      backgroundColor={"white"}
       style={{
         backgroundColor: "white",
         marginTop:10,
         marginBottom:0,
-  ***REMOVED******REMOVED***
+      }}
     />
   );
-***REMOVED***
+};
 
 export default InputField;

@@ -1,25 +1,30 @@
 import React from "react";
-import { View ***REMOVED*** from "react-native";
-import { Feather ***REMOVED*** from "@expo/vector-icons";
-import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
+
+import { Feather } from "@expo/vector-icons";
+import { View, Pressable } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 
 import TextBox from "../components/TextBox";
-import { AuthContext ***REMOVED*** from "../lib/context/authContext";
-import { Pressable ***REMOVED*** from "react-native";
-import { CartContext ***REMOVED*** from "../lib/context/cartContext";
-import { getStatus ***REMOVED*** from "../lib/firebase/user";
+import Barber from "../components/home/Barber";
+import { getStatus } from "../lib/firebase/user";
+import SnackMen from "../components/home/SnackMen";
+import { AuthContext } from "../lib/context/authContext";
+import { CartContext } from "../lib/context/cartContext";
 import {
   getBarberBooking,
   getWaitingQueueLength,
-***REMOVED*** from "../lib/firebase/barber";
-import Barber from "../components/home/Barber";
-import SnackMen from "../components/home/SnackMen";
-import { getUserOrders ***REMOVED*** from "../lib/firebase/food-order";
+} from "../lib/firebase/barber";
+import Constants from "expo-constants";
 
-const Home = ({ navigation ***REMOVED***) => {
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
-  const { value ***REMOVED*** = React.useContext(CartContext);
-  const { cartState ***REMOVED*** = value;
+const version = Constants.expoConfig.version;
+
+SplashScreen.preventAutoHideAsync();
+
+const Home = ({ navigation }) => {
+  const [appIsReady, setAppIsReady] = React.useState(false);
+  const { authState } = React.useContext(AuthContext);
+  const { value } = React.useContext(CartContext);
+  const { cartState } = value;
   const [barberWaitingQueueLength, setBarberWaitingQueueLength] =
     React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -33,22 +38,23 @@ const Home = ({ navigation ***REMOVED***) => {
     getWaitingQueueLength(setBarberWaitingQueueLength);
     getBarberBooking(authState.user.id, setBarberBooking, setIsLoading);
     getStatus(setBarberStatus, setSnackmenStatus, setStatusLoading);
-    const getInfoFromFirebase = async () => {
-    ***REMOVED***
-        setIsLoading(true);
-        const orders = await getUserOrders(authState.user.id);
-  ***REMOVED*** type: "GET_ORDERS", payload: orders ***REMOVED***
-  ***REMOVED*** catch (err) {
-        console.log(err);
-  ***REMOVED*** finally {
-        setIsLoading(false);
-  ***REMOVED***
-***REMOVED***;
-    getInfoFromFirebase();
-***REMOVED***, []);
+    setAppIsReady(true);
+  }, []);
+
+  const onLayoutRootView = React.useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
-    <View className="flex-1 items-center justify-start">
+    <View
+      className="flex-1 items-center justify-start"
+      onLayout={onLayoutRootView}
+    >
       <View className="flex-center items-center w-full pt-2">
         <TextBox
           semibold
@@ -57,7 +63,7 @@ const Home = ({ navigation ***REMOVED***) => {
             includeFontPadding: false,
             paddingTop: 100,
             fontFamily: "Poppins_700Bold",
-      ***REMOVED******REMOVED***
+          }}
         >
           BENTO
         </TextBox>
@@ -66,52 +72,52 @@ const Home = ({ navigation ***REMOVED***) => {
             className=" pl-3 pt-3 mr-5 pb-3"
             onPress={() => {
               navigation.navigate("Cart");
-        ***REMOVED******REMOVED***
+            }}
           >
             <Feather
               name="shopping-cart"
-              style={{ transform: [{ rotateY: "180deg" ***REMOVED***] ***REMOVED******REMOVED***
-              size={35***REMOVED***
+              style={{ transform: [{ rotateY: "180deg" }] }}
+              size={35}
               color="white"
             />
             <TextBox
               semibold
               classNames="text-primary-snackmen  text-md bg-[#1E1b1b] px-2 pt-1 rounded-full absolute"
             >
-              {size***REMOVED***
+              {size}
             </TextBox>
           </Pressable>
-          <TouchableHighlight
+          <Pressable
             onPress={() => {
               navigation.openDrawer();
-        ***REMOVED******REMOVED***
+            }}
           >
             <>
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
             </>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
       <View className="w-full mt-2 ml-14">
-        <TextBox semibold classNames={"text-white text-3xl w-[80vw]"***REMOVED***>
-          Hi, {authState.user.name && authState.user.name.split(" ")[0]***REMOVED***👋
+        <TextBox semibold classNames={"text-white text-3xl w-[80vw]"}>
+          Hi, {authState.user.name && authState.user.name.split(" ")[0]}👋
         </TextBox>
       </View>
       <Barber
-        isLoading={isLoading***REMOVED***
-        statusLoading={statusLoading***REMOVED***
-        barberStatus={barberStatus***REMOVED***
-        barberBooking={barberBooking***REMOVED***
-        barberWaitingQueueLength={barberWaitingQueueLength***REMOVED***
+        isLoading={isLoading}
+        statusLoading={statusLoading}
+        barberStatus={barberStatus}
+        barberBooking={barberBooking}
+        barberWaitingQueueLength={barberWaitingQueueLength}
       />
-      <SnackMen navigation={navigation***REMOVED*** snackmenStatus={snackmenStatus***REMOVED*** />
+      <SnackMen navigation={navigation} snackmenStatus={snackmenStatus} />
       <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
-        v1.0.0
+        v{version}
       </TextBox>
     </View>
   );
-***REMOVED***
+};
 
 export default Home;

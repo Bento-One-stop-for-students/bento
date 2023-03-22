@@ -1,42 +1,44 @@
-import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
-import { Modal ***REMOVED*** from "native-base";
-import TextBox from "../TextBox";
+
+import { Modal } from "native-base";
+import { ActivityIndicator } from "react-native";
+
 import Button from "../Button";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { deleteBarberBooking ***REMOVED*** from "../../lib/firebase/barber";
+import TextBox from "../TextBox";
+import { AuthContext } from "../../lib/context/authContext";
+import { deleteBarberBooking } from "../../lib/firebase/barber";
 
 const CancelBookingModal = (props) => {
   const [disabled, setDisabled] = React.useState(false);
-  const { authState, authDispatch ***REMOVED*** = React.useContext(AuthContext);
+  const { authState, authDispatch } = React.useContext(AuthContext);
 
   const handleCancelBooking = async () => {
-  ***REMOVED***
+    try {
       setDisabled(true);
       await deleteBarberBooking(authState.user.id);
-***REMOVED***
+      authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Removed from queue",
-      ***REMOVED***
-***REMOVED*** catch (err) {
-***REMOVED***
+      });
+    } catch (err) {
+      authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Network Error. Try again later",
-      ***REMOVED***
-***REMOVED*** finally {
+      });
+    } finally {
       setTimeout(() => {
-  ***REMOVED*** type: "NOTIFICATION_FALSE" ***REMOVED***
-  ***REMOVED***, 2000);
+        authDispatch({ type: "NOTIFICATION_FALSE" });
+      }, 2000);
       setDisabled(false);
       props.onClose(false);
-***REMOVED***
-***REMOVED***;
+    }
+  };
   return (
     <Modal
-      isOpen={props.isOpen ? true : false***REMOVED***
+      isOpen={props.isOpen ? true : false}
       onClose={() => {
         props.onClose(false);
-  ***REMOVED******REMOVED***
+      }}
       animationPreset="slide"
     >
       <Modal.Content className="bg-[#AE78D3] rounded-3xl p-5">
@@ -49,8 +51,8 @@ const CancelBookingModal = (props) => {
         <Button
           classNames={`bg-primary-black items-center justify-center ${
             disabled && "opacity-50"
-      ***REMOVED***`***REMOVED***
-          onPress={handleCancelBooking***REMOVED***
+          }`}
+          onPress={handleCancelBooking}
         >
           {disabled ? (
             <ActivityIndicator size="large" color="white" />
@@ -58,11 +60,11 @@ const CancelBookingModal = (props) => {
             <TextBox semibold classNames="text-white">
               Remove from queue
             </TextBox>
-          )***REMOVED***
+          )}
         </Button>
       </Modal.Content>
     </Modal>
   );
-***REMOVED***
+};
 
 export default CancelBookingModal;

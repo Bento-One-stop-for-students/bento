@@ -1,90 +1,90 @@
 import React from "react";
+
 import {
   createStackNavigator,
   TransitionPresets,
-***REMOVED*** from "@react-navigation/stack";
-import { View ***REMOVED*** from "react-native";
-import { NavigationContainer ***REMOVED*** from "@react-navigation/native";
-import { createDrawerNavigator ***REMOVED*** from "@react-navigation/drawer";
+} from "@react-navigation/stack";
+import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "../screens/home";
 import Login from "../screens/login";
+import Cart from "../screens/drawer/cart";
 import CustomDrawer from "./CustomDrawer";
 import Register from "../screens/register";
-import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 import FoodOrder from "../screens/foodOrder";
-import Cart from "../screens/drawer/cart";
 import Orders from "../screens/drawer/orders";
-import Bookings from "../screens/drawer/bookings";
 import Profile from "../screens/drawer/profile";
+import { AuthContext } from "../lib/context/authContext";
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawer {...props***REMOVED*** />***REMOVED***
+      drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
-        sceneContainerStyle: { backgroundColor: "#131212" ***REMOVED***,
+        sceneContainerStyle: { backgroundColor: "#131212" },
         drawerActiveBackgroundColor: "#353232",
         drawerPosition: "right",
         drawerStyle: {
           backgroundColor: "#131212",
           width: "80%",
-    ***REMOVED***,
+        },
         drawerLabelStyle: {
           fontFamily: "Poppins_600Semibold",
           fontSize: 18,
           color: "#989494",
-    ***REMOVED***,
+        },
         drawerType: "slide",
-  ***REMOVED******REMOVED***
+      }}
       initialRouteName="Home"
     >
-      <Drawer.Screen name="Home" component={Home***REMOVED*** />
-      <Drawer.Screen name="Profile" component={Profile***REMOVED*** />
-      <Drawer.Screen name="Your Orders" component={Orders***REMOVED*** />
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Your Orders" component={Orders} />
     </Drawer.Navigator>
   );
-***REMOVED***
+}
 
 export const navigationRef = React.createRef();
 const Stack = createStackNavigator();
 
 function Navigator() {
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
+  const { authState } = React.useContext(AuthContext);
   return (
     <View className="flex-1">
-      <NavigationContainer ref={navigationRef***REMOVED***>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
             ...TransitionPresets.SlideFromRightIOS,
             detachPreviousScreen: false,
-            cardStyle: { backgroundColor: "#131212" ***REMOVED***,
-      ***REMOVED******REMOVED***
+            cardStyle: { backgroundColor: "#131212" },
+          }}
         >
           {!authState.isLoggedIn ? (
             <>
-              <Stack.Screen name="Login" component={Login***REMOVED*** />
-              <Stack.Screen name="Register" component={Register***REMOVED*** />
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Register" component={Register} />
             </>
           ) : (
             <>
               <Stack.Screen
                 name="Main"
-                component={DrawerNavigator***REMOVED***
-                options={{ ...TransitionPresets.ModalSlideFromBottomIOS ***REMOVED******REMOVED***
+                component={DrawerNavigator}
+                options={{ ...TransitionPresets.ModalSlideFromBottomIOS }}
               />
-              <Stack.Screen name="Food Order" component={FoodOrder***REMOVED*** />
-              <Stack.Screen name="Cart" component={Cart***REMOVED*** />
+              <Stack.Screen name="Food Order" component={FoodOrder} />
+              <Stack.Screen name="Cart" component={Cart} />
             </>
-          )***REMOVED***
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </View>
   );
-***REMOVED***
+}
 
 export default Navigator;

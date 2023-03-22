@@ -1,14 +1,16 @@
-import { View, Text, ActivityIndicator ***REMOVED*** from "react-native";
 import React from "react";
-import TextBox from "../components/TextBox";
-import InputField from "../components/InputField";
-import DropDown from "../components/DropDown";
-import Button from "../components/Button";
-import { createUser, getUser ***REMOVED*** from "../lib/firebase/user";
-import { AuthContext ***REMOVED*** from "../lib/context/authContext";
 
-const Register = ({ navigation, route ***REMOVED***) => {
-  const { authDispatch ***REMOVED*** = React.useContext(AuthContext);
+import { View, ActivityIndicator } from "react-native";
+
+import Button from "../components/Button";
+import TextBox from "../components/TextBox";
+import DropDown from "../components/DropDown";
+import InputField from "../components/InputField";
+import { AuthContext } from "../lib/context/authContext";
+import { createUser, getUser } from "../lib/firebase/user";
+
+const Register = ({ navigation, route }) => {
+  const { authDispatch } = React.useContext(AuthContext);
   const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [roomValue, setRoomValue] = React.useState("");
@@ -16,38 +18,35 @@ const Register = ({ navigation, route ***REMOVED***) => {
   const [open, setOpen] = React.useState(false);
   const [hostelValue, setHostelValue] = React.useState("");
   const [hostelItems, setHostelItems] = React.useState([
-    { label: "MBH-A", value: "MBH-A" ***REMOVED***,
-    { label: "MBH-B", value: "MBH-B" ***REMOVED***,
-    { label: "MBH-F", value: "MBH-F" ***REMOVED***,
-    { label: "BH-1", value: "BH-1" ***REMOVED***,
-    { label: "BH-2", value: "BH-2" ***REMOVED***,
-    { label: "BH-3", value: "BH-3" ***REMOVED***,
-    { label: "BH-4", value: "BH-4" ***REMOVED***,
-    { label: "BH-5", value: "BH-5" ***REMOVED***,
-    { label: "BH-6", value: "BH-6" ***REMOVED***,
-    { label: "BH-7", value: "BH-7" ***REMOVED***,
-    // { label: "GH-1", value: "GH-1" ***REMOVED***,
-    // { label: "GH-2", value: "GH-2" ***REMOVED***,
-    // { label: "MGH", value: "MGH" ***REMOVED***,
+    { label: "MBH-A", value: "MBH-A" },
+    { label: "MBH-B", value: "MBH-B" },
+    { label: "MBH-F", value: "MBH-F" },
+    { label: "BH-1", value: "BH-1" },
+    { label: "BH-2", value: "BH-2" },
+    { label: "BH-3", value: "BH-3" },
+    { label: "BH-4", value: "BH-4" },
+    { label: "BH-5", value: "BH-5" },
+    { label: "BH-6", value: "BH-6" },
+    { label: "BH-7", value: "BH-7" },
+    // { label: "GH-1", value: "GH-1" },
+    // { label: "GH-2", value: "GH-2" },
+    // { label: "MGH", value: "MGH" },
   ]);
 
   const handleRegister = async () => {
     setDisabled(true);
-    console.log(roomValue, phoneNumber.replace(/\s+/g, " ").trim());
     if (
       hostelValue == "" ||
-      roomValue.trim() == "" ||
-      phoneNumber.trim().length < 10
+      roomValue.trim().length !== 3 ||
+      phoneNumber.trim().length !== 10
     ) {
       setIsInvalid(true);
-***REMOVED*** else {
-    ***REMOVED***
+    } else {
+      try {
         setIsInvalid(false);
-        const { id, photo, email, givenName, familyName ***REMOVED*** = route.params.user;
-        // get branch of user
+        const { id, photo, email, givenName, familyName } = route.params.user;
         const splitEmail = email.split(".");
         const branchCode = splitEmail[1];
-
         const newUser = {
           id: id,
           name:
@@ -62,38 +61,38 @@ const Register = ({ navigation, route ***REMOVED***) => {
           // club: {
           //   head: false,
           //   name: "",
-          // ***REMOVED***,
+          // },
           // gender: genderValue,
           hostel: hostelValue,
           room_no: parseInt(roomValue),
           // roll_no: rollNoValue,
-          mobile_no: parseInt(phoneNumber.trim()),
-    ***REMOVED***;
+          mobile_no: parseInt(phoneNumber),
+        };
         const msg = await createUser(id, newUser);
         const user = await getUser(id);
-  ***REMOVED*** type: "NOTIFICATION_TRUE", payload: msg ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        authDispatch({ type: "NOTIFICATION_TRUE", payload: msg });
+        authDispatch({
+          type: "SIGN_IN",
+          payload: {
             user,
-      ***REMOVED***,
-        ***REMOVED***
-  ***REMOVED*** catch (err) {
-  ***REMOVED***
+          },
+        });
+      } catch (err) {
+        authDispatch({
           type: "NOTIFICATION_TRUE",
           payload: "Couldn't create user",
-        ***REMOVED***
+        });
         console.log(err);
-  ***REMOVED*** finally {
+      } finally {
         setTimeout(() => {
-    ***REMOVED***
+          authDispatch({
             type: "NOTIFICATION_FALSE",
-          ***REMOVED***
-    ***REMOVED***, 2000);
-  ***REMOVED***
-***REMOVED***
+          });
+        }, 2000);
+      }
+    }
     setDisabled(false);
-***REMOVED***;
+  };
 
   return (
     <View className="flex-1 m-10">
@@ -104,19 +103,19 @@ const Register = ({ navigation, route ***REMOVED***) => {
         <TextBox semibold classNames="text-red-500 mt-5">
           Fields marked with * are necessary
         </TextBox>
-      )***REMOVED***
+      )}
       <View className="mt-10">
         <TextBox semibold classNames=" text-white">
           Hostel*
         </TextBox>
         <DropDown
-          open={open***REMOVED***
-          setOpen={setOpen***REMOVED***
-          value={hostelValue***REMOVED***
-          items={hostelItems***REMOVED***
-          setValue={setHostelValue***REMOVED***
-          setItems={setHostelItems***REMOVED***
-          placeholder={"Select Hostel"***REMOVED***
+          open={open}
+          setOpen={setOpen}
+          value={hostelValue}
+          items={hostelItems}
+          setValue={setHostelValue}
+          setItems={setHostelItems}
+          placeholder={"Select Hostel"}
         />
       </View>
       <View className="mt-5">
@@ -125,33 +124,33 @@ const Register = ({ navigation, route ***REMOVED***) => {
         </TextBox>
         <InputField
           placeholder="Enter Room No."
-          onValueChange={setRoomValue***REMOVED***
+          onValueChange={setRoomValue}
           numeric
         />
       </View>
-      {/*  For later don't delete */***REMOVED***
+      {/*  For later don't delete */}
 
       {/* <View className="mt-5">
         <TextBox semibold    classNames=" text-white">Roll No.</TextBox>
         <InputField
           placeholder="Enter Roll No."
-          // onValueChange={setEmail***REMOVED***
+          // onValueChange={setEmail}
         />
-      </View> */***REMOVED***
+      </View> */}
       <View className="mt-5">
         <TextBox semibold classNames=" text-white">
           Phone No.*
         </TextBox>
         <InputField
           placeholder="Enter Phone No."
-          onValueChange={setPhoneNumber***REMOVED***
+          onValueChange={setPhoneNumber}
           numeric
         />
       </View>
       <Button
         classNames="mt-10 bg-[#0181ef]"
-        onPress={handleRegister***REMOVED***
-        disabled={disabled***REMOVED***
+        onPress={handleRegister}
+        disabled={disabled}
       >
         {disabled ? (
           <ActivityIndicator size="large" color="white" />
@@ -159,10 +158,10 @@ const Register = ({ navigation, route ***REMOVED***) => {
           <TextBox semibold classNames="text-white text-xl">
             Let's Go
           </TextBox>
-        )***REMOVED***
+        )}
       </Button>
     </View>
   );
-***REMOVED***
+};
 
 export default Register;

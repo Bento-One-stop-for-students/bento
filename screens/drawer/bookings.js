@@ -1,16 +1,14 @@
 import React from "react";
 
-import { View ***REMOVED*** from "react-native";
-import { useFocusEffect ***REMOVED*** from "@react-navigation/native";
-import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
+import { View, TouchableHighlight } from "react-native";
 
 import TextBox from "../../components/TextBox";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
+import { AuthContext } from "../../lib/context/authContext";
+import { getBarberBooking } from "../../lib/firebase/barber";
 import BookingItem from "../../components/barber/BookingItem";
-import { getBarberBooking ***REMOVED*** from "../../lib/firebase/barber";
 
-const Bookings = ({ navigation ***REMOVED***) => {
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
+const Bookings = ({ navigation }) => {
+  const { authState } = React.useContext(AuthContext);
   const [booking, setBooking] = React.useState([]);
   const res = getBarberBooking(authState.user.id);
   setBooking(res);
@@ -20,7 +18,7 @@ const Bookings = ({ navigation ***REMOVED***) => {
       <TextBox
         semibold
         classNames="text-primary-black text-[100px]  w-[200vw] text-center absolute"
-        style={{ includeFontPadding: false, lineHeight: 150 ***REMOVED******REMOVED***
+        style={{ includeFontPadding: false, lineHeight: 150 }}
       >
         BENTO
       </TextBox>
@@ -31,7 +29,7 @@ const Bookings = ({ navigation ***REMOVED***) => {
         <TouchableHighlight
           onPress={() => {
             navigation.openDrawer();
-      ***REMOVED******REMOVED***
+          }}
         >
           <>
             <View className="w-10 h-2 m-1 bg-white" />
@@ -41,10 +39,10 @@ const Bookings = ({ navigation ***REMOVED***) => {
         </TouchableHighlight>
       </View>
       <View className="w-full px-5">
-        <BookingItem item={booking***REMOVED*** />
+        <BookingItem item={booking} />
       </View>
     </View>
   );
-***REMOVED***
+};
 
 export default Bookings;

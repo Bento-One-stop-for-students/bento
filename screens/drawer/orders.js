@@ -1,19 +1,38 @@
 import React from "react";
 
-import { View ***REMOVED*** from "react-native";
-import { TouchableHighlight ***REMOVED*** from "react-native-gesture-handler";
+import { FlatList } from "native-base";
+import { View, Pressable } from "react-native";
 
 import TextBox from "../../components/TextBox";
-import { AuthContext ***REMOVED*** from "../../lib/context/authContext";
-import { FlatList ***REMOVED*** from "native-base";
+import { useFocusEffect } from "@react-navigation/native";
+import { AuthContext } from "../../lib/context/authContext";
 import OrderItem from "../../components/foodOrder/OrderItem";
+import { getUserOrders } from "../../lib/firebase/food-order";
 import CancelOrderModal from "../../components/foodOrder/CancelOrderModal";
 
-const Orders = ({ navigation ***REMOVED***) => {
-  const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
+const Orders = ({ navigation }) => {
+  const { authState, authDispatch } = React.useContext(AuthContext);
   const [isComponentOpen, setIsComponentOpen] = React.useState(false);
-  const { authState ***REMOVED*** = React.useContext(AuthContext);
-  React.useEffect(() => {***REMOVED***, [authState]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [openCancelOrderModal, setOpenCancelOrderModal] = React.useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const getInfoFromFirebase = async () => {
+        try {
+          setIsLoading(true);
+          const orders = await getUserOrders(authState.user.id);
+          authDispatch({ type: "GET_ORDERS", payload: orders });
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      getInfoFromFirebase();
+    }, [])
+  );
+
   return (
     <View className="flex-1 items-center justify-start">
       <View className="flex-center items-center">
@@ -24,7 +43,7 @@ const Orders = ({ navigation ***REMOVED***) => {
             includeFontPadding: false,
             paddingTop: 100,
             fontFamily: "Poppins_700Bold",
-      ***REMOVED******REMOVED***
+          }}
         >
           BENTO
         </TextBox>
@@ -32,47 +51,55 @@ const Orders = ({ navigation ***REMOVED***) => {
           <TextBox semibold classNames="text-white text-3xl mr-10">
             Orders
           </TextBox>
-          <TouchableHighlight
+          <Pressable
             onPress={() => {
               navigation.openDrawer();
-        ***REMOVED******REMOVED***
+            }}
           >
             <>
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
               <View className="w-10 h-2 m-1 bg-white" />
             </>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
-      {authState.orders.length == 0 ? (
+      {!isLoading ? (
+        authState.orders.length == 0 ? (
+          <View>
+            <TextBox semibold classNames="text-white pt-24">
+              No orders! Order now...
+            </TextBox>
+          </View>
+        ) : (
+          <FlatList
+            contentContainerStyle={{ paddingBottom: 150 }}
+            className="w-full px-5"
+            data={authState.orders}
+            renderItem={({ item }) => (
+              <OrderItem
+                item={item}
+                isComponentOpen={isComponentOpen}
+                setIsComponentOpen={setIsComponentOpen}
+                cancelOrderModal={setOpenCancelOrderModal}
+              />
+            )}
+            keyExtractor={(item, index) => index}
+          />
+        )
+      ) : (
         <View>
           <TextBox semibold classNames="text-white pt-24">
-            No orders! Order now...
+            Loading Orders...
           </TextBox>
         </View>
-      ) : (
-        <FlatList
-          contentContainerStyle={{ paddingBottom: 150 ***REMOVED******REMOVED***
-          className="w-full px-5"
-          data={authState.orders***REMOVED***
-          renderItem={({ item ***REMOVED***) => (
-            <OrderItem
-              item={item***REMOVED***
-              isComponentOpen={isComponentOpen***REMOVED***
-              setIsComponentOpen={setIsComponentOpen***REMOVED***
-              cancelOrderModal={setOpenCancelOrderModal***REMOVED***
-            />
-          )***REMOVED***
-          keyExtractor={(item, index) => index***REMOVED***
-        />
-      )***REMOVED***
+      )}
       <CancelOrderModal
-        isOpen={openCancelOrderModal***REMOVED***
-        onClose={setOpenCancelOrderModal***REMOVED***
+        isOpen={openCancelOrderModal}
+        onClose={setOpenCancelOrderModal}
       />
     </View>
   );
-***REMOVED***
+};
 
 export default Orders;
