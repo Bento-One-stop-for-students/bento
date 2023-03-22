@@ -14,6 +14,9 @@ import {
   getBarberBooking,
   getWaitingQueueLength,
 } from "../lib/firebase/barber";
+import Constants from "expo-constants";
+
+const version = Constants.expoConfig.version;
 
 SplashScreen.preventAutoHideAsync();
 
@@ -111,7 +114,7 @@ const Home = ({ navigation }) => {
       />
       <SnackMen navigation={navigation} snackmenStatus={snackmenStatus} />
       <TextBox classNames="text-white w-full pl-5 pt-2 opacity-40">
-        v1.0.0
+        v{version}
       </TextBox>
     </View>
   );
