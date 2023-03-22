@@ -164,10 +164,10 @@ const Cart = ({ navigation }) => {
               {authState.user.name}
             </TextBox>
             <TextBox classNames="text-white">
-              {authState.user.hostel.toUpperCase()} {authState.user.room_no}
+              Address : {authState.user.hostel.toUpperCase()} {authState.user.room_no}
             </TextBox>
             <TextBox classNames="text-white">
-              {authState.user.phone_no || "No phone no."}
+              Mobile No : {authState.user.mobile_no}
             </TextBox>
           </View>
           <View className="h-[1px] w-full bg-white" />

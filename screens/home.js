@@ -10,11 +10,11 @@ import { getStatus } from "../lib/firebase/user";
 import SnackMen from "../components/home/SnackMen";
 import { AuthContext } from "../lib/context/authContext";
 import { CartContext } from "../lib/context/cartContext";
+import Constants from "expo-constants";
 import {
   getBarberBooking,
   getWaitingQueueLength,
 } from "../lib/firebase/barber";
-import Constants from "expo-constants";
 
 const version = Constants.expoConfig.version;
 
