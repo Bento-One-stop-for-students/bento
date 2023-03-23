@@ -25,9 +25,13 @@ import NetworkErrorModal from "./components/NetworkErrorModal";
 import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
 
+// ***** DO NOT DELETE *****
+
 // import SpInAppUpdates, { IAUUpdateKind } from "sp-react-native-in-app-updates";
 
 SplashScreen.preventAutoHideAsync();
+
+// ***** DO NOT DELETE *****
 
 // const inAppUpdates = new SpInAppUpdates(
 //   false // isDebug
