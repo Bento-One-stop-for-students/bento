@@ -16,9 +16,6 @@
       "env": {
         "FIREBASE_ENV": "prod"
       },
-      "android": {
-        "buildType": "apk"
-      },
       "channel": "production"
     },
     "development-client": {
