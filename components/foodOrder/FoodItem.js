@@ -41,38 +41,46 @@ const FoodItem = ({ item, index }) => {
           }
           resizeMode="contain"
         />
-        {!cartState.cart[item.id] ? (
-          <Pressable
-            className="absolute bg-primary-snackmen  rounded-xl flex-row w-20 h-10 items-center justify-evenly"
-            onPress={() => cartDispatch({ type: "ADD_TO_CART", payload: item })}
-          >
-            <TextBox semibold bold class="text-black">
-              add
-            </TextBox>
-          </Pressable>
-        ) : (
-          <View className="absolute bg-primary-snackmen  rounded-2xl flex-row w-28 h-12 items-center justify-evenly">
+        {item.qty > 0 ? (
+          !cartState.cart[item.id] ? (
             <Pressable
-              onPress={() =>
-                cartDispatch({ type: "REDUCE_FROM_CART", payload: item })
-              }
-            >
-              <TextBox semibold classNames="p-1 rounded-lg bg-black">
-                <Entypo name="minus" size={15} color="white" />
-              </TextBox>
-            </Pressable>
-            <TextBox semibold classNames="text-[#1E1b1b]">
-              {cartState.cart[item.id].qty}
-            </TextBox>
-            <Pressable
+              className="absolute bg-primary-snackmen  rounded-xl flex-row w-20 h-10 items-center justify-evenly"
               onPress={() =>
                 cartDispatch({ type: "ADD_TO_CART", payload: item })
               }
             >
-              <TextBox semibold classNames="p-1 rounded-lg bg-black">
-                <Entypo name="plus" size={15} color="white" />
+              <TextBox semibold bold class="text-black">
+                add
               </TextBox>
             </Pressable>
+          ) : (
+            <View className="absolute bg-primary-snackmen  rounded-2xl flex-row w-28 h-12 items-center justify-evenly">
+              <Pressable
+                onPress={() =>
+                  cartDispatch({ type: "REDUCE_FROM_CART", payload: item })
+                }
+              >
+                <TextBox semibold classNames="p-1 rounded-lg bg-black">
+                  <Entypo name="minus" size={15} color="white" />
+                </TextBox>
+              </Pressable>
+              <TextBox semibold classNames="text-[#1E1b1b]">
+                {cartState.cart[item.id].qty}
+              </TextBox>
+              <Pressable
+                onPress={() =>
+                  cartDispatch({ type: "ADD_TO_CART", payload: item })
+                }
+              >
+                <TextBox semibold classNames="p-1 rounded-lg bg-black">
+                  <Entypo name="plus" size={15} color="white" />
+                </TextBox>
+              </Pressable>
+            </View>
+          )
+        ) : (
+          <View className="absolute bg-primary-snackmen  rounded-2xl flex-row w-28 h-12 items-center justify-evenly">
+            <TextBox classNames="text-black text-xs">Out of stock</TextBox>
           </View>
         )}
       </View>

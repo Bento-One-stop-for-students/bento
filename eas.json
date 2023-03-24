@@ -16,7 +16,8 @@
       "env": {
         "FIREBASE_ENV": "prod"
       },
-      "channel": "production"
+      "channel": "production",
+      "autoIncrement": true
     },
     "development-client": {
       "developmentClient": true,

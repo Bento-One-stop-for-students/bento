@@ -20,6 +20,7 @@ const CancelOrderModal = (props) => {
       authDispatch({ type: "GET_ORDERS", payload: updatedOrders });
       authDispatch({ type: "NOTIFICATION_TRUE", payload: "Order Cancelled" });
     } catch (err) {
+      console.log(err);
       authDispatch({
         type: "NOTIFICATION_TRUE",
         payload: "Network Error. Try again later",
