@@ -18,13 +18,13 @@ import NetInfo from "@react-native-community/netinfo";
 import messaging from "@react-native-firebase/messaging";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { handleIsSignedIn } from "./lib/auth";
+import { verifyUser } from "./lib/auth";
 import Navigator from "./navigation/Navigator";
 import { AuthContext } from "./lib/context/authContext";
 import NetworkErrorModal from "./components/NetworkErrorModal";
 import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
-import Constants from "expo-constants";
+import auth from "@react-native-firebase/auth";
 
 // ***** DO NOT DELETE *****
 
@@ -67,11 +67,27 @@ export default function AppExtended({ navigation }) {
           Poppins_800ExtraBold,
           Poppins_700Bold,
         });
-        await handleIsSignedIn(authDispatch);
+
+        // check if already signed in
+        auth().onAuthStateChanged(async (user) => {
+          try {
+            const res = await verifyUser({ id: user.uid, email: user.email });
+            if (res) {
+              authDispatch({
+                type: "SIGN_IN",
+                payload: {
+                  user: res,
+                },
+              });
+            }
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setAppIsReady(true);
+          }
+        });
       } catch (err) {
         console.log(err);
-      } finally {
-        setAppIsReady(true);
       }
     }
     prepare();
