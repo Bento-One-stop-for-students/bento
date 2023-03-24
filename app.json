@@ -1,35 +1,37 @@
 {
-    "expo": {
-      "name": "Bento",
-      "slug": "bento",
-      "version": "1.0.3",
-      "orientation": "portrait",
-      "icon": "./assets/icon.png",
-      "splash": {
-        "image": "./assets/splash.png",
-        "resizeMode": "cover",
+  "expo": {
+    "name": "Bento",
+    "slug": "bento",
+    "version": "1.0.3",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#131212"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#131212"
       },
-      "assetBundlePatterns": ["**/*"],
-      "ios": {
-        "supportsTablet": true
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/adaptive-icon.png",
-          "backgroundColor": "#131212"
-        },
-        "googleServicesFile": "./google-services.json",
-        "package": "com.devesh16.bento"
-      },
-      "web": {
-        "favicon": "./assets/favicon.png"
-      },
-      "plugins": [
-        "@react-native-firebase/app",
-        "@react-native-firebase/auth",
-        "@react-native-firebase/perf",
-        "@react-native-firebase/crashlytics"
-      ]
-    }
+      "googleServicesFile": "./google-services.json",
+      "package": "com.devesh16.bento"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/perf",
+      "@react-native-firebase/crashlytics"
+    ]
   }
+}
