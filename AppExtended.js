@@ -24,6 +24,7 @@ import { AuthContext } from "./lib/context/authContext";
 import NetworkErrorModal from "./components/NetworkErrorModal";
 import { registerForPushNotificationsAsync } from "./lib/notifications";
 import OverLayNotificationModal from "./components/OverLayNotificationModal";
+import Constants from "expo-constants";
 
 // ***** DO NOT DELETE *****
 
