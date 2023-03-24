@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 .vscode
 .DS_Store
+build/
 google-services.json
 app.config.js
 service-account-key.json
