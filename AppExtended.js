@@ -51,7 +51,7 @@ SplashScreen.preventAutoHideAsync();
 //   }
 // });
 
-export default function AppExtended({ navigation }) {
+export default function AppExtended() {
   const [showNetworkErrorModal, setShowNetworkErrorModal] =
     React.useState(false);
   const [appIsReady, setAppIsReady] = React.useState(false);
@@ -70,20 +70,22 @@ export default function AppExtended({ navigation }) {
 
         // check if already signed in
         auth().onAuthStateChanged(async (user) => {
-          try {
-            const res = await verifyUser({ id: user.uid, email: user.email });
-            if (res) {
-              authDispatch({
-                type: "SIGN_IN",
-                payload: {
-                  user: res,
-                },
-              });
+          if (user) {
+            try {
+              const res = await verifyUser({ id: user.uid, email: user.email });
+              if (res) {
+                authDispatch({
+                  type: "SIGN_IN",
+                  payload: {
+                    user: res,
+                  },
+                });
+              }
+            } catch (error) {
+              console.log(error);
+            } finally {
+              setAppIsReady(true);
             }
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setAppIsReady(true);
           }
         });
       } catch (err) {

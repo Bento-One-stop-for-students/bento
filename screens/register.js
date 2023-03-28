@@ -81,9 +81,10 @@ const Register = ({ navigation, route }) => {
           },
         });
       } catch (err) {
+        navigation.navigate("Login");
         authDispatch({
           type: "NOTIFICATION_TRUE",
-          payload: "Couldn't create user",
+          payload: "Check credentials & try again.",
         });
         console.log(err);
       } finally {
