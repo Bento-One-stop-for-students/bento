@@ -13,7 +13,7 @@ const Login = ({ navigation }) => {
   const [disabled, setDisabled] = React.useState(false);
   const [isInvalid, setIsInvalid] = React.useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async () => {
     setDisabled(true);
     try {
       const res = await handleGoogleProviderLogin(authDispatch);

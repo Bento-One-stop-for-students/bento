@@ -70,8 +70,9 @@ export default function AppExtended() {
 
         // check if already signed in
         auth().onAuthStateChanged(async (user) => {
-          if (user) {
-            try {
+          console.log("working");
+          try {
+            if (user) {
               const res = await verifyUser({ id: user.uid, email: user.email });
               if (res) {
                 authDispatch({
@@ -81,11 +82,11 @@ export default function AppExtended() {
                   },
                 });
               }
-            } catch (error) {
-              console.log(error);
-            } finally {
-              setAppIsReady(true);
             }
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setAppIsReady(true);
           }
         });
       } catch (err) {
