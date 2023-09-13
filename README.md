@@ -1,5 +1,7 @@
 ## Bento Mobile App
 
+FOR MORE INFO GO TO ORGANIZATION's README
+
 ### Overview
 
 Bento is a mobile app for local barbers and students at the University of [University Name] to book barber appointments. It is a convenient and easy-to-use way for students to find and book appointments with local barbers, and for barbers to manage their appointments and grow their business.
